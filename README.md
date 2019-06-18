@@ -1,7 +1,7 @@
 # sssignal3
 ウェブサイト「水飴信号」バージョン3
 
-## Teaser Website
+## Teaser Website & previous practice
 https://mizzsig.github.io/sssignal3/
 
 ## history
