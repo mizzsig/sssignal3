@@ -1,31 +1,13 @@
 version: '3'
 services:
   front:
-    image: nginx:alpine
+    image: node:12.7.0-alpine
     container_name: front
-    environment: 
-      - VIRTUAL_HOST=sssignal.com
-
-  nginx-proxy:
-    image: jwilder/nginx-proxy
-    container_name: nginx-proxy
-    labels:
-      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=jwilder/nginx-proxy
+    working_dir: /home/node/front
+    expose:
+      - "3000"
     ports: 
-      - 443:443
+      - 3000:3000
     volumes:
-      - /etc/nginx/vhost.d
-      - /usr/share/nginx/html
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      - /etc/nginx/certs
-
-  letsencrypt:
-    image: jrcs/letsencrypt-nginx-proxy-companion
-    container_name: letsencrypt
-    depends_on:
-      - nginx-proxy
-    volumes:
-      - /etc/nginx/vhost.d
-      - /usr/share/nginx/html
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /etc/nginx/certs
+      - ./app/front:/home/node/front
+    command: yarn run dev

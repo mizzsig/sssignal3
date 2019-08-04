@@ -1,6 +1,19 @@
 # sssignal3
 ウェブサイト「水飴信号」バージョン3
 
+## 使い方
+1. 必要なパッケージをインストール
+```
+cd app/front
+yarn install
+cd ../../
+```
+2. Docker-compose起動
+```
+docker-compose up
+```
+3. localhost:3000 にアクセスするとブラウザ上で確認可能
+
 ## Teaser Website & previous practice
 https://mizzsig.github.io/sssignal3/
 
