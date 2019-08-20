@@ -1,13 +1,14 @@
 version: '3'
 services:
   front:
-    image: node:12.7.0-alpine
+    build: ./app/front/
     container_name: front
     working_dir: /home/node/front
-    expose:
-      - "3000"
+    environment:
+      HOST: 0.0.0.0
     ports: 
       - 3000:3000
     volumes:
       - ./app/front:/home/node/front
+      - /home/node/front/node_modules
     command: yarn run dev

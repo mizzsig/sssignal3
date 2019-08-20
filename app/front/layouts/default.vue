@@ -1,55 +1,83 @@
 <template>
   <div>
-    <nuxt />
+    <header>
+      <nuxt-link class="menu" to="/"><span>Starch Syrup Signal3</span></nuxt-link>
+      <nuxt-link class="menu" to="/about"><span>about</span></nuxt-link>
+      <nuxt-link class="menu" to="/ideas"><span>ideas</span></nuxt-link>
+      <nuxt-link class="menu" to="/progress"><span>progress</span></nuxt-link>
+    </header>
+    <div style="height: 50px;"></div>
+    <nuxt class="nuxt"/>
   </div>
 </template>
 
-<style>
+<style lang="scss" scoped>
+$height: 50px;
+header {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: $height;
+  z-index: 10;
+  padding-left: 40px;
+  background-color: rgba(30, 30, 30, 0.6);
+  .menu {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #cccccc;
+    font-size: 20px;
+    padding: 0px 10px;
+    height: 100%;
+    &:hover span::before, &:hover span::after {
+      width: 50%;
+    }
+    span {
+      display: block;
+      position: relative;
+      &::before, &::after {
+        border-bottom: 2px solid #BBBBBB;
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: -3px;
+        width: 0;
+        transition: 0.2s all ease;
+      }
+      &::before {
+        left: 50%;
+      }
+      &::after {
+        right: 50%;
+      }
+    }
+  }
+}
+.nuxt {
+  height: calc(100% - 50px);
+}
+</style>
+
+<style lang="scss">
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", */
+    /* Roboto, "Helvetica Neue", Arial, sans-serif; */
   font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
+  /* word-spacing: 1px; */
+  /* -ms-text-size-adjust: 100%; */
+  /* -webkit-text-size-adjust: 100%; */
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
+html, body {
+  background-color: #000;
+  height: 100%;
 }
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+html, body, div {
+  text-align: center;
+  color: #bbbbbb;
+  margin: 0px;
+  padding: 0px;
 }
 </style>

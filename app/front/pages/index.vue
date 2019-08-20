@@ -14,10 +14,7 @@ export default {
 };
 </script>
 
-<style scoped>
-.youtube-wrapper {
-  position: fixed;
-}
+<style lang="scss" scoped>
 .container {
   display: inline-flex;
   max-height: 100%;
