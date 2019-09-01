@@ -79,4 +79,12 @@ html, body, div {
   margin: 0px;
   padding: 0px;
 }
+
+a {
+    color: rgb(54, 149, 222);
+
+    &:hover {
+        color: rgb(18, 111, 182);
+    }
+}
 </style>
