@@ -1,5 +1,7 @@
 <template>
   <div>
+    <img class="svg" src="~/assets/about/about.svg">
+    <!-- <object type="image/svg+xml" data="~/assets/about/about.svg"></object> -->
     <div class="section-borderline"></div>
     <div class="section-container">
       <div class="section-title">このサイトについて！</div>
@@ -7,6 +9,7 @@
       <p>バージョン３です！</p>
     </div>
 
+    <img class="svg" src="~/assets/about/history.svg">
     <div class="section-borderline"></div>
     <div class="section-container">
       <div class="section-title">歴史！！！！</div>
@@ -16,7 +19,7 @@
           <a href="http://sssignal.web.fc2.com">http://sssignal.web.fc2.com</a>
           <div class="date">2016/03/18 ~ 2017/06/28</div>
           <div>
-            <img src="~/assets/sssignal_ver1.png">
+            <img src="~/assets/about/sssignal1.png">
           </div>
           <p>FC2の無料サーバを借りて作ったサイトです。<br>一部でxserverの機能を借りたりしつつ、せっせとHTMLを書いておりました。</p>
         </div>
@@ -26,13 +29,14 @@
           <a href="https://sssignal.com">http://sssignal.com</a>
           <div class="date">2018/01/28 ~ 2019/06/01</div>
           <div>
-            <img src="~/assets/sssignal_ver2.png">
+            <img src="~/assets/about/sssignal2.png">
           </div>
           <p>Conohaのレンタルサーバを借りて作ったLaravel製のサイトです。<br>part1はAngularで作っておりましたが、当時の自分の限界点を迎えたため今の形(part2)になりました。</p>
         </div>
       </div>
     </div>
 
+    <img class="svg" src="~/assets/about/inquiry.svg">
     <div class="section-borderline"></div>
     <div class="section-container">
       <div class="section-title">ご意見フォーム！</div>
@@ -45,6 +49,7 @@
       </form>
     </div>
 
+    <img class="svg" src="~/assets/about/terms.svg">
     <div class="section-borderline"></div>
     <div class="section-container">
       <div class="section-title">規約！！！！</div>
@@ -67,6 +72,11 @@ export default {
 <style lang="scss" scoped>
 img {
     max-width: 95%;
+}
+
+.svg {
+    width: 400px;
+    max-width: 100%;
 }
 
 .section-borderline {
