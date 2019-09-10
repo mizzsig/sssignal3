@@ -3,8 +3,8 @@
     <header>
       <nuxt-link class="menu" to="/"><span>Starch Syrup Signal3</span></nuxt-link>
       <nuxt-link class="menu" to="/about"><span>about</span></nuxt-link>
-      <nuxt-link class="menu" to="/ideas"><span>ideas</span></nuxt-link>
-      <nuxt-link class="menu" to="/progress"><span>progress</span></nuxt-link>
+      <nuxt-link class="menu" to="/gallery"><span>gallery</span></nuxt-link>
+      <nuxt-link class="menu" to="/column"><span>column</span></nuxt-link>
     </header>
     <div style="height: 50px;"></div>
     <nuxt class="nuxt"/>
