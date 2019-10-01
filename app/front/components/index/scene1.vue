@@ -1,7 +1,7 @@
 <template>
-    <div class="container" @mousemove="moveCircle">
-        <div :style="circleStyle"></div>
-        <img :style="imageStyle" src="~/assets/top/scene1/kari.png">
+    <div class="container" @mousemove="moveCircle" @mousedown="toggleCircle">
+        <div v-show="circle.isShow" :style="circleStyle"></div>
+        <img id="main-img" :style="imageStyle" src="~/assets/top/scene1/kari.png">
     </div>
 </template>
 
@@ -9,34 +9,71 @@
 export default {
     data() {
         return {
+            circle: {
+                defaultRadius: 300,
+                radius: 0,
+                isShow: true
+            },
+            mainImage: {
+                width: 0,
+                height: 0
+            },
             circleStyle: {
+                filter: "blur(30px)",
                 position: "fixed",
                 top: "0px",
                 left: "0px",
-                width: "400px",
-                height: "400px",
-                borderRadius: "200px",
+                width: "",
+                height: "",
+                borderRadius: "",
                 background: "radial-gradient(rgba(255, 255, 255, 0.4), rgba(255,255,255, 0.0))"
             },
             imageStyle: {
                 position: "absolute",
                 top: "0px",
-                left: "0px"
+                left: "0px",
+                right: "0px",
+                margin: "auto",
+                maxWidth: '',
+                maxHeight: ''
             }
         }
     },
+    mounted() {
+        // 初回のリサイズを実施
+        window.addEventListener('resize', this.onResize);
+        this.mainImage.width = document.getElementById('main-img').scrollWidth;
+        this.mainImage.height = document.getElementById('main-img').scrollHeight;
+        this.onResize();
+    },
+    beforeDestroy() {
+        window.removeEventListener('resize', this.onResize);
+    },
     methods: {
-        moveCircle(event) {
-            this.circleStyle.top = `${event.clientY - 200}px`;
-            this.circleStyle.left = `${event.clientX - 200}px`;
+        toggleCircle() {
+            this.circle.isShow = !this.circle.isShow;
         },
-        imageResize() {
-            if (window.width > image.width) {
+        moveCircle(event) {
+            this.circleStyle.top = `${event.clientY - this.circle.radius}px`;
+            this.circleStyle.left = `${event.clientX - this.circle.radius}px`;
+        },
+        onResize() {
+            // 画像がウィンドウからはみ出さないようにする
+            this.imageStyle.maxWidth = `${window.innerWidth}px`;
+            this.imageStyle.maxHeight = `${window.innerHeight - 50}px`;
 
+            // 円の半径を更新
+            this.circle.radius = this.circle.defaultRadius;
+            if ((this.circle.radius * 3) > window.innerWidth) {
+                this.circle.radius = window.innerWidth / 3;
             }
-            if (window.height > image.height) {
-
+            if ((this.circle.radius * 3) > window.innerHeight) {
+                this.circle.radius = window.innerHeight / 3;
             }
+            // 半径を元に円のサイズ更新
+            this.circleStyle.width = `${this.circle.radius * 2}px`;
+            this.circleStyle.height = `${this.circle.radius * 2}px`;
+            this.circleStyle.borderRadius = `${this.circle.radius}px`;
         }
     }
 }
