@@ -26,7 +26,7 @@ export default {
                 width: "",
                 height: "",
                 borderRadius: "",
-                background: "radial-gradient(rgba(255, 255, 255, 0.4), rgba(255,255,255, 0.0))"
+                background: "radial-gradient(rgba(255, 255, 255, 0.2), rgba(255,255,255, 0.0))"
             },
             imageStyle: {
                 position: "absolute",
@@ -45,6 +45,10 @@ export default {
         this.mainImage.width = document.getElementById('main-img').scrollWidth;
         this.mainImage.height = document.getElementById('main-img').scrollHeight;
         this.onResize();
+
+        // 最初は光を左上に出す
+        this.circleStyle.top = `${-this.circle.radius + 50}px`;
+        this.circleStyle.left = `${-this.circle.radius}px`;
     },
     beforeDestroy() {
         window.removeEventListener('resize', this.onResize);
