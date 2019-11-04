@@ -55,7 +55,8 @@ export default {
         },
         // 黒鍵盤の左側にマージンを入れるかどうかの判定
         isBlackMargin(index) {
-            if (index === 0) {
+            const noMarginWhite = [4, 8, 11, 15, 18, 22];
+            if (index === 0 && noMarginWhite.indexOf(this.keyboardsWhite.length) >= 0) {
                 return { marginLeft: '-23px' };
             } else if (this.hiddenBlackKey.indexOf(index) >= 0) {
                 return { marginLeft: '29px' };
