@@ -8,8 +8,19 @@
     </header>
     <div style="height: 50px;"></div>
     <nuxt class="nuxt"/>
+    <character class="character"></character>
   </div>
 </template>
+
+<script>
+import Character from '../components/common/character.vue';
+
+export default {
+    components: {
+        Character
+    }   
+}
+</script>
 
 <style lang="scss" scoped>
 $height: 50px;
@@ -54,7 +65,22 @@ header {
   }
 }
 .nuxt {
-  height: calc(100% - 50px);
+    width: calc(100% - 300px);
+    height: calc(100% - 50px);
+}
+.character {
+    position: fixed;
+    right: 0px;
+    bottom: -40px;
+    width: 300px;
+}
+@media screen and (max-width: 899px) {
+    .nuxt {
+        width: 100%;
+    }
+    .character {
+        display: none;
+    }
 }
 </style>
 

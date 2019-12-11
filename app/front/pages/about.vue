@@ -53,7 +53,7 @@
     <div class="section-container">
       <div class="section-title">規約！！！！</div>
       <p>このサイトはどのページもリンクフリーです。<br>
-      画像の無断転載と直リンクはご遠慮ください。</p>
+      画像の直リンクはご遠慮ください。</p>
     </div>
   </div>
 </template>
