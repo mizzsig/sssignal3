@@ -1,10 +1,10 @@
 <template>
     <div class="container">
-        <div class="balloon">
+        <div class="balloon" v-bind:class="{ 'balloon-character': isCharacter, 'balloon-advertisement': !isCharacter }">
             <div class="reload">
                 <img>
             </div>
-            <div class="close">
+            <div class="close" @click="$store.commit('character/setCharacter', !isCharacter);">
                 <img>
             </div>
             ツイートと広告<br>(開いてるページへのコメント(できれば))
@@ -18,7 +18,15 @@
 </template>
 
 <script>
-export default {}
+import { mapMutations } from 'vuex';
+
+export default {
+    computed: {
+        isCharacter() {
+            return this.$store.state.character.isCharacter;
+        }
+    }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -51,6 +59,14 @@ export default {}
     background: rgb(206, 206, 206);
     color: rgb(0, 0, 0);
     border-radius: 4px;
+}
+
+.balloon-character {
+    max-height: calc(100vh - 430px);
+}
+
+.balloon-advertisement {
+    max-height: calc(100vh - 140px);
 }
 
 // 大きい

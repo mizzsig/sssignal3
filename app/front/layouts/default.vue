@@ -1,24 +1,39 @@
 <template>
   <div>
     <header>
-      <nuxt-link class="menu" to="/"><span>Starch Syrup Signal3</span></nuxt-link>
-      <nuxt-link class="menu" to="/about"><span>about</span></nuxt-link>
-      <nuxt-link class="menu" to="/gallery"><span>gallery</span></nuxt-link>
-      <nuxt-link class="menu" to="/column"><span>column</span></nuxt-link>
+      <nuxt-link @click.native="$store.commit('character/setShow', false)" class="menu" to="/"><span>Starch Syrup Signal3</span></nuxt-link>
+      <nuxt-link @click.native="$store.commit('character/setShow', true)" class="menu" to="/about"><span>about</span></nuxt-link>
+      <nuxt-link @click.native="$store.commit('character/setShow', true)" class="menu" to="/gallery"><span>gallery</span></nuxt-link>
+      <nuxt-link @click.native="$store.commit('character/setShow', true)" class="menu" to="/column"><span>column</span></nuxt-link>
     </header>
     <div style="height: 50px;"></div>
-    <nuxt class="nuxt"/>
-    <character class="character"></character>
+    <nuxt v-bind:class="{ 'nuxt-show-character': isShow, 'nuxt-notshow-character': !isShow }"/>
+    <character v-show="isShow" class="character" v-bind:class="{ 'character-show': isCharacter, 'character-fade': !isCharacter }"></character>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 import Character from '../components/common/character.vue';
 
 export default {
     components: {
         Character
-    }   
+    },
+    computed: {
+        isShow() {
+            return this.$store.state.character.isShow;
+        },
+        isCharacter() {
+            return this.$store.state.character.isCharacter;
+        }
+    },
+    mounted() {
+        // トップページはキャラ出さない
+        if (this.$route.path !== '/') {
+            this.$store.commit('character/setShow', true);
+        }
+    }
 }
 </script>
 
@@ -64,21 +79,31 @@ header {
     }
   }
 }
-.nuxt {
+.nuxt-show-character {
     width: calc(100% - 300px);
+    height: calc(100% - 50px);
+}
+.nuxt-notshow-character {
+    width: 100%;
     height: calc(100% - 50px);
 }
 .character {
     position: fixed;
     right: 0px;
-    bottom: -40px;
+    transition: all 0.3s;
     width: 300px;
 }
+.character-show {
+    bottom: -40px;
+}
+.character-fade {
+    bottom: -330px;
+}
 @media screen and (max-width: 899px) {
-    .nuxt {
+    .nuxt-show-character {
         width: 100%;
     }
-    .character {
+    .character, .character-fade {
         display: none;
     }
 }
