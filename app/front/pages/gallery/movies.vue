@@ -1,5 +1,9 @@
 <template>
     <div>
+        <div>
+            <nuxt-link @click.native="$store.commit('character/setShow', true)" class="menu" to="/gallery/images"><span>images</span></nuxt-link>
+            <nuxt-link @click.native="$store.commit('character/setShow', true)" class="menu" to="/gallery/movies"><span>movies</span></nuxt-link>
+        </div>
         ぎゃらりー！<br>
         動画のまとめページです<br>
         工事中 
@@ -114,6 +118,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+
 export default {
 }
 </script>
@@ -127,5 +133,33 @@ export default {
 video {
     max-width: 300px;
     max-height: 300px;
+}
+
+.menu {
+    text-decoration: none;
+    color: #cccccc;
+    font-size: 20px;
+    padding: 10px;
+    &:hover span::before, &:hover span::after {
+        width: 50%;
+    }
+    span {
+        position: relative;
+        &::before, &::after {
+            border-bottom: 2px solid #BBBBBB;
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: -3px;
+            width: 0;
+            transition: 0.2s all ease;
+        }
+        &::before {
+            left: 50%;
+        }
+        &::after {
+            right: 50%;
+        }
+    }
 }
 </style>
