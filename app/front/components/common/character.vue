@@ -1,11 +1,13 @@
 <template>
     <div class="container">
         <div class="balloon" v-bind:class="{ 'balloon-character': isCharacter, 'balloon-advertisement': !isCharacter }">
-            <div class="reload">
-                <img>
+            <div class="reload" @mouseenter="setReloadHover(true)" @mouseleave="setReloadHover(false)">
+                <img v-show="!isReloadHover" src="~/assets/common/reload.gif">
+                <img v-show="isReloadHover" src="~/assets/common/reload-hover.gif">
             </div>
-            <div class="close" @click="$store.commit('character/setCharacter', !isCharacter);">
-                <img>
+            <div class="close" @click="$store.commit('character/setCharacter', !isCharacter); setCloseHover(false);" @mouseenter="setCloseHover(true)" @mouseleave="setCloseHover(false)">
+                <img v-show="!isCloseHover" src="~/assets/common/close.gif">
+                <img v-show="isCloseHover" src="~/assets/common/close-hover.gif">
             </div>
             ツイートと広告<br>(開いてるページへのコメント(できれば))
         </div>
@@ -21,9 +23,23 @@
 import { mapMutations } from 'vuex';
 
 export default {
+    data() {
+        return {
+            isReloadHover: false,
+            isCloseHover: false
+        }
+    },
     computed: {
         isCharacter() {
             return this.$store.state.character.isCharacter;
+        }
+    },
+    methods: {
+        setReloadHover(isReloadHover) {
+            this.isReloadHover = isReloadHover;
+        },
+        setCloseHover(isCloseHover) {
+            this.isCloseHover = isCloseHover;
         }
     }
 }
@@ -39,7 +55,6 @@ export default {
 
 .reload, .close {
     position: absolute;
-    background: rgb(145, 145, 145);
     width: 30px;
     height: 30px;
     border-radius: 4px;
