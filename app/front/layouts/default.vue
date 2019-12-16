@@ -1,10 +1,18 @@
 <template>
   <div>
     <header>
-      <nuxt-link @click.native="$store.commit('character/setShow', false)" class="menu" to="/"><span>Starch Syrup Signal3</span></nuxt-link>
-      <nuxt-link @click.native="$store.commit('character/setShow', true)" class="menu" to="/about"><span>about</span></nuxt-link>
-      <nuxt-link @click.native="$store.commit('character/setShow', true)" class="menu" to="/gallery/images"><span>gallery</span></nuxt-link>
-      <nuxt-link @click.native="$store.commit('character/setShow', true)" class="menu" to="/column"><span>column</span></nuxt-link>
+      <nuxt-link @click.native="$store.commit('character/setShow', false)" class="menu" to="/">
+        <span v-bind:class="{ 'active': isActive('/') }">Starch Syrup Signal3</span>
+      </nuxt-link>
+      <nuxt-link @click.native="$store.commit('character/setShow', true)" class="menu" to="/about">
+        <span v-bind:class="{ 'active': isActive('/about') }">about</span>
+      </nuxt-link>
+      <nuxt-link @click.native="$store.commit('character/setShow', true)" class="menu" to="/gallery/images">
+        <span v-bind:class="{ 'active': isActive('/gallery') }">gallery</span>
+      </nuxt-link>
+      <nuxt-link @click.native="$store.commit('character/setShow', true)" class="menu" to="/column">
+        <span v-bind:class="{ 'active': isActive('/column') }">column</span>
+      </nuxt-link>
     </header>
     <div style="height: 50px;"></div>
     <nuxt v-bind:class="{ 'nuxt-show-character': isShow, 'nuxt-notshow-character': !isShow }"/>
@@ -26,6 +34,14 @@ export default {
         },
         isCharacter() {
             return this.$store.state.character.isCharacter;
+        }
+    },
+    methods: {
+        isActive(path) {
+            if (path === '/') {
+                return path === this.$route.path;
+            }
+            return this.$route.path.indexOf(path) >= 0;
         }
     },
     mounted() {
@@ -56,6 +72,9 @@ header {
     padding: 0px 10px;
     height: 100%;
     &:hover span::before, &:hover span::after {
+      width: 50%;
+    }
+    .active::before, .active::after {
       width: 50%;
     }
     span {

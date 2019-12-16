@@ -34,6 +34,11 @@ export default {
         window.addEventListener('keydown', this.pianoKeyDown);
         window.addEventListener('keyup', this.pianoKeyUp);
     },
+    beforeDestroy() {
+        window.removeEventListener('resize', this.onResize);
+        window.removeEventListener('keydown', this.pianoKeyDown);
+        window.removeEventListener('keyup', this.pianoKeyUp);
+    },
     methods: {
         // 画面サイズに応じた鍵盤を表示する
         onResize() {

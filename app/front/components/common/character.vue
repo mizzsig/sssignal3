@@ -1,11 +1,11 @@
 <template>
     <div class="container">
         <div class="balloon" v-bind:class="{ 'balloon-character': isCharacter, 'balloon-advertisement': !isCharacter }">
-            <div class="reload" @mouseenter="setReloadHover(true)" @mouseleave="setReloadHover(false)">
-                <img v-show="!isReloadHover" src="~/assets/common/reload.gif">
-                <img v-show="isReloadHover" src="~/assets/common/reload-hover.gif">
+            <div class="reload" v-bind:class="{ 'pointer': isCharacter, 'nocursor': !isCharacter }" @mouseenter="setReloadHover(true)" @mouseleave="setReloadHover(false)">
+                <img v-show="!isReloadHover && isCharacter" src="~/assets/common/reload.gif">
+                <img v-show="isReloadHover && isCharacter" src="~/assets/common/reload-hover.gif">
             </div>
-            <div class="close" @click="$store.commit('character/setCharacter', !isCharacter); setCloseHover(false);" @mouseenter="setCloseHover(true)" @mouseleave="setCloseHover(false)">
+            <div class="close pointer" @click="$store.commit('character/setCharacter', !isCharacter); setCloseHover(false);" @mouseenter="setCloseHover(true)" @mouseleave="setCloseHover(false)">
                 <img v-show="!isCloseHover" src="~/assets/common/close.gif">
                 <img v-show="isCloseHover" src="~/assets/common/close-hover.gif">
             </div>
@@ -53,13 +53,20 @@ export default {
     box-sizing: border-box;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
+.nocursor {
+    cursor: default;
+}
+
 .reload, .close {
     position: absolute;
     width: 30px;
     height: 30px;
     border-radius: 4px;
     top: -15px;
-    cursor: pointer;
 }
 
 .reload {

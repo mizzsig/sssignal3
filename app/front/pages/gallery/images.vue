@@ -1,8 +1,12 @@
 <template>
     <div>
         <div>
-            <nuxt-link @click.native="$store.commit('character/setShow', true)" class="menu" to="/gallery/images"><span>images</span></nuxt-link>
-            <nuxt-link @click.native="$store.commit('character/setShow', true)" class="menu" to="/gallery/movies"><span>movies</span></nuxt-link>
+            <nuxt-link @click.native="$store.commit('character/setShow', true)" class="menu" to="/gallery/images">
+                <span v-bind:class="{ 'active': isActive('/gallery/images') }">images</span>
+            </nuxt-link>
+            <nuxt-link @click.native="$store.commit('character/setShow', true)" class="menu" to="/gallery/movies">
+                <span v-bind:class="{ 'active': isActive('/gallery/movies') }">movies</span>
+            </nuxt-link>
         </div>
         ぎゃらりー！<br>
         画像のまとめページです<br>
@@ -202,6 +206,11 @@
 import { mapMutations } from 'vuex';
 
 export default {
+    methods: {
+        isActive(path) {
+            return path === this.$route.path;
+        }
+    }
 }
 </script>
 
@@ -224,6 +233,9 @@ img {
     font-size: 20px;
     padding: 10px;
     &:hover span::before, &:hover span::after {
+        width: 50%;
+    }
+    .active::before, .active::after {
         width: 50%;
     }
     span {
