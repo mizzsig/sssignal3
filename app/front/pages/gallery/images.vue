@@ -215,13 +215,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-    // display: flex;
-    // flex-wrap: wrap;
-    // flex-direction: column;
-    // align-items: flex-start;
-}
-
 img {
     max-width: 300px;
     max-height: 300px;
