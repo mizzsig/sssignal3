@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   front:
     build: ./app/front/
@@ -6,9 +6,21 @@ services:
     working_dir: /home/node/front
     environment:
       HOST: 0.0.0.0
-    ports: 
+    ports:
       - 3000:3000
     volumes:
       - ./app/front:/home/node/front
       - /home/node/front/node_modules
     command: yarn run dev
+
+  api:
+    build: ./app/api/
+    container_name: api
+    working_dir: /go/cmd/sssignal3-api
+    environment:
+      HOST: 0.0.0.0
+    ports:
+      - 1323:1323
+    volumes:
+      - ./app/api:/go/cmd/sssignal3-api
+    command: realize start --run --no-config
