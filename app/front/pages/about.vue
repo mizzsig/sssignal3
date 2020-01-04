@@ -41,11 +41,11 @@
       <div class="section-title">ご意見フォーム！</div>
       <p>ご意見感想など、何かある方はこちらから<br>
       <a href="https://twitter.com/mizzsig">Twitter</a>からの連絡でも、よいです！</p>
-      <form class="opinion-form">
-        <input class="opinion-content address" name="address" placeholder="メールアドレス(任意)">
-        <textarea class="opinion-content body" name="body" placeholder="本文(必須)"></textarea>
-        <button class="opinion-content send">そうしん！</button>
-      </form>
+      <div class="opinion-form">
+        <input v-model="address" class="opinion-content address" name="address" placeholder="メールアドレス(任意)">
+        <textarea v-model="body" class="opinion-content body" name="body" placeholder="本文(必須)"></textarea>
+        <button v-on:click="postMessage" class="opinion-content send">そうしん！</button>
+      </div>
     </div>
 
     <svg class="svg" style="" version="1.1" viewBox="0 0 211.67 79.375" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><metadata><rdf:rdf><cc:work rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/><dc:title/></cc:work></rdf:rdf></metadata><g fill="none" stroke="#bbb" stroke-linecap="round" stroke-width=".39688px"><path class="ayTPNMKP_0" d="m98.155 34.006c1.3135 7.8273 3.4376 12.682 5.8799 16.37-3.871-17.902-1.6169-26.904 1.0691-35.28 0.89031 3.3215 1.5258 7.917 2.8732 8.9535 1.4174-0.9472 1.5424-1.6359 1.7372-2.3386 0.89526 2.0937 2.5078 3.1628 4.2763 4.009l1.47-1.6704c1.1498 1.3086 2.3718 2.4726 4.1427 2.5391-0.43983 10.247-1.139 18.288-2.0828 24.251 2.8103-6.0009 4.3586-15.157 6.2255-23.516" stroke-linejoin="round"/><path class="ayTPNMKP_1" d="m102.24 31.892c3.1661 4.2321 5.941 4.0302 8.7407 4.1105 3.3564 0.30816 5.6363-1.293 7.8902-2.4096"/><path class="ayTPNMKP_2" d="m106.77 35.643c0.54406 1.3867-0.39052 1.0398 2.4722 5.1449 0.93347 1.3198 2.304 1.6459 3.5747 0.06682 0.62497-0.48608 1.5689-5.1551 1.6036-5.1783" stroke-linejoin="round"/><path class="ayTPNMKP_3" d="m114.29 36.946c1.6685 0.57218 3.3369 1.1445 4.3097 2.2384" stroke-linejoin="round"/><path class="ayTPNMKP_4" d="m121.07 40.721c2.2384 2.4464 4.4768 5.3564 6.7152 7.2497 6.2957-2.0715 12.853-3.9098 19.11-4.2095-0.0384 2.542 0.64797 3.7379 1.2027 5.1783-7.2761 2.3298-13.987 3.3409-20.981 5.0113-3.1954-0.29798-5.0451-2.6985-6.7152-4.9779" stroke-linejoin="round"/><path class="ayTPNMKP_5" d="m146.9 43.761c1.2004-0.59265 2.486-1.3473 3.081-0.78965l0.69417 0.92328" stroke-linejoin="round"/><path class="ayTPNMKP_6" d="m148.1 48.94c1.8554-0.60577 5.0103-1.0036 5.4506-1.8358-0.0432 0.11176 0.24032-1.5719-0.9388-3.2629-0.70135-0.64067-1.2946 0.01643-1.9394 0.05396" stroke-linejoin="round"/><path class="ayTPNMKP_7" d="m150.67 43.895c-3.1931 0.35696-1.8994 5.1089 0.94251 4.0608" stroke-linejoin="round"/><path class="ayTPNMKP_8" d="m151.29 48.155 0.70158 2.2384 1.754-0.65147-0.73499-2.205" stroke-linejoin="round"/><path class="ayTPNMKP_9" d="m149.85 42.625-3.842-14.85 1.7373-0.33409 4.0758 16.086" stroke-linejoin="round"/><path class="ayTPNMKP_10" d="m135.09 18.329a10.156 9.4129 0 1 1 20.312 0 10.156 9.4129 0 1 1-20.312 0" stroke-linejoin="round"/><path class="ayTPNMKP_11" d="m139 13.694c13.029 8.9702 12.996 9.0036 12.996 9.0036" stroke-linejoin="round"/><path class="ayTPNMKP_12" d="m149.96 12.327-9.5549 11.71" stroke-linejoin="round"/><path class="ayTPNMKP_13" d="m123.17 52.539c2.8287 12.784 4.6791 20.695 6.6618 29.246" stroke-linejoin="round"/><path class="ayTPNMKP_14" d="m106.94 36.846c-1.7974-0.18314-3.6078 2.0409-4.3431 3.4912" stroke-linejoin="round"/><path class="ayTPNMKP_15" d="m100.26 42.692c-3.0911 4.1567-5.8561 9.3051-9.8556 10.39-5.0224-1.5925-9.5852-3.4608-15.067-4.7774-0.25924 1.7389-0.97727 3.1719-2.0379 4.3765 5.6564 3.4796 13.228 6.712 19.796 7.6128 2.2719-1.057 6.5728-5.6348 9.1506-9.5907" stroke-linejoin="round"/><path class="ayTPNMKP_16" d="m75.337 48.305c-0.85527-0.42093-1.5136-1.6295-2.6059-1.1025-0.30092 0.03262-0.42352 0.65961-0.60136 1.1025l-1.6036-0.73499c-1.1386-0.321-1.7956 1.9981-1.8375 2.6226-0.11326 1.4288 2.4535 1.8311 4.6104 2.4889" stroke-linejoin="round"/><path class="ayTPNMKP_17" d="m72.129 48.305c2.3026 1.3478 0.38808 4.8136-1.2194 3.6583" stroke-linejoin="round"/><path class="ayTPNMKP_18" d="m69.457 51.646-0.63476 1.8709 1.4115 0.60971 0.67653-2.1632" stroke-linejoin="round"/><path class="ayTPNMKP_19" d="m70.526 47.57 6.0637-18.726 1.1693 0.31738-5.6294 19.143" stroke-linejoin="round"/><path class="ayTPNMKP_20" d="m69.455 19.797a10.156 9.4129 0 1 1 20.312 0 10.156 9.4129 0 1 1-20.312 0" stroke-linejoin="round"/><path class="ayTPNMKP_21" d="m82.052 13.961c10.138 3.5772 2.5724 15.071-4.7774 12.127-7.7829-3.4376-4.4458-14.95 4.7774-12.127z" stroke-linejoin="round"/><path class="ayTPNMKP_22" d="m100.68 52.964c-2.2627 14.085-12.54 25.151-9.1187 28.821" stroke-linejoin="round"/><path class="ayTPNMKP_23" d="m127.71 72.808c0.011-1.1497 0.0256-2.2994 0.8977-3.449 0.74333 1.3963 2.1938 1.4411 2.9766 1.6064-2.1504-4.1275-3.3006-9.7321-3.4352-17.261" stroke-linejoin="round"/><path class="ayTPNMKP_24" d="m127.79 47.971c-0.84635-11.292 2.4049-15.41-2.94-33.075-0.23971-1.9687-4.7853-6.8111-9.2542-8.2519-6.0967-2.5947-10.532-0.42195-14.6 2.8063-6.1942 8.7089-7.0985 20.239-6.3476 25.09l1.4032 13.798" stroke-linejoin="round"/><path class="ayTPNMKP_25" d="m96.549 57.618c-0.97644 3.4569-2.9391 7.6887-2.9293 10.371 0.02937 1.5367 0.40116 1.6181 0.66146 2.1734" stroke-linejoin="round"/></g><style data-made-with="vivus-instant">.ayTPNMKP_0{stroke-dasharray:128 130;stroke-dashoffset:129;animation:ayTPNMKP_draw 500ms ease 0ms forwards;}.ayTPNMKP_1{stroke-dasharray:19 21;stroke-dashoffset:20;animation:ayTPNMKP_draw 500ms ease 20ms forwards;}.ayTPNMKP_2{stroke-dasharray:16 18;stroke-dashoffset:17;animation:ayTPNMKP_draw 500ms ease 40ms forwards;}.ayTPNMKP_3{stroke-dasharray:5 7;stroke-dashoffset:6;animation:ayTPNMKP_draw 500ms ease 60ms forwards;}.ayTPNMKP_4{stroke-dasharray:66 68;stroke-dashoffset:67;animation:ayTPNMKP_draw 500ms ease 80ms forwards;}.ayTPNMKP_5{stroke-dasharray:5 7;stroke-dashoffset:6;animation:ayTPNMKP_draw 500ms ease 100ms forwards;}.ayTPNMKP_6{stroke-dasharray:12 14;stroke-dashoffset:13;animation:ayTPNMKP_draw 500ms ease 120ms forwards;}.ayTPNMKP_7{stroke-dasharray:8 10;stroke-dashoffset:9;animation:ayTPNMKP_draw 500ms ease 140ms forwards;}.ayTPNMKP_8{stroke-dasharray:7 9;stroke-dashoffset:8;animation:ayTPNMKP_draw 500ms ease 160ms forwards;}.ayTPNMKP_9{stroke-dasharray:34 36;stroke-dashoffset:35;animation:ayTPNMKP_draw 500ms ease 180ms forwards;}.ayTPNMKP_10{stroke-dasharray:62 64;stroke-dashoffset:63;animation:ayTPNMKP_draw 500ms ease 200ms forwards;}.ayTPNMKP_11{stroke-dasharray:16 18;stroke-dashoffset:17;animation:ayTPNMKP_draw 500ms ease 220ms forwards;}.ayTPNMKP_12{stroke-dasharray:16 18;stroke-dashoffset:17;animation:ayTPNMKP_draw 500ms ease 240ms forwards;}.ayTPNMKP_13{stroke-dasharray:30 32;stroke-dashoffset:31;animation:ayTPNMKP_draw 500ms ease 260ms forwards;}.ayTPNMKP_14{stroke-dasharray:6 8;stroke-dashoffset:7;animation:ayTPNMKP_draw 500ms ease 280ms forwards;}.ayTPNMKP_15{stroke-dasharray:70 72;stroke-dashoffset:71;animation:ayTPNMKP_draw 500ms ease 300ms forwards;}.ayTPNMKP_16{stroke-dasharray:16 18;stroke-dashoffset:17;animation:ayTPNMKP_draw 500ms ease 320ms forwards;}.ayTPNMKP_17{stroke-dasharray:6 8;stroke-dashoffset:7;animation:ayTPNMKP_draw 500ms ease 340ms forwards;}.ayTPNMKP_18{stroke-dasharray:6 8;stroke-dashoffset:7;animation:ayTPNMKP_draw 500ms ease 360ms forwards;}.ayTPNMKP_19{stroke-dasharray:41 43;stroke-dashoffset:42;animation:ayTPNMKP_draw 500ms ease 380ms forwards;}.ayTPNMKP_20{stroke-dasharray:62 64;stroke-dashoffset:63;animation:ayTPNMKP_draw 500ms ease 400ms forwards;}.ayTPNMKP_21{stroke-dasharray:43 45;stroke-dashoffset:44;animation:ayTPNMKP_draw 500ms ease 420ms forwards;}.ayTPNMKP_22{stroke-dasharray:31 33;stroke-dashoffset:32;animation:ayTPNMKP_draw 500ms ease 440ms forwards;}.ayTPNMKP_23{stroke-dasharray:25 27;stroke-dashoffset:26;animation:ayTPNMKP_draw 500ms ease 460ms forwards;}.ayTPNMKP_24{stroke-dasharray:103 105;stroke-dashoffset:104;animation:ayTPNMKP_draw 500ms ease 480ms forwards;}.ayTPNMKP_25{stroke-dasharray:14 16;stroke-dashoffset:15;animation:ayTPNMKP_draw 500ms ease 500ms forwards;}@keyframes ayTPNMKP_draw{100%{stroke-dashoffset:0;}}@keyframes ayTPNMKP_fade{0%{stroke-opacity:1;}92.3076923076923%{stroke-opacity:1;}100%{stroke-opacity:0;}}</style></svg>
@@ -60,11 +60,29 @@
 
 <script>
 export default {
-  head() {
-    return {
-      title: "About - Starch Syrup Signal3"
-    };
-  }
+    head() {
+        return {
+            title: 'About - Starch Syrup Signal3'
+        };
+    },
+    data() {
+        return {
+            address: '',
+            body: ''
+        };
+    },
+    methods: {
+        postMessage() {
+            console.log(this.address, this.body);
+            fetch("http://api.sssignal.com/inquiry", {
+                method: "POST"
+            }).then(response => {
+                return response.json();
+            }).then(json => {
+                console.log(json);
+            })
+        }
+    }
 };
 </script>
 
