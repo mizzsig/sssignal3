@@ -4,6 +4,7 @@ RUN apk add --no-cache git
 
 WORKDIR /go
 RUN go get -u github.com/labstack/echo/...
+RUN go get github.com/joho/godotenv
 RUN go get github.com/oxequa/realize
 RUN mkdir /go/cmd
 COPY . ./cmd/sssignal3-api
