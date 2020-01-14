@@ -46,11 +46,14 @@ func main() {
 		if err := c.Bind(inquiryRequest); err != nil {
 			return c.String(http.StatusOK, "err!")
 		}
+		if inquiryRequest.Address != "" {
+			inquiryRequest.Address = "*" + inquiryRequest.Address + "*"
+		}
 
 		// TODO : 見た目もう少し良くしたい 
 		// https://api.slack.com/tools/block-kit-builder
 		slack := new(Slack)
-		slack.Text = "*【問い合わせフォーム】*\naddress : *" + inquiryRequest.Address + "*\ntext : " + inquiryRequest.Body
+		slack.Text = "*【問い合わせフォーム】*\naddress : " + inquiryRequest.Address + "\ntext : " + inquiryRequest.Body
 
 		// 構造体をJSONに変換
 		json, _:= json.Marshal(slack)

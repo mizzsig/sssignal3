@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-resize="resize">
     <svg class="svg" style="" version="1.1" viewBox="0 0 211.67 79.375" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><metadata><rdf:rdf><cc:work rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/><dc:title/></cc:work></rdf:rdf></metadata><g fill="none" stroke="#bbb" stroke-width=".39688px"><path class="jxrgOTBq_0" d="m54.256 54.385c2.6159 0.81678 4.3877 2.4249 5.5792 4.577"/><path class="jxrgOTBq_1" d="m65.153 68.152 4.8858 12.877"/><path class="jxrgOTBq_2" d="m42.73 54.385c-3.0849 0.83264-3.6917 1.0263-4.9445 2.3887" stroke-linecap="round" stroke-linejoin="bevel"/><path class="jxrgOTBq_3" d="m41.377 50.352c0.70028 2.0383 1.4764 4.051 2.0045 6.1472 1.7181 1.0678 3.3022 2.6716 5.1783 3.107 1.2342-0.67139 2.2185-1.0303 5.5124-4.2763 0.02028-1.2374 0.3364-3.1619 0.80181-5.1115" stroke-linecap="round" stroke-linejoin="round"/><path class="jxrgOTBq_4" d="m31.872 59.196c-3.7082-2.3464-8.335-5.0466-8.7068-10.468 0.36974-5.8851 3.6548-10.734 7.7046-17.495-1.1681-1.9162-3.195-3.2599-3.4077-5.8131l-2.7722 2.3183" stroke-linecap="round" stroke-linejoin="round"/><path class="jxrgOTBq_5" d="m18.676 32.658c-2.9792 5.008-7.3739 8.4244-8.8206 14.995 1.637 8.1461 6.1252 15.161 10.975 20.947" stroke-linecap="round" stroke-linejoin="round"/><path class="jxrgOTBq_6" d="m27.651 26.07c0.4712-0.35963 0.88666-0.76803 1.5972-0.91825 1.0416-0.0607 2.0833 0.0029 3.1249 0.53587 0.57086 1.0523 0.50152 1.8777 0.72081 2.8748-0.494 1.1377-1.3618 1.9017-2.2242 2.671" stroke-linecap="round" stroke-linejoin="round"/></g><g fill="none" stroke="#bbb" stroke-width=".39688px"><g transform="translate(-.07103 .14032)" stroke-linecap="round" stroke-linejoin="round"><path class="jxrgOTBq_7" d="m80.981 54.523c0.69074-8.0418 1.5198-16.297 5.0082-24.096 3.6371 7.78 4.8889 15.56 6.4728 23.34"/><path class="jxrgOTBq_8" d="m81.974 44.743c3.0475-0.55667 5.9293-0.56107 8.599 0.14174"/></g><path class="jxrgOTBq_9" d="m95.506 32.117c-0.46597 7.5064 1.3066 17.816 2.3151 22.348-0.44609-3.511-1.9846-7.6876 1.3702-8.8824 1.7454-0.09127 2.1834 1.0111 2.5041 2.2206-0.21008 2.9476-0.89463 4.0835-1.7954 4.394-1.8357 1.0579-2.7064 0.19962-2.7167-1.819" stroke-linecap="round" stroke-linejoin="round"/><path class="jxrgOTBq_10" d="m104.46 47.456c0.92768 0.18723 1.8557 0.37363 2.2915 1.9135 0.1739 2.1626-0.59436 3.0145-1.8663 3.1656-1.0097-0.32892-1.79-0.97549-1.9844-2.4332 0.0199-1.1943 0.53132-2.0815 1.5592-2.6458z" stroke-linecap="round" stroke-linejoin="round"/><path class="jxrgOTBq_11" d="m109.6 45.85c-0.2463 2.0552-0.24762 4.1105 0.25986 6.1657 0.18222 0.99499 1.6092 1.4509 2.3624 0.11812 0.89557-1.1512 0.87923-3.6596 1.1103-5.7169-0.88706 4.8709 2.5473 5.7022 4.2522 8.1501" stroke-linecap="round" stroke-linejoin="round"/><path class="jxrgOTBq_12" d="m115.78 47.2c2.4179-0.73045 4.6853 0.14755 6.8744-0.44885" stroke-linecap="round" stroke-linejoin="round"/><path class="jxrgOTBq_13" d="m119.77 43.16c-0.18191 14.254 3.5768 11.043 4.583 10.489" stroke-linecap="round" stroke-linejoin="round"/><path class="jxrgOTBq_14" d="m144.55 44.176c-4.0694-1.8273-7.8824 0.70835-7.465 1.9371 0.0467 1.1911 5.7475 1.2607 5.5988 3.7089-0.92851 2.2819-3.2178 2.4385-4.4176 2.2206" stroke-linecap="round" stroke-linejoin="round"/><path class="jxrgOTBq_15" d="m150.43 45.924c-3.3909-3.6097-5.5482-0.55927-4.8901 1.7481 0.62155 1.5796 2.68 1.2702 3.8979 3.3309-0.059 1.3931-2.7524 2.3124-4.6538 1.3938"/><path class="jxrgOTBq_16" d="m156.79 45.381c-2.5936-2.18-6.4084-1.0672-4.7483 1.9135 1.5181 1.0766 3.7813 1.0116 4.3704 2.6695-0.86921 2.6318-3.0349 2.7339-4.6302 2.4568" stroke-linecap="round" stroke-linejoin="round"/><path class="jxrgOTBq_17" d="m160.78 42.9-2.5986 1.1812" stroke-linecap="round" stroke-linejoin="round"/><path class="jxrgOTBq_18" d="m160.07 45.924c-0.0395 2.4775-0.22028 5.4606 0.16537 7.3469" stroke-linecap="round" stroke-linejoin="round"/><path class="jxrgOTBq_19" d="m166.71 47.223c-1.0408-2.036-2.1297-3.3813-3.5435-0.07087-0.54828 1.7124-0.19261 2.8482 0.18898 3.638 2.7674 1.3751 4.337-4.2384 4.2759-5.8823-0.69296 5.5515 0.59937 11.058-2.2679 16.442-0.27926 0.29848-2.5652 1.0751-3.449-1.441 1.2851-6.1145 8.7829-3.6229 8.9061-3.638"/><path class="jxrgOTBq_20" d="m173.87 45.711c-0.38106 2.7865-0.0945 4.772-0.14175 7.1579-0.44219-9.0732 6.0534-8.4547 4.205-0.66146" stroke-linecap="round" stroke-linejoin="round"/><path class="jxrgOTBq_21" d="m183.32 47.861c0.37405 0.91095-2.0672-5.0302-2.8584 2.6458-0.26596 0.27097 0.91888 6.6392 3.26-3.4963-0.21418 3.5625 0.55691 4.6452 1.2048 4.2995" stroke-linecap="round" stroke-linejoin="round"/><path class="jxrgOTBq_22" d="m186.58 54.665c5.7376-4.7867 5.3823-20.189 4.4176-19.041-3.0937-0.92384-3.3284 15.776-2.197 16.111 1.8976 2.4022 2.7607 0.5037 3.5199 0.54334" stroke-linecap="round" stroke-linejoin="round"/><path class="jxrgOTBq_23" d="m198.19 39.694c4.547-3.5643 6.8602 4.7892 0.42523 5.0554 10.446 0.91297 2.3607 11.818-1.2993 7.3469" stroke-linecap="round" stroke-linejoin="round"/></g><g fill="none" stroke="#bbb" stroke-linecap="round" stroke-width=".39688px"><path class="jxrgOTBq_24" d="m21.167 29.671c-0.27106-26.622 36.568-39.396 47.011-6.5673l8.032 58.256" stroke-linejoin="round"/><path class="jxrgOTBq_25" d="m63.963 24.838c0.07789 11.602 1.8793 19.042 3.3164 29.779 1.838 9.0102-0.3128 10.229-1.6064 12.615-2.4096 2.9795-4.8192 3.9978-7.2288 5.8586 0.6794-7.384 1.9931-14.269 2.4568-22.253 0.10508-6.3467-0.23106-12.344-0.94494-18.993" stroke-linejoin="round"/><path class="jxrgOTBq_26" d="m39.38 19.277c0.55464 4.9938 0.59474 10.664 4.3231 13.206 0.64964-0.44886 1.8109-0.74851 1.9608-2.197 1.1677 1.4185 2.3838 2.8048 5.0318 3.2364 0.58026-0.42703 0.63304-1.7508 0.59059-3.2364 0.8932 1.5063 0.76485 3.5233 3.1183 4.2995l0.42522-1.3702c1.1108 1.0092 2.5441 1.9314 4.2758 1.9844 0.88957-0.70108 0.71504-1.8993 0.85045-3.3545" stroke-linejoin="round"/><path class="jxrgOTBq_27" d="m39.38 19.277c-1.1289 18.1-3.2291 36.433-0.12518 53.517-4.2036-2.2385-6.2722-5.8546-7.4167-10.991 1.1702-11.815 1.6643-21.252 1.7707-37.685" stroke-linejoin="bevel"/><path class="jxrgOTBq_28" d="m21.167 29.671c-1.3379 1.1594-1.7992 2.0759-2.4905 2.9871-0.35815 12.187 0.94809 24.629 2.2026 36.561 0.6334 3.956 2.2453 7.0059 4.5787 9.3878-1.7406-16.337-2.6617-31.534-2.7763-48.774l2.0086-2.094" stroke-linejoin="round"/></g><path class="jxrgOTBq_29" d="m37.752 47.303c1.2428 1.5062 2.6913 2.7552 4.6438 3.3743 1.9543 0.88444 4.3616 1.044 6.7486 1.2361 2.8963-0.43971 5.0414-1.3995 6.782-2.6393 2.1713-0.99955 3.2045-2.2836 4.744-3.4411" fill="none" stroke="#bbb" stroke-width=".39688px"/><style data-made-with="vivus-instant">.jxrgOTBq_0{stroke-dasharray:8 10;stroke-dashoffset:9;animation:jxrgOTBq_draw 500ms ease 0ms forwards;}.jxrgOTBq_1{stroke-dasharray:14 16;stroke-dashoffset:15;animation:jxrgOTBq_draw 500ms ease 17ms forwards;}.jxrgOTBq_2{stroke-dasharray:6 8;stroke-dashoffset:7;animation:jxrgOTBq_draw 500ms ease 34ms forwards;}.jxrgOTBq_3{stroke-dasharray:25 27;stroke-dashoffset:26;animation:jxrgOTBq_draw 500ms ease 51ms forwards;}.jxrgOTBq_4{stroke-dasharray:44 46;stroke-dashoffset:45;animation:jxrgOTBq_draw 500ms ease 68ms forwards;}.jxrgOTBq_5{stroke-dasharray:42 44;stroke-dashoffset:43;animation:jxrgOTBq_draw 500ms ease 86ms forwards;}.jxrgOTBq_6{stroke-dasharray:12 14;stroke-dashoffset:13;animation:jxrgOTBq_draw 500ms ease 103ms forwards;}.jxrgOTBq_7{stroke-dasharray:50 52;stroke-dashoffset:51;animation:jxrgOTBq_draw 500ms ease 120ms forwards;}.jxrgOTBq_8{stroke-dasharray:9 11;stroke-dashoffset:10;animation:jxrgOTBq_draw 500ms ease 137ms forwards;}.jxrgOTBq_9{stroke-dasharray:46 48;stroke-dashoffset:47;animation:jxrgOTBq_draw 500ms ease 155ms forwards;}.jxrgOTBq_10{stroke-dasharray:14 16;stroke-dashoffset:15;animation:jxrgOTBq_draw 500ms ease 172ms forwards;}.jxrgOTBq_11{stroke-dasharray:25 27;stroke-dashoffset:26;animation:jxrgOTBq_draw 500ms ease 189ms forwards;}.jxrgOTBq_12{stroke-dasharray:7 9;stroke-dashoffset:8;animation:jxrgOTBq_draw 500ms ease 206ms forwards;}.jxrgOTBq_13{stroke-dasharray:15 17;stroke-dashoffset:16;animation:jxrgOTBq_draw 500ms ease 224ms forwards;}.jxrgOTBq_14{stroke-dasharray:22 24;stroke-dashoffset:23;animation:jxrgOTBq_draw 500ms ease 241ms forwards;}.jxrgOTBq_15{stroke-dasharray:19 21;stroke-dashoffset:20;animation:jxrgOTBq_draw 500ms ease 258ms forwards;}.jxrgOTBq_16{stroke-dasharray:19 21;stroke-dashoffset:20;animation:jxrgOTBq_draw 500ms ease 275ms forwards;}.jxrgOTBq_17{stroke-dasharray:3 5;stroke-dashoffset:4;animation:jxrgOTBq_draw 500ms ease 293ms forwards;}.jxrgOTBq_18{stroke-dasharray:8 10;stroke-dashoffset:9;animation:jxrgOTBq_draw 500ms ease 310ms forwards;}.jxrgOTBq_19{stroke-dasharray:50 52;stroke-dashoffset:51;animation:jxrgOTBq_draw 500ms ease 327ms forwards;}.jxrgOTBq_20{stroke-dasharray:22 24;stroke-dashoffset:23;animation:jxrgOTBq_draw 500ms ease 344ms forwards;}.jxrgOTBq_21{stroke-dasharray:21 23;stroke-dashoffset:22;animation:jxrgOTBq_draw 500ms ease 362ms forwards;}.jxrgOTBq_22{stroke-dasharray:42 44;stroke-dashoffset:43;animation:jxrgOTBq_draw 500ms ease 379ms forwards;}.jxrgOTBq_23{stroke-dasharray:29 31;stroke-dashoffset:30;animation:jxrgOTBq_draw 500ms ease 396ms forwards;}.jxrgOTBq_24{stroke-dasharray:131 133;stroke-dashoffset:132;animation:jxrgOTBq_draw 500ms ease 413ms forwards;}.jxrgOTBq_25{stroke-dasharray:94 96;stroke-dashoffset:95;animation:jxrgOTBq_draw 500ms ease 431ms forwards;}.jxrgOTBq_26{stroke-dasharray:43 45;stroke-dashoffset:44;animation:jxrgOTBq_draw 500ms ease 448ms forwards;}.jxrgOTBq_27{stroke-dasharray:106 108;stroke-dashoffset:107;animation:jxrgOTBq_draw 500ms ease 465ms forwards;}.jxrgOTBq_28{stroke-dasharray:103 105;stroke-dashoffset:104;animation:jxrgOTBq_draw 500ms ease 482ms forwards;}.jxrgOTBq_29{stroke-dasharray:26 28;stroke-dashoffset:27;animation:jxrgOTBq_draw 500ms ease 500ms forwards;}@keyframes jxrgOTBq_draw{100%{stroke-dashoffset:0;}}@keyframes jxrgOTBq_fade{0%{stroke-opacity:1;}92.3076923076923%{stroke-opacity:1;}100%{stroke-opacity:0;}}</style></svg>
     <div class="section-borderline"></div>
     <div class="section-container">
@@ -41,10 +41,10 @@
       <div class="section-title">問い合わせフォーム！</div>
       <p>ご意見感想問い合わせなど、何かある方はこちらから<br>
       <a href="https://twitter.com/mizzsig">Twitter</a>での連絡でも、よいです！</p>
-      <div class="opinion-form">
-        <input v-model="address" class="opinion-content address" name="address" placeholder="連絡先(任意)">
-        <textarea v-model="body" class="opinion-content body" name="body" placeholder="本文(必須)"></textarea>
-        <button v-on:click="postMessage" class="opinion-content send">そうしん！</button>
+      <div class="inquiry-form">
+        <input v-model="address" class="inquiry-content address" name="address" placeholder="連絡先(任意:メールアドレスなど)">
+        <textarea v-model="body" class="inquiry-content body" id="inquiry-body" name="body" placeholder="本文(必須)"></textarea>
+        <button v-on:click="postMessage" class="inquiry-content send">そうしん！</button>
       </div>
     </div>
 
@@ -53,7 +53,7 @@
     <div class="section-container">
       <div class="section-title">規約！！！！</div>
       <p>このサイトはどのページもリンクフリーです。<br>
-      画像の直リンクはご遠慮ください。</p>
+      画像の無断転載はご遠慮ください。</p>
     </div>
   </div>
 </template>
@@ -89,6 +89,29 @@ export default {
                 // TODO : APIがエラー返した時の表示出せるとよい
                 return response.json();
             });
+        },
+        // textarea の高さを調節する
+        resize() {
+            document.getElementById('inquiry-body').style.height = '';
+            document.getElementById('inquiry-body').style.height = document.getElementById('inquiry-body').scrollHeight + 'px';
+        }
+    },
+    watch: {
+        body() {
+            // textareaの高さを調節する
+            this.resize();
+        }
+    },
+    directives: {
+        resize: {
+            inserted: (el, binding) => {
+                let f = function (evt) {
+                    if (binding.value(evt, el)) {
+                        window.removeEventListener('resize', f);
+                    }
+                };
+                window.addEventListener('resize', f);
+            }
         }
     }
 };
@@ -116,7 +139,7 @@ img {
     position: relative;
     width: 90%;
     max-width: 800px;
-    margin: 0px auto 20px auto;
+    margin: 0px auto 50px auto;
     background-color: #000000;
     z-index: 5;
 
@@ -135,7 +158,7 @@ img {
     }
 }
 
-.opinion-form {
+.inquiry-form {
     width: 90%;
     max-width: 600px;
     font-size: 20px;
@@ -143,7 +166,7 @@ img {
     border: 1px solid #bbbbbb;
     margin: auto;
 
-    .opinion-content {
+    .inquiry-content {
         display: inline-block;
         box-sizing: border-box;
 
@@ -152,12 +175,17 @@ img {
         margin: 0px 10px 5px 10px;
         width: calc(100% - 20px);
 
-        background: rgba(255, 255, 255, 0.96);
+        background: rgba(255, 255, 255, 0.9);
         color: #101010;
     }
 
     .body {
+        min-height: 100px;
         resize: none;
+    }
+
+    .send {
+        max-width: 35%;
     }
 }
 </style>
