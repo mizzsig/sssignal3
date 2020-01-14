@@ -44,7 +44,7 @@
       <div class="inquiry-form">
         <input v-model="address" class="inquiry-content address" name="address" placeholder="連絡先(任意:メールアドレスなど)">
         <textarea v-model="body" class="inquiry-content body" id="inquiry-body" name="body" placeholder="本文(必須)"></textarea>
-        <button v-on:click="postMessage" class="inquiry-content send">そうしん！</button>
+        <button v-on:click="postMessage" v-bind:class="{ active: canInquiryPost, disable: !canInquiryPost }" class="inquiry-content send">そうしん！</button>
       </div>
     </div>
 
@@ -68,11 +68,17 @@ export default {
     data() {
         return {
             address: '',
-            body: ''
+            body: '',
+            canInquiryPost: false
         };
     },
     methods: {
+        // 問い合わせフォームからPOSTリクエストを送る
         postMessage() {
+            if (!this.canInquiryPost) {
+                return;
+            }
+
             const body = JSON.stringify({
                 address: this.address,
                 body: this.body
@@ -94,12 +100,22 @@ export default {
         resize() {
             document.getElementById('inquiry-body').style.height = '';
             document.getElementById('inquiry-body').style.height = document.getElementById('inquiry-body').scrollHeight + 'px';
+        },
+        // 問い合わせフォームの送信ボタンをアクティブにするか判定
+        checkSubmitButton() {
+            if (this.body.replace(/\s/g, '') !== '') {
+                this.canInquiryPost = true;
+            } else {
+                this.canInquiryPost = false;
+            }
         }
     },
     watch: {
         body() {
             // textareaの高さを調節する
             this.resize();
+            // 問い合わせフォーム送信ボタンをアクティブにするか判定
+            this.checkSubmitButton();
         }
     },
     directives: {
@@ -185,7 +201,16 @@ img {
     }
 
     .send {
+        transition: all 0.3s;
         max-width: 35%;
+    }
+
+    .active {
+        background: rgb(155, 198, 255);
+    }
+
+    .disable {
+        background: rgba(255, 255, 255, 0.9);
     }
 }
 </style>
