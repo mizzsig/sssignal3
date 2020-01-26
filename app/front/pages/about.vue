@@ -45,6 +45,7 @@
         <input v-model="address" class="inquiry-content address" name="address" placeholder="連絡先(任意:メールアドレスなど)">
         <textarea v-model="body" class="inquiry-content body" id="inquiry-body" name="body" placeholder="本文(必須)"></textarea>
         <button v-on:click="postMessage" v-bind:class="{ active: canInquiryPost, disable: !canInquiryPost }" class="inquiry-content send">そうしん！</button>
+        <div class="inquiry-icon"><img src="~/assets/about/inquiry_icon.png" v-show="canInquiryPost"></div>
       </div>
     </div>
 
@@ -181,6 +182,7 @@ img {
     padding: 10px;
     border: 1px solid #bbbbbb;
     margin: auto;
+    position: relative;
 
     .inquiry-content {
         display: inline-block;
@@ -195,6 +197,17 @@ img {
         color: #101010;
     }
 
+    .inquiry-icon {
+        position: absolute;
+
+        top: calc(100% - 45px);
+        left: 64%;
+
+        img {
+            height: 40px;
+        }
+    }
+
     .body {
         min-height: 100px;
         resize: none;
@@ -206,7 +219,7 @@ img {
     }
 
     .active {
-        background: rgb(155, 198, 255);
+        background: rgb(180, 212, 255);
     }
 
     .disable {
