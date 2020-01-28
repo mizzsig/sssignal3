@@ -44,8 +44,8 @@
       <div class="inquiry-form">
         <input v-model="address" class="inquiry-content address" name="address" placeholder="連絡先(任意:メールアドレスなど)">
         <textarea v-model="body" class="inquiry-content body" id="inquiry-body" name="body" placeholder="本文(必須)"></textarea>
-        <button v-on:click="postMessage" v-bind:class="{ active: canInquiryPost, disable: !canInquiryPost }" class="inquiry-content send">そうしん！</button>
-        <div class="inquiry-icon"><img src="~/assets/about/inquiry_icon.png" v-show="canInquiryPost"></div>
+        <button v-on:click="postMessage" v-on:mouseover="inquiryHover" v-on:mouseleave="inquiryLeave" v-bind:class="{ active: canInquiryPost, disable: !canInquiryPost }" class="inquiry-content send">そうしん！</button>
+        <div class="inquiry-icon" v-bind:class="{ 'inquiry-icon-show': canInquiryPost, 'inquiry-icon-fade': !canInquiryPost }"><img :src="inquiryIcon"></div>
       </div>
     </div>
 
@@ -70,7 +70,10 @@ export default {
         return {
             address: '',
             body: '',
-            canInquiryPost: false
+            canInquiryPost: false,
+            inquiryIcon: require('~/assets/about/inquiry_icon.png'),
+            inquiryIconLeave: require('~/assets/about/inquiry_icon.png'),
+            inquiryIconHover: require('~/assets/about/inquiry_icon_hover.png')
         };
     },
     methods: {
@@ -109,6 +112,14 @@ export default {
             } else {
                 this.canInquiryPost = false;
             }
+        },
+        // ホバーした時のアイコンに差し替え
+        inquiryHover() {
+            this.inquiryIcon = this.inquiryIconHover;
+        },
+        // ホバーが外れた時のアイコンに差し替え
+        inquiryLeave() {
+            this.inquiryIcon = this.inquiryIconLeave;
         }
     },
     watch: {
@@ -202,10 +213,19 @@ img {
 
         top: calc(100% - 45px);
         left: 64%;
+        transition: all 0.3s;
 
         img {
             height: 40px;
         }
+    }
+
+    .inquiry-icon-fade {
+        opacity: 0;
+    }
+
+    .inquiry-icon-show {
+        opacity: 1;
     }
 
     .body {
@@ -216,6 +236,23 @@ img {
     .send {
         transition: all 0.3s;
         max-width: 35%;
+    }
+
+    .send:hover + .inquiry-icon {
+        animation-name: inquiryIconHover;
+        animation-duration: 0.3s;
+    }
+
+    @keyframes inquiryIconHover {
+        0% {
+            margin-top: 0px;
+        }
+        50% {
+            margin-top: -5px;
+        }
+        100% {
+            margin-top: 0px;
+        }
     }
 
     .active {
