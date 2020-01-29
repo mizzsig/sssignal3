@@ -1,22 +1,55 @@
 <template>
   <div>
     <header>
-      <nuxt-link @click.native="$store.commit('character/setShow', false)" class="menu" to="/">
-        <span v-bind:class="{ 'active': isActive('/') }">Starch Syrup Signal3</span>
-      </nuxt-link>
-      <nuxt-link @click.native="$store.commit('character/setShow', true)" class="menu" to="/about">
-        <span v-bind:class="{ 'active': isActive('/about') }">about</span>
-      </nuxt-link>
-      <nuxt-link
-        @click.native="$store.commit('character/setShow', true)"
-        class="menu"
-        to="/gallery/images"
-      >
-        <span v-bind:class="{ 'active': isActive('/gallery') }">gallery</span>
-      </nuxt-link>
-      <nuxt-link @click.native="$store.commit('character/setShow', true)" class="menu" to="/column">
-        <span v-bind:class="{ 'active': isActive('/column') }">column</span>
-      </nuxt-link>
+      <div class="header small">
+        <div class="menu">
+          <span>Starch Syrup Signal3</span>
+        </div>
+      </div>
+      <div class="toggle-menu" :class="{ 'toggle-show': toggleShow }">
+        <nuxt-link @click.native="$store.commit('character/setShow', false)" class="menu" to="/">Top</nuxt-link>
+        <nuxt-link
+          @click.native="$store.commit('character/setShow', true)"
+          class="menu"
+          to="/about"
+        >about</nuxt-link>
+        <nuxt-link
+          @click.native="$store.commit('character/setShow', true)"
+          class="menu"
+          to="/gallery/images"
+        >gallery</nuxt-link>
+        <nuxt-link
+          @click.native="$store.commit('character/setShow', true)"
+          class="menu"
+          to="/column"
+        >column</nuxt-link>
+      </div>
+      <div class="header wide">
+        <nuxt-link @click.native="$store.commit('character/setShow', false)" class="menu" to="/">
+          <span v-bind:class="{ 'active': isActive('/') }">Starch Syrup Signal3</span>
+        </nuxt-link>
+        <nuxt-link
+          @click.native="$store.commit('character/setShow', true)"
+          class="menu"
+          to="/about"
+        >
+          <span v-bind:class="{ 'active': isActive('/about') }">about</span>
+        </nuxt-link>
+        <nuxt-link
+          @click.native="$store.commit('character/setShow', true)"
+          class="menu"
+          to="/gallery/images"
+        >
+          <span v-bind:class="{ 'active': isActive('/gallery') }">gallery</span>
+        </nuxt-link>
+        <nuxt-link
+          @click.native="$store.commit('character/setShow', true)"
+          class="menu"
+          to="/column"
+        >
+          <span v-bind:class="{ 'active': isActive('/column') }">column</span>
+        </nuxt-link>
+      </div>
     </header>
     <div style="height: 50px;"></div>
     <nuxt v-bind:class="{ 'nuxt-show-character': isShow, 'nuxt-notshow-character': !isShow }" />
@@ -33,6 +66,11 @@ import { mapMutations } from "vuex";
 import Character from "../components/common/character.vue";
 
 export default {
+  data() {
+    return {
+      toggleShow: false
+    };
+  },
   components: {
     Character
   },
@@ -50,6 +88,14 @@ export default {
         return path === this.$route.path;
       }
       return this.$route.path.indexOf(path) >= 0;
+    },
+    toggleMenu(event) {
+      // メニューが出ていない & 画面幅が小さい & メニューを押下したときにトグルメニューを出す
+      if (!this.toggleShow && window.innerWidth <= 500 && event.clientY <= 50) {
+        this.toggleShow = true;
+      } else {
+        this.toggleShow = false;
+      }
     }
   },
   mounted() {
@@ -57,13 +103,47 @@ export default {
     if (this.$route.path !== "/") {
       this.$store.commit("character/setShow", true);
     }
+    window.addEventListener("click", this.toggleMenu);
+  },
+  beforeDestroy() {
+    window.removeEventListener("click", this.toggleMenu);
   }
 };
 </script>
 
 <style lang="scss" scoped>
 $height: 50px;
-header {
+.toggle-menu {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 20;
+  width: 100%;
+  top: 4 * -40px;
+  transition: all 0.3s;
+
+  .menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #cccccc;
+    background: rgba(60, 60, 60, 0.95);
+    height: 40px;
+    align-items: center;
+    transition: all 0.2s;
+  }
+
+  .menu:hover {
+    background: rgba(80, 80, 80, 0.95);
+  }
+}
+
+.toggle-show {
+  top: 0px;
+}
+
+.header {
   display: flex;
   position: fixed;
   width: 100%;
@@ -71,6 +151,7 @@ header {
   z-index: 10;
   padding-left: 40px;
   background-color: rgba(30, 30, 30, 0.6);
+
   .menu {
     display: flex;
     align-items: center;
@@ -109,6 +190,22 @@ header {
     }
   }
 }
+.small {
+  padding-left: 0px;
+  cursor: pointer;
+  justify-content: center;
+}
+@media screen and (max-width: 500px) {
+  .wide {
+    display: none;
+  }
+}
+@media screen and (min-width: 501px) {
+  .small {
+    display: none;
+  }
+}
+
 .nuxt-show-character {
   width: calc(100% - 300px);
   height: calc(100% - 50px);
