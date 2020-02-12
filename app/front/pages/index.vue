@@ -1,7 +1,7 @@
 <template>
   <section class="container">
-    <scene1 v-if="scene === 1"></scene1>
-    <scene2 v-if="scene === 2"></scene2>
+    <scene1 v-show="scene === 1"></scene1>
+    <scene2 v-show="scene === 2"></scene2>
   </section>
 </template>
 
@@ -33,5 +33,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

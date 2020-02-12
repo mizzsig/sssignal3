@@ -10,6 +10,8 @@ import (
 	"net/url"
 	"os"
 	"fmt"
+	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
 
 // 問い合わせフォームから送られるリクエスト
@@ -21,6 +23,12 @@ type InquiryRequest struct {
 // Slack webhookに渡す用の構造体
 type Slack struct {
 	Text string `json:"text"`
+}
+
+// ギャラリーに出す画像
+type Image struct {
+	ImageUrl string `bson:"imageUrl"`
+	TweetUrl string `bson:"tweetUrl"`
 }
 
 func main() {
@@ -39,6 +47,20 @@ func main() {
 
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, world!!!")
+	})
+	e.GET("/gallery/images", func(c echo.Context) error {
+		// MongoDBにログイン, DBとCollectionを指定
+		credential := &mgo.Credential{Username: "root", Password: "pass"}
+		session, _ := mgo.Dial("mongodb")
+		session.Login(credential)
+		images := session.DB("sssignal3").C("images")
+
+		// Query発行
+		var imageList []Image
+		images.Find(bson.M{}).Sort("-_id").All(&imageList)
+
+		session.Close()
+		return c.JSON(http.StatusOK, imageList)
 	})
 	e.POST("/inquiry", func(c echo.Context) error {
 		// パラメータを受け取る

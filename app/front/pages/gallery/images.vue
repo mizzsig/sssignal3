@@ -19,6 +19,12 @@
     <br />画像のまとめページです
     <br />工事中
     <div class="container">
+      <a v-for="image in images" v-bind:key="image.imageUrl" target="_blank" :href="image.TweetUrl">
+        <img class="content-img" :src="image.ImageUrl" />
+      </a>
+    </div>
+    <!-- 
+    <div class="container">
       <a target="_blank" href="https://twitter.com/mizzsig/status/1162932319826534401">
         <img class="content-img" src="https://pbs.twimg.com/media/ECOQxriUwAA8Xuo?format=jpg" />
       </a>
@@ -205,7 +211,7 @@
       <a target="_blank" href="https://twitter.com/mizzsig/status/666174148348014592">
         <img class="content-img" src="https://pbs.twimg.com/media/CT6521DVEAAuE7E?format=jpg" />
       </a>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -213,7 +219,25 @@
 import { mapMutations } from "vuex";
 
 export default {
+  data() {
+    return {
+      images: null
+    };
+  },
   mounted() {
+    // APIから画像一覧読み込み
+    fetch("http://api.sssignal.com/gallery/images", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => response.json())
+      .then(imagesJson => {
+        this.images = imagesJson;
+      });
+
     window.addEventListener("resize", this.onResize);
     // 画像読み込み後に初回リサイズ
     let images = document.getElementsByClassName("content-img");
