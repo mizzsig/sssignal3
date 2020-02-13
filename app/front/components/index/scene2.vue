@@ -8,6 +8,9 @@
         v-bind:key="index"
         :style="isBlackMargin(index)"
         class="keyboard black"
+        @mousedown="playPiano(index, 'black')"
+        @mouseup="pianoMouseUp(index, 'black')"
+        @mouseleave="pianoMouseUp(index, 'black')"
       ></div>
     </div>
     <div class="keyboard-container">
@@ -16,13 +19,16 @@
         v-for="(value, index) in this.keyboardsWhite"
         v-bind:key="index"
         class="keyboard white"
+        @mousedown="playPiano(index, 'white')"
+        @mouseup="pianoMouseUp(index, 'white')"
+        @mouseleave="pianoMouseUp(index, 'white')"
       ></div>
     </div>
     <div class="score-container">
       <div
         class="music-note"
         v-for="key in notesKey"
-        :key="notes[key].id"
+        :key="key"
         :style="{ left: notes[key].left + 'px', top: notes[key].top + 'px' }"
       >
         <img :src="notes[key].imageUrl" />
@@ -308,6 +314,10 @@ export default {
         this.keyboardsBlack[blackKeys.indexOf(event.key)] = false;
         key.classList.remove("keydown");
       }
+    },
+    pianoMouseUp(index, color) {
+      const key = document.getElementById(color + index);
+      key.classList.remove("keydown");
     }
   }
 };
