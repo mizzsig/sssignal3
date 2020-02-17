@@ -38,13 +38,11 @@
       <div class="score-line-dark"></div>
       <div class="score-line-dark"></div>
       <div class="score-line-dark"></div>
-      <div class="score-line-dark"></div>
       <div class="score-line"></div>
       <div class="score-line"></div>
       <div class="score-line"></div>
       <div class="score-line"></div>
       <div class="score-line"></div>
-      <div class="score-line-dark"></div>
       <div class="score-line-dark"></div>
       <div class="score-line-dark"></div>
       <div class="score-line-dark"></div>
@@ -245,8 +243,8 @@ export default {
       // 連想配列は単純に追加すると動かない！ので$setを使う
       this.$set(this.notes, `${timeStamp}-${color}${index}`, {
         imageUrl:
-          "/top/scene2/note" + (Math.floor(Math.random() * 3) + 1) + ".png",
-        top: (21 - index) * 13,
+          "/top/scene2/" + color + (Math.floor(Math.random() * 3) + 1) + ".png",
+        top: (21 - index) * 12,
         left:
           redLine.getBoundingClientRect().left -
           scoreContainer.getBoundingClientRect().left -
@@ -362,13 +360,14 @@ export default {
 
   .music-note {
     position: absolute;
-    width: 26px;
-    height: 26px;
+    margin-top: 4px;
+    width: 20px;
+    height: 20px;
     transition: all 4s linear;
 
     img {
-      width: 26px;
-      height: 26px;
+      width: 20px;
+      height: 20px;
     }
   }
 
@@ -376,14 +375,14 @@ export default {
     background: rgb(140, 140, 140);
 
     margin-top: 20px;
-    height: 5px;
+    height: 4px;
   }
 
   .score-line-dark {
     background: rgb(50, 50, 50);
 
     margin-top: 20px;
-    height: 5px;
+    height: 4px;
   }
 
   .score-line-red {
