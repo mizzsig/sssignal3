@@ -240,11 +240,35 @@ export default {
 
       // 音符を設置する
       this.notesKey.push(`${timeStamp}-${color}${index}`);
+      let top;
+      if (color === "white") {
+        top = (21 - index) * 12;
+      } else {
+        // 黒鍵盤の縦位置に対応する白鍵盤の位置
+        const blackIndex = [
+          0,
+          1,
+          3,
+          4,
+          5,
+          7,
+          8,
+          10,
+          11,
+          12,
+          14,
+          15,
+          17,
+          18,
+          19
+        ];
+        top = (21 - blackIndex[index]) * 12;
+      }
       // 連想配列は単純に追加すると動かない！ので$setを使う
       this.$set(this.notes, `${timeStamp}-${color}${index}`, {
         imageUrl:
           "/top/scene2/" + color + (Math.floor(Math.random() * 3) + 1) + ".png",
-        top: (21 - index) * 12,
+        top: top,
         left:
           redLine.getBoundingClientRect().left -
           scoreContainer.getBoundingClientRect().left -
