@@ -1,6 +1,9 @@
 <template>
   <div class="container">
     <h1>水飴信号3 ~Starch Syrup Signal~</h1>
+    <a class="explain" @mousedown="isExplain = !isExplain">{{
+      this.isExplain ? "press any key" : "How to play"
+    }}</a>
     <div class="keyboard-container" style="margin-bottom: -66px;">
       <div
         :id="'black' + index"
@@ -11,7 +14,11 @@
         @mousedown="playPiano(index, 'black')"
         @mouseup="pianoMouseUp(index, 'black')"
         @mouseleave="pianoMouseUp(index, 'black')"
-      ></div>
+      >
+        <span class="keyboard-help" v-show="isExplain">{{
+          blackKeys[index]
+        }}</span>
+      </div>
     </div>
     <div class="keyboard-container">
       <div
@@ -22,7 +29,11 @@
         @mousedown="playPiano(index, 'white')"
         @mouseup="pianoMouseUp(index, 'white')"
         @mouseleave="pianoMouseUp(index, 'white')"
-      ></div>
+      >
+        <span class="keyboard-help" v-show="isExplain">{{
+          whiteKeys[index]
+        }}</span>
+      </div>
     </div>
     <div class="score-container">
       <div
@@ -52,51 +63,11 @@
 </template>
 
 <script>
-const whiteKeys = [
-  "z",
-  "x",
-  "c",
-  "v",
-  "b",
-  "n",
-  "m",
-  ",",
-  ".",
-  "/",
-  "q",
-  "w",
-  "e",
-  "r",
-  "t",
-  "y",
-  "u",
-  "i",
-  "o",
-  "p",
-  "@",
-  "["
-];
-const blackKeys = [
-  "s",
-  "d",
-  "g",
-  "h",
-  "j",
-  "l",
-  ";",
-  "2",
-  "3",
-  "4",
-  "6",
-  "7",
-  "9",
-  "0",
-  "-"
-];
-
 export default {
   data() {
     return {
+      // 説明を表示するかどうか
+      isExplain: false,
       isDrawingScore: false,
       isNoteMoving: false,
       score: [],
@@ -109,16 +80,57 @@ export default {
       // 表示しているキーボードを格納する配列、押されているときはtrue、押されてないときはfales
       keyboardsBlack: [],
       keyboardsWhite: [],
-      hiddenBlackKey: [2, 5, 7, 10, 12, 15, 17, 20]
+      hiddenBlackKey: [2, 5, 7, 10, 12, 15, 17, 20],
+      whiteKeys: [
+        "z",
+        "x",
+        "c",
+        "v",
+        "b",
+        "n",
+        "m",
+        ",",
+        ".",
+        "/",
+        "q",
+        "w",
+        "e",
+        "r",
+        "t",
+        "y",
+        "u",
+        "i",
+        "o",
+        "p",
+        "@",
+        "["
+      ],
+      blackKeys: [
+        "s",
+        "d",
+        "g",
+        "h",
+        "j",
+        "l",
+        ";",
+        "2",
+        "3",
+        "4",
+        "6",
+        "7",
+        "9",
+        "0",
+        "-"
+      ]
     };
   },
   mounted() {
     // mp3のプリロード
-    whiteKeys.forEach((value, index) => {
+    this.whiteKeys.forEach((value, index) => {
       this.notesAudio[`white${index}`] = new Audio();
       this.notesAudio[`white${index}`].src = `/top/scene2/white${index}.mp3`;
     });
-    blackKeys.forEach((value, index) => {
+    this.blackKeys.forEach((value, index) => {
       this.notesAudio[`black${index}`] = new Audio();
       this.notesAudio[`black${index}`].src = `/top/scene2/black${index}.mp3`;
     });
@@ -231,10 +243,16 @@ export default {
       const timeStamp = Date.now();
 
       // 古い音符を消す
-      //   this.notesKey = this.notesKey.filter(function(key) {
-      //     const index = key.indexOf("-");
-      //     const stamp = Number(key.substring(0, index));
-      //     return stamp + 4000 > timeStamp;
+      //   this.notesKey.forEach((note, index) => {
+      //     console.log(note, index);
+      //     const tmpIndex = note.indexOf("-");
+      //     // タイムスタンプ部分を抽出
+      //     const stamp = Number(note.substring(0, tmpIndex));
+      //     if (stamp + 4000 <= timeStamp) {
+      //       console.log("hit!");
+      //     // アニメーションが終わってるやつを消す
+      //       this.$delete(this.notesKey, index);
+      //     }
       //   });
       //   this.notes = this.notes.filter(note => note.timestamp + 4000 > timeStamp);
 
@@ -300,40 +318,40 @@ export default {
       }
 
       if (
-        !this.keyboardsWhite[whiteKeys.indexOf(event.key)] &&
-        whiteKeys.indexOf(event.key) >= 0 &&
-        whiteKeys.indexOf(event.key) < this.keyboardsWhite.length
+        !this.keyboardsWhite[this.whiteKeys.indexOf(event.key)] &&
+        this.whiteKeys.indexOf(event.key) >= 0 &&
+        this.whiteKeys.indexOf(event.key) < this.keyboardsWhite.length
       ) {
-        this.keyboardsWhite[whiteKeys.indexOf(event.key)] = true;
-        this.playPiano(whiteKeys.indexOf(event.key), "white");
+        this.keyboardsWhite[this.whiteKeys.indexOf(event.key)] = true;
+        this.playPiano(this.whiteKeys.indexOf(event.key), "white");
       } else if (
-        !this.keyboardsBlack[blackKeys.indexOf(event.key)] &&
-        blackKeys.indexOf(event.key) >= 0 &&
-        blackKeys.indexOf(event.key) < this.keyboardsBlack.length
+        !this.keyboardsBlack[this.blackKeys.indexOf(event.key)] &&
+        this.blackKeys.indexOf(event.key) >= 0 &&
+        this.blackKeys.indexOf(event.key) < this.keyboardsBlack.length
       ) {
-        this.keyboardsBlack[blackKeys.indexOf(event.key)] = true;
-        this.playPiano(blackKeys.indexOf(event.key), "black");
+        this.keyboardsBlack[this.blackKeys.indexOf(event.key)] = true;
+        this.playPiano(this.blackKeys.indexOf(event.key), "black");
       }
     },
     // キーボードからピアノ鍵盤が離されたかを判定する
     pianoKeyUp(event) {
       if (
-        whiteKeys.indexOf(event.key) >= 0 &&
-        whiteKeys.indexOf(event.key) < this.keyboardsWhite.length
+        this.whiteKeys.indexOf(event.key) >= 0 &&
+        this.whiteKeys.indexOf(event.key) < this.keyboardsWhite.length
       ) {
         const key = document.getElementById(
-          "white" + whiteKeys.indexOf(event.key)
+          "white" + this.whiteKeys.indexOf(event.key)
         );
-        this.keyboardsWhite[whiteKeys.indexOf(event.key)] = false;
+        this.keyboardsWhite[this.whiteKeys.indexOf(event.key)] = false;
         key.classList.remove("keydown");
       } else if (
-        blackKeys.indexOf(event.key) >= 0 &&
-        blackKeys.indexOf(event.key) < this.keyboardsBlack.length
+        this.blackKeys.indexOf(event.key) >= 0 &&
+        this.blackKeys.indexOf(event.key) < this.keyboardsBlack.length
       ) {
         const key = document.getElementById(
-          "black" + blackKeys.indexOf(event.key)
+          "black" + this.blackKeys.indexOf(event.key)
         );
-        this.keyboardsBlack[blackKeys.indexOf(event.key)] = false;
+        this.keyboardsBlack[this.blackKeys.indexOf(event.key)] = false;
         key.classList.remove("keydown");
       }
     },
@@ -348,6 +366,11 @@ export default {
 <style lang="scss" scoped>
 .container {
   overflow: hidden;
+
+  .explain {
+    cursor: pointer;
+    user-select: none;
+  }
 }
 
 .keyboard-container {
@@ -356,6 +379,7 @@ export default {
 }
 
 .keyboard {
+  position: relative;
   margin: 3px;
   width: 20px;
 }
@@ -363,12 +387,25 @@ export default {
 .white {
   background: rgb(210, 210, 210);
   height: 100px;
+
+  color: rgb(72, 72, 72);
 }
 
 .black {
   background: rgb(72, 72, 72);
   z-index: 3;
   height: 60px;
+
+  color: rgb(210, 210, 210);
+}
+
+.keyboard-help {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 3px;
+  margin: auto;
+  user-select: none;
 }
 
 .keydown {
