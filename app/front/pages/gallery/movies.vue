@@ -15,15 +15,11 @@
       >
         <span class="active">movies</span>
       </nuxt-link>
-    </div>
-    ぎゃらりー！ <br />動画のまとめページです <br />上のやつが新しい
+    </div>ぎゃらりー！
+    <br />動画のまとめページです
+    <br />上のやつが新しい
     <div class="container">
-      <a
-        v-for="movie in movies"
-        v-bind:key="movie.MovieUrl"
-        target="_blank"
-        :href="movie.TweetUrl"
-      >
+      <a v-for="movie in movies" v-bind:key="movie.MovieUrl" target="_blank" :href="movie.TweetUrl">
         <div class="content">
           <video
             class="content-video"
@@ -79,6 +75,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 
   a {

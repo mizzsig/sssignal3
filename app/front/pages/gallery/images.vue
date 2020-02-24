@@ -15,15 +15,11 @@
       >
         <span>movies</span>
       </nuxt-link>
-    </div>
-    ぎゃらりー！ <br />画像のまとめページです <br />上のやつが新しい
+    </div>ぎゃらりー！
+    <br />画像のまとめページです
+    <br />上のやつが新しい
     <div class="container">
-      <a
-        v-for="image in images"
-        v-bind:key="image.ImageUrl"
-        target="_blank"
-        :href="image.TweetUrl"
-      >
+      <a v-for="image in images" v-bind:key="image.ImageUrl" target="_blank" :href="image.TweetUrl">
         <div class="content">
           <img class="content-img" :src="image.ImageUrl" />
         </div>
@@ -61,6 +57,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   margin: 0px 10px;
 
