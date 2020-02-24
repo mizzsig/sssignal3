@@ -31,6 +31,12 @@ type Image struct {
 	TweetUrl string `bson:"tweetUrl"`
 }
 
+// ギャラリーに出す動画
+type Movie struct {
+	MovieUrl string `bson:"movieUrl"`
+	TweetUrl string `bson:"tweetUrl"`
+}
+
 func main() {
 	e := echo.New()
 
@@ -61,6 +67,20 @@ func main() {
 
 		session.Close()
 		return c.JSON(http.StatusOK, imageList)
+	})
+	e.GET("/gallery/movies", func(c echo.Context) error {
+		// MongoDBにログイン, DBとCollectionを指定
+		credential := &mgo.Credential{Username: "root", Password: "pass"}
+		session, _ := mgo.Dial("mongodb")
+		session.Login(credential)
+		images := session.DB("sssignal3").C("movies")
+
+		// Query発行
+		var movieList []Movie
+		images.Find(bson.M{}).Sort("-_id").All(&movieList)
+
+		session.Close()
+		return c.JSON(http.StatusOK, movieList)
 	})
 	e.POST("/inquiry", func(c echo.Context) error {
 		// パラメータを受け取る
