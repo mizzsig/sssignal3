@@ -23,7 +23,7 @@
         <div class="content">
           <video
             class="content-video"
-            @mouseenter="videoPlay"
+            @mouseenter="videoPlay($event, movie.Comment)"
             @mouseleave="videoPause"
             loop
             muted
@@ -45,6 +45,9 @@ export default {
     };
   },
   mounted() {
+    // キャラクターコメントの初期化
+    this.commentInit();
+
     // APIから動画一覧読み込み
     fetch("http://api.sssignal.com/gallery/movies", {
       method: "GET",
@@ -59,14 +62,21 @@ export default {
       });
   },
   methods: {
+    commentInit() {
+      this.$store.commit("character/setComment", "動画で振り返る水飴信号！");
+    },
     isActive(path) {
       return path === this.$route.path;
     },
-    videoPlay(e) {
+    videoPlay(e, comment) {
       e.target.play();
+
+      this.$store.commit("character/setComment", comment);
     },
     videoPause(e) {
       e.target.pause();
+
+      this.commentInit();
     }
   }
 };

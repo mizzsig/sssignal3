@@ -29,12 +29,18 @@ type Slack struct {
 type Image struct {
 	ImageUrl string `bson:"imageUrl"`
 	TweetUrl string `bson:"tweetUrl"`
+	Text string `bson:"text"`
+	Comment string `bson:"comment"`
+	Date string `bson:"date"`
 }
 
 // ギャラリーに出す動画
 type Movie struct {
 	MovieUrl string `bson:"movieUrl"`
 	TweetUrl string `bson:"tweetUrl"`
+	Text string `bson:"text"`
+	Comment string `bson:"comment"`
+	Date string `bson:"date"`
 }
 
 func main() {

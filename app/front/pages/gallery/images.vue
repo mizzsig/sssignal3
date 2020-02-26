@@ -21,7 +21,12 @@
     <div class="container">
       <a v-for="image in images" v-bind:key="image.ImageUrl" target="_blank" :href="image.TweetUrl">
         <div class="content">
-          <img class="content-img" :src="image.ImageUrl" />
+          <img
+            class="content-img"
+            :src="image.ImageUrl"
+            @mouseenter="$store.commit('character/setComment', image.Comment)"
+            @mouseleave="commentInit"
+          />
         </div>
       </a>
     </div>
@@ -38,6 +43,9 @@ export default {
     };
   },
   mounted() {
+    // キャラクターコメントの初期化
+    this.commentInit();
+
     // APIから画像一覧読み込み
     fetch("http://api.sssignal.com/gallery/images", {
       method: "GET",
@@ -50,6 +58,11 @@ export default {
       .then(imagesJson => {
         this.images = imagesJson;
       });
+  },
+  methods: {
+    commentInit() {
+      this.$store.commit("character/setComment", "画像で振り返る水飴信号！");
+    }
   }
 };
 </script>
