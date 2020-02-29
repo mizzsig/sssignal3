@@ -18,7 +18,7 @@ export default {
   data() {
     return {
       scene: 1,
-      components: 1 // 本番はここシーンの数にする
+      components: 2 // 本番はここシーンの数にする
     };
   },
   head() {
@@ -27,7 +27,10 @@ export default {
     };
   },
   beforeMount() {
-    this.scene = Math.floor(Math.random() * this.components) + 2; // 本番は1にする
+    this.scene = Math.floor(Math.random() * this.components) + 1; // 本番は1にする
+    if (this.$route.query.scene !== undefined) {
+      this.scene = parseInt(this.$route.query.scene);
+    }
   },
   methods: {}
 };
