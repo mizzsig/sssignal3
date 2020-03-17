@@ -23,8 +23,18 @@
         <img v-show="isCloseHover" src="~/assets/common/close-hover.gif" />
       </div>
       <div class="comment" v-show="isCharacter">{{ comment }}</div>
-      <div class="line" v-show="comment != ''"></div>ツイートと広告
-      <br />(開いてるページへのコメント(できれば))
+      <div class="line" v-show="comment != ''"></div>
+      <div v-show="isCharacter" class="tweet">
+        <img
+          class="tweet-icon"
+          src="https://pbs.twimg.com/profile_images/950738808911233024/H357rT4H_400x400.jpg"
+        />
+        <div class="tweet-name">とえら＠mizzsig</div>
+        <div>文章</div>
+        <div>画像 or 動画</div>
+        <div>日付</div>
+      </div>
+      <div v-show="!isCharacter">(広告：バナーだけ載せる)</div>
     </div>
     <div>
       <a href="https://twitter.com/mizzsig" target="_blank">
@@ -120,6 +130,22 @@ export default {
     );
     background-size: 12px 1px;
     background-repeat: repeat-x;
+  }
+
+  .tweet {
+    div {
+      color: rgb(0, 0, 0);
+    }
+
+    .tweet-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+    }
+
+    .tweet-name {
+      display: inline-block;
+    }
   }
 }
 

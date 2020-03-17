@@ -10,6 +10,8 @@ import (
 	"net/url"
 	"os"
 	"fmt"
+	"time"
+	"math/rand"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
@@ -79,11 +81,11 @@ func main() {
 		credential := &mgo.Credential{Username: "root", Password: "pass"}
 		session, _ := mgo.Dial("mongodb")
 		session.Login(credential)
-		images := session.DB("sssignal3").C("movies")
+		movies := session.DB("sssignal3").C("movies")
 
 		// Query発行
 		var movieList []Movie
-		images.Find(bson.M{}).Sort("-_id").All(&movieList)
+		movies.Find(bson.M{}).Sort("-_id").All(&movieList)
 
 		session.Close()
 		return c.JSON(http.StatusOK, movieList)
@@ -119,6 +121,53 @@ func main() {
 
 		// webhookの結果をJSONで返す
 		return c.JSON(http.StatusOK, map[string]string{"result": string(responseBody)})
+	})
+	// ランダムでツイートを１件返す
+	e.GET("/tweet", func(c echo.Context) error {
+		credential := &mgo.Credential{Username: "root", Password: "pass"}
+		session, _ := mgo.Dial("mongodb")
+		session.Login(credential)
+
+		rand.Seed(time.Now().UnixNano())
+		// データを取ってくる対象のCollection
+		target := [...] string{"images", "movies"}
+
+		// ランダムで選んだCollectionに対してデータを取得する
+		switch target[rand.Intn(2)] {
+			case "images":
+				images := session.DB("sssignal3").C("images")
+
+				// Query発行
+				var imageList []Image
+				images.Find(bson.M{}).Sort("-_id").All(&imageList)
+				count, err := images.Count()
+				if err != nil {
+					return c.String(http.StatusOK, "err!")
+				}
+				
+				result := imageList[rand.Intn(count)]
+
+				session.Close()
+				return c.JSON(http.StatusOK, result)
+			case "movies":
+				movies := session.DB("sssignal3").C("movies")
+
+				// Query発行
+				var movieList []Movie
+				movies.Find(bson.M{}).Sort("-_id").All(&movieList)
+				count, err := movies.Count()
+				if err != nil {
+					return c.String(http.StatusOK, "err!")
+				}
+				
+				result := movieList[rand.Intn(count)]
+
+				session.Close()
+				return c.JSON(http.StatusOK, result)
+		}
+
+		session.Close()
+		return c.String(http.StatusOK, "eee")
 	})
 	e.Logger.Fatal(e.Start(":1323"))
 }
