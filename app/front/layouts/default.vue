@@ -245,6 +245,15 @@ $height: 50px;
     display: none;
   }
 }
+@media screen and (max-height: 699px) {
+  .nuxt-show-character {
+    width: 100%;
+  }
+  .character,
+  .character-fade {
+    display: none;
+  }
+}
 </style>
 
 <style lang="scss">

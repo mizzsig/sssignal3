@@ -7,6 +7,7 @@
       <div
         class="reload"
         v-bind:class="{ 'pointer': isCharacter, 'nocursor': !isCharacter }"
+        @click="tweetLoad"
         @mouseenter="setReloadHover(true)"
         @mouseleave="setReloadHover(false)"
       >
@@ -23,16 +24,32 @@
         <img v-show="isCloseHover" src="~/assets/common/close-hover.gif" />
       </div>
       <div class="comment" v-show="isCharacter">{{ comment }}</div>
-      <div class="line" v-show="comment != ''"></div>
+      <div class="line" v-show="comment !== '' && isCharacter"></div>
       <div v-show="isCharacter" class="tweet">
-        <img
-          class="tweet-icon"
-          src="https://pbs.twimg.com/profile_images/950738808911233024/H357rT4H_400x400.jpg"
-        />
-        <div class="tweet-name">とえら＠mizzsig</div>
-        <div>文章</div>
-        <div>画像 or 動画</div>
-        <div>日付</div>
+        <a
+          :href="tweet.TweetUrl"
+          target="_blank"
+          @mouseenter="$store.commit('character/setComment', 'Twitterもぜひ見て')"
+        >
+          <div class="tweet-header">
+            <img
+              class="tweet-icon"
+              src="https://pbs.twimg.com/profile_images/950738808911233024/H357rT4H_400x400.jpg"
+            />
+            <div class="tweet-name">とえら＠mizzsig</div>
+          </div>
+          <!-- \nを<br>してツイートのテキスト出力 -->
+          <div class="tweet-text" v-show="tweet.Text !== undefined" v-html="tweet.Text"></div>
+          <!-- 画像 -->
+          <div v-show="tweet.ImageUrl !== undefined">
+            <img class="tweet-content" :src="tweet.ImageUrl" />
+          </div>
+          <!-- 動画 -->
+          <div v-show="tweet.MovieUrl !== undefined">
+            <video class="tweet-content" :src="tweet.MovieUrl" autoplay loop muted></video>
+          </div>
+          <div class="tweet-date">{{ tweet.Date }}</div>
+        </a>
       </div>
       <div v-show="!isCharacter">(広告：バナーだけ載せる)</div>
     </div>
@@ -51,8 +68,12 @@ export default {
   data() {
     return {
       isReloadHover: false,
-      isCloseHover: false
+      isCloseHover: false,
+      tweet: []
     };
+  },
+  mounted() {
+    this.tweetLoad();
   },
   computed: {
     isCharacter() {
@@ -68,6 +89,21 @@ export default {
     },
     setCloseHover(isCloseHover) {
       this.isCloseHover = isCloseHover;
+    },
+    // 最初に表示する時、更新ボタンを押された時にAPIリクエスト投げてtweet取得
+    tweetLoad() {
+      fetch("http://api.sssignal.com/tweet", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      })
+        .then(response => response.json())
+        .then(resultJson => {
+          this.tweet = resultJson;
+          this.tweet.Text = this.tweet.Text.replace(/\r?\n/g, "<br>");
+        });
     }
   }
 };
@@ -110,7 +146,7 @@ export default {
   background: rgb(206, 206, 206);
   color: rgb(0, 0, 0);
   border-radius: 4px;
-  padding: 20px 0px;
+  padding: 20px 10px 5px 10px;
 
   .comment {
     color: rgb(0, 0, 0);
@@ -133,18 +169,51 @@ export default {
   }
 
   .tweet {
+    transition: all 0.2s;
+    border-radius: 4px;
+
+    &:hover {
+      background: rgb(206, 219, 221);
+      .tweet-name {
+        color: rgb(45, 56, 158);
+      }
+    }
+    a {
+      text-decoration: none;
+    }
     div {
       color: rgb(0, 0, 0);
+    }
+
+    .tweet-header {
+      display: flex;
+      align-items: center;
     }
 
     .tweet-icon {
       width: 30px;
       height: 30px;
       border-radius: 8px;
+      margin-left: 15px;
+      margin-right: 5px;
     }
 
     .tweet-name {
       display: inline-block;
+    }
+
+    .tweet-text {
+      font-size: 14px;
+    }
+
+    .tweet-content {
+      max-width: 100%;
+      max-height: 150px;
+    }
+
+    .tweet-date {
+      font-size: 12px;
+      float: right;
     }
   }
 }
