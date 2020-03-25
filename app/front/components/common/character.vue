@@ -51,7 +51,14 @@
           <div class="tweet-date">{{ tweet.Date }}</div>
         </a>
       </div>
-      <div v-show="!isCharacter">(広告：バナーだけ載せる)</div>
+      <div class="advertisement" v-show="!isCharacter">
+        <div class="advertisement-banner">
+          <!-- ここに広告入れる API化したい -->
+        </div>
+        <div class="advertisement-banner">
+          <!-- ここに広告入れる API化したい -->
+        </div>
+      </div>
     </div>
     <div>
       <a href="https://twitter.com/mizzsig" target="_blank">
@@ -147,6 +154,7 @@ export default {
   color: rgb(0, 0, 0);
   border-radius: 4px;
   padding: 20px 10px 5px 10px;
+  overflow-y: scroll;
 
   .comment {
     color: rgb(0, 0, 0);
@@ -188,6 +196,7 @@ export default {
     .tweet-header {
       display: flex;
       align-items: center;
+      margin-bottom: 5px;
     }
 
     .tweet-icon {
@@ -216,14 +225,24 @@ export default {
       float: right;
     }
   }
+
+  .advertisement {
+    .advertisement-banner {
+      padding: 5px 0px;
+
+      img {
+        max-width: 100%;
+      }
+    }
+  }
 }
 
 .balloon-character {
-  max-height: calc(100vh - 430px);
+  max-height: calc(100vh - 440px);
 }
 
 .balloon-advertisement {
-  max-height: calc(100vh - 140px);
+  max-height: calc(100vh - 150px);
 }
 
 // 大きい

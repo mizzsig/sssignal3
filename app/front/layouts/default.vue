@@ -245,7 +245,7 @@ $height: 50px;
     display: none;
   }
 }
-@media screen and (max-height: 699px) {
+@media screen and (max-height: 499px) {
   .nuxt-show-character {
     width: 100%;
   }
