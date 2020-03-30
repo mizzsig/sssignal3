@@ -52,12 +52,12 @@
         </a>
       </div>
       <div class="advertisement" v-show="!isCharacter">
-        <div class="advertisement-banner">
-          <!-- ここに広告入れる API化したい -->
-        </div>
-        <div class="advertisement-banner">
-          <!-- ここに広告入れる API化したい -->
-        </div>
+        <div
+          class="advertisement-banner"
+          v-for="advertisement in advertisements"
+          v-bind:key="advertisement.Html"
+          v-html="advertisement.Html"
+        ></div>
       </div>
     </div>
     <div>
@@ -76,11 +76,13 @@ export default {
     return {
       isReloadHover: false,
       isCloseHover: false,
-      tweet: []
+      tweet: [],
+      advertisements: []
     };
   },
   mounted() {
     this.tweetLoad();
+    this.advertisementLoad();
   },
   computed: {
     isCharacter() {
@@ -110,6 +112,19 @@ export default {
         .then(resultJson => {
           this.tweet = resultJson;
           this.tweet.Text = this.tweet.Text.replace(/\r?\n/g, "<br>");
+        });
+    },
+    advertisementLoad() {
+      fetch("http://api.sssignal.com/advertisement", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      })
+        .then(response => response.json())
+        .then(resultJson => {
+          this.advertisements = resultJson;
         });
     }
   }
@@ -155,6 +170,7 @@ export default {
   border-radius: 4px;
   padding: 20px 10px 5px 10px;
   overflow-y: scroll;
+  width: 270px;
 
   .comment {
     color: rgb(0, 0, 0);
@@ -229,10 +245,6 @@ export default {
   .advertisement {
     .advertisement-banner {
       padding: 5px 0px;
-
-      img {
-        max-width: 100%;
-      }
     }
   }
 }

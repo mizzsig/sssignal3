@@ -45,6 +45,11 @@ type Movie struct {
 	Date string `bson:"date"`
 }
 
+// 広告
+type Advertisement struct {
+	Html string `bson:html`
+}
+
 func main() {
 	e := echo.New()
 
@@ -58,13 +63,15 @@ func main() {
 	}
 
 	slackWebhook := os.Getenv("SLACK_WEBHOOK")
+	mongoUsername := os.Getenv("MONGO_USERNAME")
+	mongoPassword := os.Getenv("MONGO_PASSWORD")
 
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, world!!!")
 	})
 	e.GET("/gallery/images", func(c echo.Context) error {
 		// MongoDBにログイン, DBとCollectionを指定
-		credential := &mgo.Credential{Username: "root", Password: "pass"}
+		credential := &mgo.Credential{Username: mongoUsername, Password: mongoPassword}
 		session, _ := mgo.Dial("mongodb")
 		session.Login(credential)
 		images := session.DB("sssignal3").C("images")
@@ -78,7 +85,7 @@ func main() {
 	})
 	e.GET("/gallery/movies", func(c echo.Context) error {
 		// MongoDBにログイン, DBとCollectionを指定
-		credential := &mgo.Credential{Username: "root", Password: "pass"}
+		credential := &mgo.Credential{Username: mongoUsername, Password: mongoPassword}
 		session, _ := mgo.Dial("mongodb")
 		session.Login(credential)
 		movies := session.DB("sssignal3").C("movies")
@@ -94,7 +101,7 @@ func main() {
 		// パラメータを受け取る
 		inquiryRequest := new(InquiryRequest)
 		if err := c.Bind(inquiryRequest); err != nil {
-			return c.String(http.StatusOK, "err!")
+			return c.String(http.StatusOK, "error!")
 		}
 		if inquiryRequest.Address != "" {
 			inquiryRequest.Address = "*" + inquiryRequest.Address + "*"
@@ -116,7 +123,7 @@ func main() {
 		// レスポンス読み込み
 		responseBody, err := ioutil.ReadAll(response.Body)
 		if err != nil {
-			return c.String(http.StatusOK, "err!")
+			return c.String(http.StatusOK, "error!")
 		}
 
 		// webhookの結果をJSONで返す
@@ -124,7 +131,7 @@ func main() {
 	})
 	// ランダムでツイートを１件返す
 	e.GET("/tweet", func(c echo.Context) error {
-		credential := &mgo.Credential{Username: "root", Password: "pass"}
+		credential := &mgo.Credential{Username: mongoUsername, Password: mongoPassword}
 		session, _ := mgo.Dial("mongodb")
 		session.Login(credential)
 
@@ -142,7 +149,7 @@ func main() {
 				images.Find(bson.M{}).Sort("-_id").All(&imageList)
 				count, err := images.Count()
 				if err != nil {
-					return c.String(http.StatusOK, "err!")
+					return c.String(http.StatusOK, "error!")
 				}
 				
 				result := imageList[rand.Intn(count)]
@@ -157,17 +164,58 @@ func main() {
 				movies.Find(bson.M{}).Sort("-_id").All(&movieList)
 				count, err := movies.Count()
 				if err != nil {
-					return c.String(http.StatusOK, "err!")
+					return c.String(http.StatusOK, "error!")
 				}
 				
 				result := movieList[rand.Intn(count)]
 
 				session.Close()
 				return c.JSON(http.StatusOK, result)
+			default:
+				session.Close()
+				return c.String(http.StatusOK, "error!")
+		}
+	})
+	// 表示させる広告を取得
+	e.GET("/advertisement", func(c echo.Context) error {
+		// MongoDBにログイン, DBとCollectionを指定
+		credential := &mgo.Credential{Username: mongoUsername, Password: mongoPassword}
+		session, _ := mgo.Dial("mongodb")
+		session.Login(credential)
+		advertisements := session.DB("sssignal3").C("advertisements")
+		// 表示する広告の数
+		viewAdvertisementNum := 2
+
+		var advertisementList []Advertisement
+		advertisements.Find(bson.M{}).Sort("-_id").All(&advertisementList)
+		count, err := advertisements.Count()
+		if err != nil {
+			return c.String(http.StatusOK, "error!")
+		}
+
+		var advertisementIndex []int
+		var advertisementResult []Advertisement
+
+		for len(advertisementIndex) < viewAdvertisementNum {
+			index := rand.Intn(count)
+			var isEqual = false
+
+			// 同一のインデックスが既に選ばれているかを確認
+			for i := 0; i < len(advertisementIndex); i++ {
+				if (index == advertisementIndex[i]) {
+					isEqual = true
+				}
+			}
+
+			// インデックスと結果配列に格納する
+			if !isEqual {
+				advertisementIndex = append(advertisementIndex, index)
+				advertisementResult = append(advertisementResult, advertisementList[index])
+			}
 		}
 
 		session.Close()
-		return c.String(http.StatusOK, "eee")
+		return c.JSON(http.StatusOK, advertisementResult)
 	})
 	e.Logger.Fatal(e.Start(":1323"))
 }
