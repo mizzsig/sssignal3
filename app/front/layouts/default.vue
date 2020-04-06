@@ -160,7 +160,7 @@ $height: 50px;
   height: $height;
   z-index: 10;
   padding-left: 40px;
-  background-color: rgba(30, 30, 30, 0.6);
+  background-color: rgba(30, 30, 30, 0.9);
 
   .menu {
     display: flex;
@@ -174,8 +174,12 @@ $height: 50px;
     &:hover span::after {
       width: 50%;
     }
+    .active {
+      color: #6d82b3;
+    }
     .active::before,
     .active::after {
+      border-bottom: 2px solid #6d82b3;
       width: 50%;
     }
     span {
@@ -187,7 +191,7 @@ $height: 50px;
         content: "";
         display: block;
         position: absolute;
-        bottom: -3px;
+        bottom: -5px;
         width: 0;
         transition: 0.2s all ease;
       }

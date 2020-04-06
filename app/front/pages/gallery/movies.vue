@@ -125,8 +125,12 @@ export default {
   &:hover span::after {
     width: 50%;
   }
+  .active {
+    color: #6d82b3;
+  }
   .active::before,
   .active::after {
+    border-bottom: 2px solid #6d82b3;
     width: 50%;
   }
   span {
