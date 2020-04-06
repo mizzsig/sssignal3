@@ -1808,7 +1808,7 @@ export default {
         body: this.body
       });
 
-      fetch("http://api.sssignal.com/inquiry", {
+      fetch(process.env.SSSIGNAL_API_DOMAIN + "/inquiry", {
         method: "POST",
         headers: {
           Accept: "application/json",

@@ -47,7 +47,7 @@ export default {
     this.commentInit();
 
     // APIから画像一覧読み込み
-    fetch("http://api.sssignal.com/gallery/images", {
+    fetch(process.env.SSSIGNAL_API_DOMAIN + "/gallery/images", {
       method: "GET",
       headers: {
         Accept: "application/json",

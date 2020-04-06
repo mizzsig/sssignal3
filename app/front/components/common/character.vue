@@ -101,7 +101,7 @@ export default {
     },
     // 最初に表示する時、更新ボタンを押された時にAPIリクエスト投げてtweet取得
     tweetLoad() {
-      fetch("http://api.sssignal.com/tweet", {
+      fetch(process.env.SSSIGNAL_API_DOMAIN + "/tweet", {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -115,7 +115,7 @@ export default {
         });
     },
     advertisementLoad() {
-      fetch("http://api.sssignal.com/advertisement", {
+      fetch(process.env.SSSIGNAL_API_DOMAIN + "/advertisement", {
         method: "GET",
         headers: {
           Accept: "application/json",

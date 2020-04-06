@@ -49,7 +49,7 @@ export default {
     this.commentInit();
 
     // APIから動画一覧読み込み
-    fetch("http://api.sssignal.com/gallery/movies", {
+    fetch(process.env.SSSIGNAL_API_DOMAIN + "/gallery/movies", {
       method: "GET",
       headers: {
         Accept: "application/json",

@@ -47,14 +47,14 @@ type Movie struct {
 
 // 広告
 type Advertisement struct {
-	Html string `bson:html`
+	Html string `bson:"html"`
 }
 
 // 記事
 type Column struct {
-	Date string `bson:date`
-	Title string `bson:title`
-	CharacterComment string `bson:characterComment`
+	Date string `bson:"date"`
+	Title string `bson:"title"`
+	CharacterComment string `bson:"characterComment"`
 }
 
 func main() {
