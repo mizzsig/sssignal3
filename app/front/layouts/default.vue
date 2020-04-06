@@ -175,6 +175,7 @@ $height: 50px;
       width: 50%;
     }
     .active {
+      transition: all 0.2s;
       color: #6d82b3;
     }
     .active::before,
@@ -185,6 +186,7 @@ $height: 50px;
     span {
       display: block;
       position: relative;
+      transition: all 0.2s;
       &::before,
       &::after {
         border-bottom: 2px solid #bbbbbb;
