@@ -53,6 +53,7 @@ type Advertisement struct {
 // 記事
 type Column struct {
 	Date string `bson:"date"`
+	Url string `bson:"url"`
 	Title string `bson:"title"`
 	CharacterComment string `bson:"characterComment"`
 }
@@ -238,6 +239,23 @@ func main() {
 
 		session.Close()
 		return c.JSON(http.StatusOK, columnList)
+	})
+	// 記事の詳細取得
+	e.GET("/column/:url", func(c echo.Context) error {
+		// MongoDBにログイン, DBとCollectionを指定
+		credential := &mgo.Credential{Username: mongoUsername, Password: mongoPassword}
+		session, _ := mgo.Dial("mongodb")
+		session.Login(credential)
+		columns := session.DB("sssignal3").C("columns")
+
+		// Query発行
+		var column Column
+
+		// 一件取得にしたい
+		columns.Find(bson.M{"url": c.Param("url")}).One(&column)
+
+		session.Close()
+		return c.JSON(http.StatusOK, column)
 	})
 	e.Logger.Fatal(e.Start(":1323"))
 }
