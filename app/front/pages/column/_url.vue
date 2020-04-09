@@ -28,6 +28,10 @@ export default {
       .then(response => response.json())
       .then(resultJson => {
         this.column = resultJson;
+        this.$store.commit(
+          "character/setComment",
+          this.column.CharacterComment
+        );
       });
   },
   methods: {}

@@ -5,9 +5,16 @@
     <br />工事中
     <div>
       <div class="column" v-for="column in columns" v-bind:key="column.Date">
-        <div>{{ column.Title }}</div>
-        <div>{{ column.CharacterComment }}</div>
-        <div>{{ column.Date }}</div>
+        <nuxt-link
+          :to="'/column/' + column.Url"
+          @mouseenter.native="$store.commit('character/setComment', column.CharacterComment)"
+          @mouseleave.native="commentInit"
+        >
+          <div>
+            <div>{{ column.Title }}</div>
+            <div>{{ column.Date }}</div>
+          </div>
+        </nuxt-link>
       </div>
     </div>
   </div>
@@ -38,6 +45,7 @@ export default {
   },
   methods: {
     commentInit() {
+      console.log("init");
       this.$store.commit("character/setComment", "");
     }
   }
@@ -54,6 +62,10 @@ export default {
 
   &:hover {
     background: rgb(98, 119, 156);
+  }
+
+  a {
+    text-decoration: none;
   }
 }
 </style>
