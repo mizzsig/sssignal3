@@ -9,10 +9,11 @@
           :to="'/column/' + column.Url"
           @mouseenter.native="$store.commit('character/setComment', column.CharacterComment)"
           @mouseleave.native="commentInit"
+          class="column-inner"
         >
           <div>
             <div>{{ column.Title }}</div>
-            <div>{{ column.Date }}</div>
+            <div>{{ column.Date.slice(0, 10) }}</div>
           </div>
         </nuxt-link>
       </div>
@@ -24,7 +25,7 @@
 export default {
   data() {
     return {
-      columns: null
+      columns: []
     };
   },
   mounted() {
@@ -45,7 +46,6 @@ export default {
   },
   methods: {
     commentInit() {
-      console.log("init");
       this.$store.commit("character/setComment", "");
     }
   }
@@ -55,16 +55,78 @@ export default {
 <style lang="scss" scoped>
 .column {
   display: inline-block;
-  width: 300px;
+  width: calc(100% - 20px);
+  max-width: 400px;
   background: rgb(87, 87, 87);
+  box-sizing: border-box;
   margin: 10px;
-  transition: all 0.2s;
+  padding: 5px;
+  transition: all 0.5s;
+  border-radius: 2px;
+  position: relative;
 
   &:hover {
-    background: rgb(98, 119, 156);
+    background: rgb(68, 88, 124);
   }
 
-  a {
+  // 左右
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    background: rgb(124, 144, 180);
+    width: 2px;
+    height: 0px;
+    border-radius: 2px;
+    transition: all 0.25s;
+    transition-delay: 0.25s;
+  }
+
+  &::before {
+    right: 0px;
+    bottom: 0px;
+  }
+
+  &::after {
+    top: 0px;
+    left: 0px;
+  }
+
+  &:hover::before,
+  &:hover::after {
+    height: 100%;
+    transition-delay: 0s;
+  }
+
+  // 上下
+  .column-inner::before,
+  .column-inner::after {
+    content: "";
+    position: absolute;
+    background: rgb(124, 144, 180);
+    width: 0px;
+    height: 2px;
+    border-radius: 2px;
+    transition: all 0.25s;
+  }
+
+  .column-inner::before {
+    right: 0px;
+    top: 0px;
+  }
+
+  .column-inner::after {
+    bottom: 0px;
+    left: 0px;
+  }
+
+  &:hover .column-inner::before,
+  &:hover .column-inner::after {
+    width: 100%;
+    transition-delay: 0.25s;
+  }
+
+  .column-inner {
     text-decoration: none;
   }
 }

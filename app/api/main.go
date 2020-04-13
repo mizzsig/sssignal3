@@ -55,6 +55,7 @@ type Column struct {
 	Date string `bson:"date"`
 	Url string `bson:"url"`
 	Title string `bson:"title"`
+	Body string `bson:"body"`
 	CharacterComment string `bson:"characterComment"`
 }
 

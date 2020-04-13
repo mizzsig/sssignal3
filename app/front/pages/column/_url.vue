@@ -1,7 +1,7 @@
 <template>
   <div>
     url
-    <div>{{ column.Date }}</div>
+    <div>{{ column.slicedDate }}</div>
     <div>{{ column.Title }}</div>
     <div>{{ column.CharacterComment }}</div>
   </div>
@@ -32,6 +32,7 @@ export default {
           "character/setComment",
           this.column.CharacterComment
         );
+        this.column.slicedDate = this.column.Date.slice(0, 10);
       });
   },
   methods: {}
