@@ -66,36 +66,18 @@
       </div>
     </header>
     <div style="height: 50px;"></div>
-    <nuxt
-      v-bind:class="{
-        'nuxt-show-character': isShow,
-        'nuxt-notshow-character': !isShow
-      }"
-    />
-    <character
-      v-show="isShow"
-      class="character"
-      v-bind:class="{
-        'character-show': isCharacter,
-        'character-fade': !isCharacter
-      }"
-    ></character>
+    <nuxt />
   </div>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
-import Character from "../components/common/character.vue";
-
 export default {
   data() {
     return {
       toggleShow: false
     };
   },
-  components: {
-    Character
-  },
+  components: {},
   computed: {
     // 右側にキャラクターを出すかどうか
     isShow() {
@@ -236,14 +218,6 @@ $height: 50px;
   }
 }
 
-.nuxt-show-character {
-  width: calc(100% - 300px);
-  height: calc(100% - 50px);
-}
-.nuxt-notshow-character {
-  width: 100%;
-  height: calc(100% - 50px);
-}
 .character {
   position: fixed;
   right: 0px;
@@ -257,56 +231,15 @@ $height: 50px;
   bottom: -330px;
 }
 @media screen and (max-width: 899px) {
-  .nuxt-show-character {
-    width: 100%;
-  }
   .character,
   .character-fade {
     display: none;
   }
 }
 @media screen and (max-height: 499px) {
-  .nuxt-show-character {
-    width: 100%;
-  }
   .character,
   .character-fade {
     display: none;
   }
-}
-</style>
-
-<style lang="scss">
-html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-}
-html,
-body {
-  background-color: #000;
-  height: 100%;
-}
-html,
-body,
-div {
-  text-align: center;
-  color: #bbbbbb;
-  margin: 0px;
-  padding: 0px;
-}
-
-a {
-  color: rgb(54, 149, 222);
-
-  &:hover {
-    color: rgb(18, 111, 182);
-  }
-}
-
-.ace_line {
-  text-align: initial;
 }
 </style>

@@ -1,9 +1,8 @@
 <template>
   <div>
-    url
+    <div v-html="column.Body"></div>
     <div>{{ column.slicedDate }}</div>
     <div>{{ column.Title }}</div>
-    <div>{{ column.CharacterComment }}</div>
   </div>
 </template>
 
@@ -40,4 +39,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.column-container {
+  margin: 30px;
+
+  .column-title {
+    display: inline-block;
+    font-size: 30px;
+    border-bottom: 2px #556b9e solid;
+    margin-bottom: 8px;
+    position: relative;
+
+    .column-title-date {
+      display: inline-block;
+      font-size: 12px;
+      position: absolute;
+      left: -10px;
+      top: -12px;
+    }
+  }
+}
 </style>
