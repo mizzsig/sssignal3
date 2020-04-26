@@ -3,22 +3,27 @@
     <div class="half" v-html="column.Body"></div>
     <div class="half" style="padding-top: 30px; padding-bottom: 30px;">
       <div>column.Url</div>
-      <input :value="column.Url" style="width: 40%; background: #E0E0E0;" />
+      <input v-model="column.Url" style="width: 40%; background: #E0E0E0;" />
       <div>column.Title</div>
-      <input :value="column.Title" style="width: 40%; background: #E0E0E0;" />
+      <input v-model="column.Title" style="width: 40%; background: #E0E0E0;" />
       <div>column.Body</div>
       <div id="editor"></div>
       <div>column.Date</div>
-      <input :value="column.Date" style="width: 40%; background: #E0E0E0;" />
+      <input v-model="column.Date" style="width: 40%; background: #E0E0E0;" />
       <br />
-      <button v-on:click="setDate">↑now!</button>
+      <button @click="setDate">↑now!</button>
       <div>column.CharacterComment</div>
       <input
-        :value="column.CharacterComment"
+        v-model="column.CharacterComment"
         style="width: 40%; background: #E0E0E0;"
       />
       <div>
-        <button style="padding: 10px 20px; margin-top: 10px;">submit!</button>
+        <button
+          @click="postColumn"
+          style="padding: 10px 20px; margin-top: 10px;"
+        >
+          submit!
+        </button>
       </div>
     </div>
   </div>
@@ -69,7 +74,7 @@ export default {
 
         // ace.jsを使う
         this.editor = ace.edit("editor");
-        this.editor.setTheme("ace/theme/monokai");
+        this.editor.setTheme("ace/theme/kuroir");
         this.editor.setFontSize(14);
         this.editor.getSession().setMode("ace/mode/html");
         this.editor.getSession().setTabSize(2);
@@ -94,6 +99,26 @@ export default {
       const minute = padZero(date.getMinutes());
       const second = padZero(date.getSeconds());
       this.column.Date = `${year}/${month}/${day} ${hour}:${minute}:${second}`;
+    },
+    postColumn() {
+      fetch(
+        process.env.SSSIGNAL_API_DOMAIN + "/column/" + this.$route.params.url,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            Url: this.column.Url,
+            Title: this.column.Title,
+            Body: this.column.Body,
+            Date: this.column.Date,
+            CharacterComment: this.column.CharacterComment
+          })
+        }
+      ).then(response => {
+        console.log(response);
+      });
     }
   }
 };
@@ -109,8 +134,8 @@ export default {
 }
 
 #editor {
-  width: 90%;
-  height: 150px;
+  width: 95%;
+  height: 350px;
   margin: auto;
 }
 

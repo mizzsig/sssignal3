@@ -308,5 +308,6 @@ a {
 
 .ace_line {
   text-align: initial;
+  color: initial;
 }
 </style>
