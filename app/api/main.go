@@ -295,5 +295,22 @@ func main() {
 		session.Close()
 		return c.JSON(http.StatusOK, "r")
 	})
+	// 記事の削除
+	e.DELETE("/column/:url", func(c echo.Context) error {
+		// MongoDBにログイン, DBとCollectionを指定
+		credential := &mgo.Credential{Username: mongoUsername, Password: mongoPassword}
+		session, _ := mgo.Dial("mongodb")
+		session.Login(credential)
+		columns := session.DB("sssignal3").C("columns")
+
+		colQuerier := bson.M{"url": c.Param("url")}
+		err = columns.Remove(colQuerier)
+		if err != nil {
+			return c.JSON(http.StatusOK, "error!")
+		}
+
+		session.Close()
+		return c.JSON(http.StatusOK, "r")
+	})
 	e.Logger.Fatal(e.Start(":1323"))
 }

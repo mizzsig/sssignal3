@@ -24,6 +24,7 @@
         >
           submit!
         </button>
+        <button @click="deleteColumn">delete!</button>
       </div>
     </div>
   </div>
@@ -116,9 +117,15 @@ export default {
             CharacterComment: this.column.CharacterComment
           })
         }
-      ).then(response => {
-        console.log(response);
-      });
+      ).then(response => {});
+    },
+    deleteColumn() {
+      fetch(
+        process.env.SSSIGNAL_API_DOMAIN + "/column/" + this.$route.params.url,
+        {
+          method: "DELETE"
+        }
+      ).then(response => {});
     }
   }
 };
