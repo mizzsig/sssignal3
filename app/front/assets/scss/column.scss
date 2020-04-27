@@ -1,0 +1,34 @@
+.column-body {
+  /deep/ .column-container {
+    margin: 30px;
+
+    .column-title {
+      display: inline-block;
+      font-size: 30px;
+      border-bottom: 2px #556b9e solid;
+      margin-bottom: 8px;
+      position: relative;
+
+      .column-title-date {
+        display: inline-block;
+        font-size: 12px;
+        position: absolute;
+        left: -10px;
+        top: -12px;
+      }
+    }
+
+    .hover-toggle {
+      display: inline-block;
+      .hover-show {
+        display: none;
+      }
+      &:hover > .hover-show {
+        display: initial;
+      }
+      &:hover > .hover-fade {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <div class="half" v-html="column.Body"></div>
+    <div class="half column-body" v-html="column.Body"></div>
     <div class="half" style="padding-top: 30px; padding-bottom: 30px;">
       <div>column.Url</div>
       <input v-model="column.Url" style="width: 40%; background: #E0E0E0;" />
@@ -137,25 +137,12 @@ export default {
   width: 95%;
   height: 350px;
   margin: auto;
-}
 
-.column-container {
-  margin: 30px;
-
-  .column-title {
-    display: inline-block;
-    font-size: 30px;
-    border-bottom: 2px #556b9e solid;
-    margin-bottom: 8px;
-    position: relative;
-
-    .column-title-date {
-      display: inline-block;
-      font-size: 12px;
-      position: absolute;
-      left: -10px;
-      top: -12px;
-    }
+  /deep/ .ace_line {
+    text-align: initial;
+    color: initial;
   }
 }
+
+@import "@/assets/scss/column.scss";
 </style>

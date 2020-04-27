@@ -15,11 +15,15 @@
       >
         <span>movies</span>
       </nuxt-link>
-    </div>ぎゃらりー！
-    <br />画像のまとめページです
-    <br />上のやつが新しい
+    </div>
+    ぎゃらりー！ <br />画像のまとめページです <br />上のやつが新しい
     <div class="container">
-      <a v-for="image in images" v-bind:key="image.ImageUrl" target="_blank" :href="image.TweetUrl">
+      <a
+        v-for="image in images"
+        v-bind:key="image.ImageUrl"
+        target="_blank"
+        :href="image.TweetUrl"
+      >
         <div class="content">
           <img
             class="content-img"
@@ -68,75 +72,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin: 0px 10px;
-
-  a {
-    display: contents;
-    .content {
-      width: 300px;
-      height: 200px;
-      margin: 3px;
-      overflow: hidden;
-
-      .content-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: contrast(70%);
-        transition: all 0.3s;
-
-        &:hover {
-          filter: none;
-          transform: scale(1.1);
-        }
-      }
-    }
-  }
-}
-
-.gallery-menu {
-  margin-bottom: 10px;
-}
-
-.menu {
-  text-decoration: none;
-  color: #cccccc;
-  font-size: 20px;
-  padding: 10px;
-  &:hover span::before,
-  &:hover span::after {
-    width: 50%;
-  }
-  .active {
-    color: #6d82b3;
-  }
-  .active::before,
-  .active::after {
-    border-bottom: 2px solid #6d82b3;
-    width: 50%;
-  }
-  span {
-    position: relative;
-    &::before,
-    &::after {
-      border-bottom: 2px solid #bbbbbb;
-      content: "";
-      display: block;
-      position: absolute;
-      bottom: -3px;
-      width: 0;
-      transition: 0.2s all ease;
-    }
-    &::before {
-      left: 50%;
-    }
-    &::after {
-      right: 50%;
-    }
-  }
-}
+@import "@/assets/scss/gallery";
 </style>

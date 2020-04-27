@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-html="column.Body"></div>
+    <div class="column-body" v-html="column.Body"></div>
     <div>{{ column.slicedDate }}</div>
     <div>{{ column.Title }}</div>
   </div>
@@ -27,6 +27,12 @@ export default {
       .then(response => response.json())
       .then(resultJson => {
         this.column = resultJson;
+
+        // 記事の内容なかった時用の
+        if (this.column.Url === "") {
+          this.column.Body = "記事ないよー(泣)";
+        }
+
         this.$store.commit(
           "character/setComment",
           this.column.CharacterComment
@@ -39,23 +45,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.column-container {
-  margin: 30px;
-
-  .column-title {
-    display: inline-block;
-    font-size: 30px;
-    border-bottom: 2px #556b9e solid;
-    margin-bottom: 8px;
-    position: relative;
-
-    .column-title-date {
-      display: inline-block;
-      font-size: 12px;
-      position: absolute;
-      left: -10px;
-      top: -12px;
-    }
-  }
-}
+@import "@/assets/scss/column.scss";
 </style>
