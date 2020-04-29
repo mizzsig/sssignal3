@@ -1480,7 +1480,7 @@
         <a href="https://twitter.com/mizzsig">Twitter</a
         >での連絡でも、よいです！
       </p>
-      <div class="inquiry-form">
+      <div class="inquiry-form" v-if="!isPost">
         <input
           v-model="address"
           class="inquiry-content address"
@@ -1512,6 +1512,19 @@
         >
           <img :src="inquiryIcon" />
         </div>
+      </div>
+      <div class="inquiry-form" v-if="isPost">
+        <input
+          v-model="address"
+          class="inquiry-content address"
+          readonly="readonly"
+        />
+        <textarea
+          v-model="body"
+          class="inquiry-content body"
+          readonly
+        ></textarea>
+        <p>送信完了！(*^ o ^*)</p>
       </div>
     </div>
 
@@ -1845,7 +1858,8 @@ export default {
       canInquiryPost: false,
       inquiryIcon: require("~/assets/about/inquiry_icon.png"),
       inquiryIconLeave: require("~/assets/about/inquiry_icon.png"),
-      inquiryIconHover: require("~/assets/about/inquiry_icon_hover.png")
+      inquiryIconHover: require("~/assets/about/inquiry_icon_hover.png"),
+      isPost: false
     };
   },
   mounted() {
@@ -1872,6 +1886,7 @@ export default {
         body
       }).then(response => {
         // TODO : APIがエラー返した時の表示出せるとよい
+        this.isPost = true;
         return response.json();
       });
     },
