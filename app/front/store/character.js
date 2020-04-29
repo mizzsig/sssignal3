@@ -4,7 +4,9 @@ export const state = () => ({
   // falseの時は広告を出す
   isCharacter: true,
   // ページや画像ホバーで出すコメント
-  comment: ""
+  comment: "",
+  // 表示するsceneのID
+  scene: null
 });
 
 export const mutations = {
@@ -16,5 +18,8 @@ export const mutations = {
   },
   setComment(state, comment) {
     state.comment = comment;
+  },
+  setScene(state, scene) {
+    state.scene = scene;
   }
 };

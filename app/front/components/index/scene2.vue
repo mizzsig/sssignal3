@@ -125,34 +125,38 @@ export default {
     };
   },
   mounted() {
-    // mp3のプリロード
-    this.whiteKeys.forEach((value, index) => {
-      this.notesAudio[`white${index}`] = new Audio();
-      this.notesAudio[`white${index}`].src = `/top/scene2/white${index}.mp3`;
-    });
-    this.blackKeys.forEach((value, index) => {
-      this.notesAudio[`black${index}`] = new Audio();
-      this.notesAudio[`black${index}`].src = `/top/scene2/black${index}.mp3`;
-    });
+    if (this.$store.state.character.scene === 2) {
+      // mp3のプリロード
+      this.whiteKeys.forEach((value, index) => {
+        this.notesAudio[`white${index}`] = new Audio();
+        this.notesAudio[`white${index}`].src = `/top/scene2/white${index}.mp3`;
+      });
+      this.blackKeys.forEach((value, index) => {
+        this.notesAudio[`black${index}`] = new Audio();
+        this.notesAudio[`black${index}`].src = `/top/scene2/black${index}.mp3`;
+      });
 
-    // 画面サイズに応じて表示する鍵盤の数を変える
-    window.addEventListener("resize", this.onResize);
-    this.onResize();
+      // 画面サイズに応じて表示する鍵盤の数を変える
+      window.addEventListener("resize", this.onResize);
+      this.onResize();
 
-    window.addEventListener("keydown", this.pianoKeyDown);
-    window.addEventListener("keyup", this.pianoKeyUp);
+      window.addEventListener("keydown", this.pianoKeyDown);
+      window.addEventListener("keyup", this.pianoKeyUp);
 
-    // 赤線が右端に行った時の処理
-    const redLine = document.querySelector(".score-line-red");
-    redLine.addEventListener("transitionend", this.redLineTransitionEnd);
+      // 赤線が右端に行った時の処理
+      const redLine = document.querySelector(".score-line-red");
+      redLine.addEventListener("transitionend", this.redLineTransitionEnd);
+    }
   },
   beforeDestroy() {
-    if (!process.client) return;
-    window.removeEventListener("resize", this.onResize);
-    window.removeEventListener("keydown", this.pianoKeyDown);
-    window.removeEventListener("keyup", this.pianoKeyUp);
-    const redLine = document.querySelector(".score-line-red");
-    redLine.removeEventListener("transitionend", this.redLineTransitionEnd);
+    if (this.$store.state.character.scene === 2) {
+      if (!process.client) return;
+      window.removeEventListener("resize", this.onResize);
+      window.removeEventListener("keydown", this.pianoKeyDown);
+      window.removeEventListener("keyup", this.pianoKeyUp);
+      const redLine = document.querySelector(".score-line-red");
+      redLine.removeEventListener("transitionend", this.redLineTransitionEnd);
+    }
   },
   methods: {
     redLineTransitionEnd() {
@@ -241,20 +245,6 @@ export default {
       }
 
       const timeStamp = Date.now();
-
-      // 古い音符を消す
-      //   this.notesKey.forEach((note, index) => {
-      //     console.log(note, index);
-      //     const tmpIndex = note.indexOf("-");
-      //     // タイムスタンプ部分を抽出
-      //     const stamp = Number(note.substring(0, tmpIndex));
-      //     if (stamp + 4000 <= timeStamp) {
-      //       console.log("hit!");
-      //     // アニメーションが終わってるやつを消す
-      //       this.$delete(this.notesKey, index);
-      //     }
-      //   });
-      //   this.notes = this.notes.filter(note => note.timestamp + 4000 > timeStamp);
 
       // 音符を設置する
       this.notesKey.push(`${timeStamp}-${color}${index}`);

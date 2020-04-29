@@ -5,7 +5,9 @@
     <br />
     <div class="movable-object">ccc</div>
     <br />
-    <div class="movable-object logo-string" contenteditable="true">水飴信号３</div>
+    <div class="movable-object logo-string" contenteditable="true">
+      水飴信号３
+    </div>
   </div>
 </template>
 
@@ -20,14 +22,18 @@ export default {
     };
   },
   mounted() {
-    window.addEventListener("mousedown", this.mousedown);
-    window.addEventListener("mouseup", this.mouseup);
-    window.addEventListener("mousemove", this.mousemove);
+    if (this.$store.state.character.scene === 3) {
+      window.addEventListener("mousedown", this.mousedown);
+      window.addEventListener("mouseup", this.mouseup);
+      window.addEventListener("mousemove", this.mousemove);
+    }
   },
   beforeDestroy() {
-    window.removeEventListener("mousedown", this.mousedown);
-    window.removeEventListener("mouseup", this.mouseup);
-    window.removeEventListener("mousemove", this.mousemove);
+    if (this.$store.state.character.scene === 3) {
+      window.removeEventListener("mousedown", this.mousedown);
+      window.removeEventListener("mouseup", this.mouseup);
+      window.removeEventListener("mousemove", this.mousemove);
+    }
   },
   methods: {
     mousedown(event) {
@@ -37,11 +43,9 @@ export default {
       this.mouseY = event.clientY;
       if (this.movingTarget.style.top === "") {
         this.movingTarget.style.top = "0px";
-        console.log(this.movingTarget.style.top);
       }
       if (this.movingTarget.style.left === "") {
         this.movingTarget.style.left = "0px";
-        console.log(this.movingTarget.style.left);
       }
     },
     mouseup() {
@@ -49,7 +53,6 @@ export default {
       this.isDrag = false;
     },
     mousemove(event) {
-      console.log(event.target);
       if (
         this.isDrag &&
         this.movingTarget.className.indexOf("movable-object") > -1

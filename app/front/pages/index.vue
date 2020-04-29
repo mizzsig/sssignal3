@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Vue from "vue";
+import { mapMutations } from "vuex";
 import Scene1 from "../components/index/scene1.vue";
 import Scene2 from "../components/index/scene2.vue";
 import Scene3 from "../components/index/scene3.vue";
@@ -31,9 +31,12 @@ export default {
   },
   beforeMount() {
     this.scene = Math.floor(Math.random() * this.components) + 1; // 本番は1にする
+    // パラメータで指定されている時
     if (this.$route.query.scene !== undefined) {
       this.scene = parseInt(this.$route.query.scene);
     }
+
+    this.$store.commit("character/setScene", this.scene);
   },
   methods: {}
 };
