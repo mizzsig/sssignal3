@@ -74,6 +74,7 @@ func main() {
 	slackWebhook := os.Getenv("SLACK_WEBHOOK")
 	mongoUsername := os.Getenv("MONGO_USERNAME")
 	mongoPassword := os.Getenv("MONGO_PASSWORD")
+	apiPassword := os.Getenv("API_PASSWORD")
 
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, world!!!")
@@ -257,13 +258,12 @@ func main() {
 		return c.JSON(http.StatusOK, column)
 	})
 	// 記事の登録・更新
-	e.POST("/column/:url", func(c echo.Context) error {
+	e.POST("/column/:url/:pass", func(c echo.Context) error {
 		// POSTリクエストのパラメータを取得
 		postColumn := new(Column)
 		if err = c.Bind(postColumn); err != nil {
 			return c.JSON(http.StatusOK, "error!")
 		}
-		fmt.Printf("%+v", postColumn)
 
 		// MongoDBにログイン, DBとCollectionを指定
 		credential := &mgo.Credential{Username: mongoUsername, Password: mongoPassword}
@@ -275,20 +275,22 @@ func main() {
 		var column Column
 		columns.Find(bson.M{"url": c.Param("url")}).One(&column)
 
-		if column.Url == c.Param("url") {
-			// 既にある場合は更新
-			colQuerier := bson.M{"url": column.Url}
-			updateValue := bson.M{"$set": postColumn}
+		if apiPassword == c.Param("pass") {
+			if column.Url == c.Param("url") {
+				// 既にある場合は更新
+				colQuerier := bson.M{"url": column.Url}
+				updateValue := bson.M{"$set": postColumn}
 
-			err = columns.Update(colQuerier, updateValue)
-			if err != nil {
-				return c.JSON(http.StatusOK, "error!")
-			}
-		} else {
-			// 無い場合は新規登録
-			err = columns.Insert(postColumn)
-			if err != nil {
-				return c.JSON(http.StatusOK, "error!")
+				err = columns.Update(colQuerier, updateValue)
+				if err != nil {
+					return c.JSON(http.StatusOK, "error!")
+				}
+			} else {
+				// 無い場合は新規登録
+				err = columns.Insert(postColumn)
+				if err != nil {
+					return c.JSON(http.StatusOK, "error!")
+				}
 			}
 		}
 
@@ -296,17 +298,19 @@ func main() {
 		return c.JSON(http.StatusOK, "r")
 	})
 	// 記事の削除
-	e.DELETE("/column/:url", func(c echo.Context) error {
+	e.DELETE("/column/:url/:pass", func(c echo.Context) error {
 		// MongoDBにログイン, DBとCollectionを指定
 		credential := &mgo.Credential{Username: mongoUsername, Password: mongoPassword}
 		session, _ := mgo.Dial("mongodb")
 		session.Login(credential)
 		columns := session.DB("sssignal3").C("columns")
 
-		colQuerier := bson.M{"url": c.Param("url")}
-		err = columns.Remove(colQuerier)
-		if err != nil {
-			return c.JSON(http.StatusOK, "error!")
+		if apiPassword == c.Param("pass") {
+			colQuerier := bson.M{"url": c.Param("url")}
+			err = columns.Remove(colQuerier)
+			if err != nil {
+				return c.JSON(http.StatusOK, "error!")
+			}
 		}
 
 		session.Close()

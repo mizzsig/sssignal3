@@ -17,6 +17,11 @@
         v-model="column.CharacterComment"
         style="width: 40%; background: #E0E0E0;"
       />
+      <div>column.Password</div>
+      <input
+        v-model="column.Password"
+        style="width: 40%; background: #E0E0E0;"
+      />
       <div>
         <button
           @click="postColumn"
@@ -103,7 +108,11 @@ export default {
     },
     postColumn() {
       fetch(
-        process.env.SSSIGNAL_API_DOMAIN + "/column/" + this.$route.params.url,
+        process.env.SSSIGNAL_API_DOMAIN +
+          "/column/" +
+          this.$route.params.url +
+          "/" +
+          this.column.Password,
         {
           method: "POST",
           headers: {
@@ -121,7 +130,11 @@ export default {
     },
     deleteColumn() {
       fetch(
-        process.env.SSSIGNAL_API_DOMAIN + "/column/" + this.$route.params.url,
+        process.env.SSSIGNAL_API_DOMAIN +
+          "/column/" +
+          this.$route.params.url +
+          "/" +
+          this.column.Password,
         {
           method: "DELETE"
         }
