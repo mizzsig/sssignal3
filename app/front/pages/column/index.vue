@@ -46,6 +46,7 @@ export default {
   },
   methods: {
     commentInit() {
+      this.$store.commit("character/setShow", true);
       this.$store.commit("character/setComment", "");
     }
   }

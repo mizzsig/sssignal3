@@ -1,8 +1,6 @@
 <template>
   <div>
     <div class="column-body" v-html="column.Body"></div>
-    <div>{{ column.slicedDate }}</div>
-    <div>{{ column.Title }}</div>
   </div>
 </template>
 
@@ -33,10 +31,15 @@ export default {
           this.column.Body = "記事ないよー(泣)";
         }
 
-        this.$store.commit(
-          "character/setComment",
-          this.column.CharacterComment
-        );
+        if (!this.column.ShowCharacter) {
+          this.$store.commit("character/setShow", false);
+        } else {
+          this.$store.commit("character/setShow", true);
+          this.$store.commit(
+            "character/setComment",
+            this.column.CharacterComment
+          );
+        }
         this.column.slicedDate = this.column.Date.slice(0, 10);
       });
   },
