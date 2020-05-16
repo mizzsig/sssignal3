@@ -47,6 +47,7 @@ export default {
     };
   },
   mounted() {
+    this.$store.commit("character/setShow", true);
     // キャラクターコメントの初期化
     this.commentInit();
 

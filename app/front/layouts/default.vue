@@ -7,60 +7,24 @@
         </div>
       </div>
       <div class="toggle-menu" :class="{ 'toggle-show': toggleShow }">
-        <nuxt-link
-          @click.native="$store.commit('character/setShow', false)"
-          class="menu"
-          to="/"
-          >Top</nuxt-link
-        >
-        <nuxt-link
-          @click.native="$store.commit('character/setShow', true)"
-          class="menu"
-          to="/about"
-          >about</nuxt-link
-        >
-        <nuxt-link
-          @click.native="$store.commit('character/setShow', true)"
-          class="menu"
-          to="/gallery/images"
-          >gallery</nuxt-link
-        >
-        <nuxt-link
-          @click.native="$store.commit('character/setShow', true)"
-          class="menu"
-          to="/column"
-          >column</nuxt-link
-        >
+        <nuxt-link class="menu" to="/">Top</nuxt-link>
+        <nuxt-link class="menu" to="/about">about</nuxt-link>
+        <nuxt-link class="menu" to="/gallery/images">gallery</nuxt-link>
+        <nuxt-link class="menu" to="/column">column</nuxt-link>
       </div>
       <div class="header wide">
-        <nuxt-link
-          @click.native="$store.commit('character/setShow', false)"
-          class="menu"
-          to="/"
-        >
+        <nuxt-link class="menu" to="/">
           <span v-bind:class="{ active: isActive('/') }"
             >Starch Syrup Signal3</span
           >
         </nuxt-link>
-        <nuxt-link
-          @click.native="$store.commit('character/setShow', true)"
-          class="menu"
-          to="/about"
-        >
+        <nuxt-link class="menu" to="/about">
           <span v-bind:class="{ active: isActive('/about') }">about</span>
         </nuxt-link>
-        <nuxt-link
-          @click.native="$store.commit('character/setShow', true)"
-          class="menu"
-          to="/gallery/images"
-        >
+        <nuxt-link class="menu" to="/gallery/images">
           <span v-bind:class="{ active: isActive('/gallery') }">gallery</span>
         </nuxt-link>
-        <nuxt-link
-          @click.native="$store.commit('character/setShow', true)"
-          class="menu"
-          to="/column"
-        >
+        <nuxt-link class="menu" to="/column">
           <span v-bind:class="{ active: isActive('/column') }">column</span>
         </nuxt-link>
       </div>

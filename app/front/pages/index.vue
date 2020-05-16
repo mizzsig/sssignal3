@@ -37,6 +37,7 @@ export default {
     }
 
     this.$store.commit("character/setScene", this.scene);
+    this.$store.commit("character/setShow", false);
   },
   methods: {}
 };

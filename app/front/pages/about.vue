@@ -1864,6 +1864,7 @@ export default {
   },
   mounted() {
     this.$store.commit("character/setComment", "");
+    this.$store.commit("character/setShow", true);
   },
   methods: {
     // 問い合わせフォームからPOSTリクエストを送る
