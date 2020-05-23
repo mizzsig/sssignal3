@@ -41,6 +41,12 @@
 import { mapMutations } from "vuex";
 
 export default {
+  head() {
+    return {
+      title: "Images - Starch Syrup Signal3",
+      meta: [{ hid: "description", name: "description", content: "画像一覧" }]
+    };
+  },
   data() {
     return {
       images: null

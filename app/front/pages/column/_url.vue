@@ -6,6 +6,18 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: `${this.column.Title} - Starch Syrup Signal3`,
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: this.column.CharacterComment
+        }
+      ]
+    };
+  },
   data() {
     return {
       column: []

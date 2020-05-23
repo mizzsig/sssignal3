@@ -18,15 +18,18 @@ export default {
     Scene2,
     Scene3
   },
+  head() {
+    return {
+      title: "Starch Syrup Signal3",
+      meta: [
+        { hid: "description", name: "description", content: "ウェブサイトです" }
+      ]
+    };
+  },
   data() {
     return {
       scene: 1,
       components: 3 // 本番はここシーンの数にする
-    };
-  },
-  head() {
-    return {
-      title: "sssignal3 Teaser Website"
     };
   },
   beforeMount() {

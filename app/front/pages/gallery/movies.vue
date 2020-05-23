@@ -43,6 +43,12 @@
 import { mapMutations } from "vuex";
 
 export default {
+  head() {
+    return {
+      title: "Movies - Starch Syrup Signal3",
+      meta: [{ hid: "description", name: "description", content: "動画一覧" }]
+    };
+  },
   data() {
     return {
       movies: null

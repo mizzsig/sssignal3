@@ -1,13 +1,14 @@
 <template>
   <div>
     こらむ！
-    <br />記事とか載せたりするページです
-    <br />工事中
+    <br />記事とか載せたりするページです <br />工事中
     <div>
       <div class="column" v-for="column in columns" v-bind:key="column.Date">
         <nuxt-link
           :to="'/column/' + column.Url"
-          @mouseenter.native="$store.commit('character/setComment', column.CharacterComment)"
+          @mouseenter.native="
+            $store.commit('character/setComment', column.CharacterComment)
+          "
           @mouseleave.native="commentInit"
           class="column-inner"
         >
@@ -23,6 +24,12 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: "Columns - Starch Syrup Signal3",
+      meta: [{ hid: "description", name: "description", content: "記事一覧" }]
+    };
+  },
   data() {
     return {
       columns: []

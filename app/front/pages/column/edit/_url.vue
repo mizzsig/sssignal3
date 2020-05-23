@@ -44,6 +44,12 @@ if (process.client) {
 
 export default {
   layout: "columnEdit",
+  head() {
+    return {
+      title: `[Edit] ${this.column.Title} - Starch Syrup Signal3`,
+      meta: [{ hid: "robots", name: "robots", content: "noindex" }]
+    };
+  },
   data() {
     return {
       column: [],
