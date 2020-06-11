@@ -1,23 +1,13 @@
 <template>
   <section class="container">
-    <scene1 v-show="scene === 1"></scene1>
-    <scene2 v-show="scene === 2"></scene2>
-    <scene3 v-show="scene === 3"></scene3>
+    <div v-for="(star, index) in stars" v-bind:key="index" :style="star"></div>
+    <img class="main-img" src="/index/sss3_top.png" />
+    <img class="logo" src="/index/sss3_top_logo.png" />
   </section>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
-import Scene1 from "../components/index/scene1.vue";
-import Scene2 from "../components/index/scene2.vue";
-import Scene3 from "../components/index/scene3.vue";
-
 export default {
-  components: {
-    Scene1,
-    Scene2,
-    Scene3
-  },
   head() {
     return {
       title: "Starch Syrup Signal3",
@@ -28,22 +18,68 @@ export default {
   },
   data() {
     return {
-      scene: 1,
-      components: 3 // 本番はここシーンの数にする
+      stars: [],
+      starsValue: [],
+      updateStars: null
     };
   },
   beforeMount() {
-    this.scene = Math.floor(Math.random() * this.components) + 1; // 本番は1にする
-    // パラメータで指定されている時
-    if (this.$route.query.scene !== undefined) {
-      this.scene = parseInt(this.$route.query.scene);
-    }
-
-    this.$store.commit("character/setScene", this.scene);
     this.$store.commit("character/setShow", false);
+
+    this.updateStars = setInterval(() => {
+      const starNum = 300;
+      const starDiff = 6;
+      const starCalc = starNum / starDiff / 2;
+
+      // 古いの消す
+      if (this.stars.length > starNum) {
+        this.stars.splice(0, starDiff);
+        this.starsValue.splice(0, starDiff);
+      }
+      // 新しいやつ追加
+      for (let i = 0; i < starDiff; i++) {
+        this.stars.push({
+          width: "2px",
+          height: "2px",
+          background: "#A0A0A0",
+          position: "fixed",
+          top: `${Math.random() * window.innerHeight}px`,
+          left: `${Math.random() * window.innerWidth}px`
+        });
+        this.starsValue.push(0);
+      }
+      // あるやつ更新
+      this.starsValue.forEach((value, index) => {
+        this.starsValue[index]++;
+        this.stars[index].opacity =
+          (starCalc - Math.abs(this.starsValue[index] - starCalc)) / starCalc;
+      });
+    }, 40);
   },
+  beforeDestroy() {
+    clearInterval(this.updateStars);
+  },
+  mounted() {},
   methods: {}
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.container {
+  text-align: left;
+  .logo {
+    position: fixed;
+    max-width: 70%;
+    padding-left: 15%;
+    padding-top: 5%;
+  }
+
+  .main-img {
+    position: fixed;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    min-height: 600px;
+  }
+}
+</style>

@@ -3,7 +3,7 @@
     <header>
       <div class="header small">
         <div class="menu">
-          <span>Starch Syrup Signal3</span>
+          <span>menu</span>
         </div>
       </div>
       <div class="toggle-menu" :class="{ 'toggle-show': toggleShow }">

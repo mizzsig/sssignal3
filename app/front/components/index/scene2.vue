@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>水飴信号3 ~Starch Syrup Signal~</h1>
+    <h1>Starch Syrup Signal 3</h1>
     <a class="explain" @mousedown="isExplain = !isExplain">{{
       this.isExplain ? "press any key" : "How to play"
     }}</a>

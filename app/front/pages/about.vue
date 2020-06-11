@@ -949,7 +949,7 @@
 
         <div class="old-version">
           <h3>バージョン２</h3>
-          <a href="https://sssignal.com">http://sssignal.com</a>
+          <a href="https://ver2.sssignal.com">http://ver2.sssignal.com</a>
           <div class="date">2018/01/28 ~ 2019/06/01</div>
           <div>
             <img src="~/assets/about/sssignal2.png" />
