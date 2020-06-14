@@ -1,7 +1,8 @@
 <template>
   <div>
     こらむ！
-    <br />記事とか載せたりするページです <br />工事中
+    <br />記事とか載せたりするページです
+    <br />工事中
     <div>
       <div class="column" v-for="column in columns" v-bind:key="column.Date">
         <nuxt-link
@@ -13,8 +14,9 @@
           class="column-inner"
         >
           <div>
-            <div>{{ column.Title }}</div>
-            <div>{{ column.Date.slice(0, 10) }}</div>
+            <img class="thumbnail" :src="column.ImageUrl" />
+            <div class="date">{{ column.Date.slice(0, 10) }}</div>
+            <div class="title">{{ column.Title }}</div>
           </div>
         </nuxt-link>
       </div>
@@ -136,6 +138,33 @@ export default {
 
   .column-inner {
     text-decoration: none;
+  }
+}
+
+.thumbnail {
+  max-width: 100%;
+  max-height: 200px;
+}
+
+.date {
+  text-align: left;
+  font-size: 12px;
+  padding-left: 10px;
+}
+
+.title {
+  text-align: left;
+}
+@media screen and (max-width: 300px) {
+  .title {
+    font-size: 20px;
+    padding-left: 15px;
+  }
+}
+@media screen and (min-width: 301px) {
+  .title {
+    font-size: 24px;
+    padding-left: 50px;
   }
 }
 </style>

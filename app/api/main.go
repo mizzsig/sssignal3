@@ -58,6 +58,7 @@ type Column struct {
 	Body string `bson:"body"`
 	CharacterComment string `bson:"characterComment"`
 	ShowCharacter bool `bson:"showCharacter"`
+	ImageUrl string `bson:"imageUrl"`
 }
 
 func main() {
