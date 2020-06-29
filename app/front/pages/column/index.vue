@@ -14,7 +14,10 @@
           class="column-inner"
         >
           <div>
-            <img class="thumbnail" :src="column.ImageUrl" />
+            <div v-if="column.ImageUrl !== ''">
+              <img class="thumbnail" :src="column.ImageUrl" />
+            </div>
+            <div v-if="column.ImageUrl === ''" style="padding: 5px 5px 0px 5px;"></div>
             <div class="date">{{ column.Date.slice(0, 10) }}</div>
             <div class="title">{{ column.Title }}</div>
           </div>
@@ -66,11 +69,11 @@ export default {
 .column {
   display: inline-block;
   width: calc(100% - 20px);
-  max-width: 400px;
+  max-width: 360px;
   background: rgb(87, 87, 87);
   box-sizing: border-box;
   margin: 10px;
-  padding: 5px;
+  padding: 0px 0px 5px 0px;
   transition: all 0.5s;
   border-radius: 2px;
   position: relative;
@@ -139,11 +142,13 @@ export default {
   .column-inner {
     text-decoration: none;
   }
-}
 
-.thumbnail {
-  max-width: 100%;
-  max-height: 200px;
+  .thumbnail {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 2px;
+  }
 }
 
 .date {

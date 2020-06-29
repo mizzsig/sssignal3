@@ -69,9 +69,11 @@ export default {
   text-align: left;
   .logo {
     position: fixed;
-    max-width: 70%;
-    padding-left: 15%;
-    padding-top: 5%;
+    transform: translate(-50%, 0%);
+    left: 50%;
+    width: 70%;
+    max-width: 700px;
+    padding-top: 10px;
   }
 
   .main-img {

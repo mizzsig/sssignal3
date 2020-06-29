@@ -14,14 +14,8 @@
         @mouseenter="setReloadHover(true)"
         @mouseleave="setReloadHover(false)"
       >
-        <img
-          v-show="!isReloadHover && isCharacter"
-          src="~/assets/common/reload.gif"
-        />
-        <img
-          v-show="isReloadHover && isCharacter"
-          src="~/assets/common/reload-hover.gif"
-        />
+        <img v-show="!isReloadHover && isCharacter" src="~/assets/common/reload.gif" />
+        <img v-show="isReloadHover && isCharacter" src="~/assets/common/reload-hover.gif" />
       </div>
       <div
         class="close pointer"
@@ -53,24 +47,14 @@
             <div class="tweet-name">とえら＠mizzsig</div>
           </div>
           <!-- \nを<br>してツイートのテキスト出力 -->
-          <div
-            class="tweet-text"
-            v-show="tweet.Text !== undefined"
-            v-html="tweet.Text"
-          ></div>
+          <div class="tweet-text" v-show="tweet.Text !== undefined" v-html="tweet.Text"></div>
           <!-- 画像 -->
           <div v-show="tweet.ImageUrl !== undefined">
             <img class="tweet-content" :src="tweet.ImageUrl" />
           </div>
           <!-- 動画 -->
           <div v-show="tweet.MovieUrl !== undefined">
-            <video
-              class="tweet-content"
-              :src="tweet.MovieUrl"
-              autoplay
-              loop
-              muted
-            ></video>
+            <video class="tweet-content" :src="tweet.MovieUrl" autoplay loop muted></video>
           </div>
           <div class="tweet-date">{{ tweet.Date }}</div>
         </a>
