@@ -148,6 +148,8 @@ export default {
   .half {
     width: 50%;
     border: 3px #2f2f2f solid;
+    height: 100vh;
+    overflow-y: scroll;
   }
 }
 
