@@ -25,9 +25,9 @@ jobs:
           USER_NAME: ${{ secrets.USER_NAME }}
         run: |
           echo "$PRIVATE_KEY" > ssh_private_key
-          && chmod 600 ssh_private_key
-          && ssh -o StrictHostKeyChecking=no ${USER_NAME}@${SERVER_IP} -i ssh_private_key
-          && cd ${REPOSITORY_PATH}
+          chmod 600 ssh_private_key
+          ssh -o StrictHostKeyChecking=no ${USER_NAME}@${SERVER_IP} -i ssh_private_key
+          cd ${REPOSITORY_PATH}
       # git checkout
       # docker-compose down
       # docker-compose up --build
