@@ -16,14 +16,21 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      - name: show information
+      # ssh
+      - name: ssh sssignal3
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          REPOSITORY_PATH: ${{ secrets.REPOSITORY_PATH }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          USER_NAME: ${{ secrets.USER_NAME }}
         run: |
-          ls -lat
-          pwd
-          whoami
+          echo "$PRIVATE_KEY" > ssh_private_key
+          && chmod 600 ssh_private_key
+          && ssh -o StrictHostKeyChecking=no ${USER_NAME}@${SERVER_IP} -i ssh_private_key
+          && cd ${REPOSITORY_PATH}
+      # git checkout
+      # docker-compose down
+      # docker-compose up --build
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
