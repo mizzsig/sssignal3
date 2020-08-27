@@ -25,12 +25,23 @@ jobs:
       - name: chmod private key
         run: chmod 600 ssh_private_key
 
+      - name: ssh & update .env file
+        env:
+          REPOSITORY_PATH: ${{ secrets.REPOSITORY_PATH }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          USER_NAME: ${{ secrets.USER_NAME }}
+          API_PASSWORD: ${{ secrets.API_PASSWORD }}
+          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+          MONGO_USERNAME: ${{ secrets.MONGO_USERNAME }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        run: ssh -o StrictHostKeyChecking=no ${USER_NAME}@${SERVER_IP} -i ssh_private_key "cd $REPOSITORY_PATH && echo API_PASSWORD=$API_PASSWORD > .env && echo MONGO_PASSWORD=$MONGO_PASSWORD > .env && echo MONGO_USERNAME=$MONGO_USERNAME > .env && echo SLACK_WEBHOOK=$SLACK_WEBHOOK > .env"
+
       - name: ssh & restart sssignal3
         env:
           REPOSITORY_PATH: ${{ secrets.REPOSITORY_PATH }}
           SERVER_IP: ${{ secrets.SERVER_IP }}
           USER_NAME: ${{ secrets.USER_NAME }}
-        run: ssh -o StrictHostKeyChecking=no ${USER_NAME}@${SERVER_IP} -i ssh_private_key "cd $REPOSITORY_PATH && docker-compose down && git pull origin master && docker-compose up -d --build"
+        run: ssh -o StrictHostKeyChecking=no ${USER_NAME}@${SERVER_IP} -i ssh_private_key "cd $REPOSITORY_PATH && docker volume prune && docker image prune && docker-compose down && git pull origin master && docker-compose up -d --build"
 
       # Runs a single command using the runners shell
       - name: Run a one-line script

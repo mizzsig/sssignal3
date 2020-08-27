@@ -68,7 +68,7 @@ func main() {
 	e.Use(middleware.CORS())
 
 	// .envファイル読み込み
-	err := godotenv.Load(".env")
+	err := godotenv.Load("../../.env")
 	if err != nil {
 		fmt.Println(".env loading error!")
 	}
