@@ -34,7 +34,7 @@ jobs:
           MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
           MONGO_USERNAME: ${{ secrets.MONGO_USERNAME }}
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        run: ssh -o StrictHostKeyChecking=no ${USER_NAME}@${SERVER_IP} -i ssh_private_key "cd $REPOSITORY_PATH && echo API_PASSWORD=$API_PASSWORD > .env && echo MONGO_PASSWORD=$MONGO_PASSWORD > .env && echo MONGO_USERNAME=$MONGO_USERNAME > .env && echo SLACK_WEBHOOK=$SLACK_WEBHOOK > .env"
+        run: ssh -o StrictHostKeyChecking=no ${USER_NAME}@${SERVER_IP} -i ssh_private_key "cd $REPOSITORY_PATH && echo API_PASSWORD=$API_PASSWORD > .env && echo MONGO_PASSWORD=$MONGO_PASSWORD >> .env && echo MONGO_USERNAME=$MONGO_USERNAME >> .env && echo SLACK_WEBHOOK=$SLACK_WEBHOOK >> .env"
 
       - name: ssh & restart sssignal3
         env:
