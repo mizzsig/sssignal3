@@ -6,6 +6,9 @@ services:
     ports:
       - 80:80
       - 443:443
+    links:
+      - front
+      - api
 
   front:
     build: ./app/front/
@@ -28,6 +31,8 @@ services:
       HOST: 0.0.0.0
     ports:
       - 1323:1323
+    links:
+      - mongodb
     volumes:
       - ./:/go/cmd/sssignal3
     command: realize start --run --no-config
