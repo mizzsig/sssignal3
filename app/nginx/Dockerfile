@@ -12,3 +12,7 @@ RUN apk --update add tzdata
 RUN cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 RUN apk del tzdata
 RUN rm -rf /var/cache/apk/*
+
+# set let's encrypt
+#RUN apk add certbot
+#RUN certbot certonly --standalone --dry-run -d sssignal.com -d api.sssignal.com -n --agree-tos -m <EMAIL@EMAIL>

@@ -1,0 +1,53 @@
+version: "3"
+services:
+  nginx:
+    build: ./app/nginx/
+    container_name: nginx
+    ports:
+      - 80:80
+      - 443:443
+    links:
+      - front
+      - api
+
+  front:
+    build: ./app/front/
+    container_name: front
+    working_dir: /home/node/front
+    environment:
+      HOST: 0.0.0.0
+    ports:
+      - 3000:3000
+    volumes:
+      - ./app/front:/home/node/front
+      - /home/node/front/node_modules
+    command: yarn run dev
+
+  api:
+    build: ./app/api/
+    container_name: api
+    working_dir: /go/cmd/sssignal3/app/api
+    environment:
+      HOST: 0.0.0.0
+    ports:
+      - 1323:1323
+    links:
+      - mongodb
+    volumes:
+      - ./:/go/cmd/sssignal3
+    command: realize start --run --no-config
+
+  mongodb:
+    image: mongo:4.2.2
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+
+volumes:
+  mongodb-data:
+    driver: local
