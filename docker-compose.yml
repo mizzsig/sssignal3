@@ -1,7 +1,10 @@
-version: "3"
+version: "3.7"
 services:
   nginx:
-    build: ./app/nginx/
+    build:
+      context: ./app/nginx/
+      args:
+        - EMAIL=${EMAIL}
     container_name: nginx
     ports:
       - 80:80
@@ -9,8 +12,6 @@ services:
     links:
       - front
       - api
-    args:
-      - EMAIL=${EMAIL}
 
   front:
     build: ./app/front/
