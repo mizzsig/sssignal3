@@ -9,6 +9,8 @@ services:
     links:
       - front
       - api
+    args:
+      - EMAIL=${EMAIL}
 
   front:
     build: ./app/front/
@@ -46,7 +48,7 @@ services:
       - mongodb-data:/data/db
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}"
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
 
 volumes:
   mongodb-data:
