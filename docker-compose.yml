@@ -4,7 +4,7 @@ services:
     build:
       context: ./app/nginx/
       args:
-        - EMAIL=${EMAIL}
+        email: ${EMAIL}
     container_name: nginx
     ports:
       - 80:80
