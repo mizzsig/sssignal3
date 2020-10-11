@@ -3,7 +3,6 @@ services:
   https-portal:
     image: steveltn/https-portal:1
     ports:
-      - 80:80
       - 443:443
     links:
       - nginx
@@ -15,6 +14,8 @@ services:
     build:
       context: ./app/nginx/
     container_name: nginx
+    ports:
+      - 80:80
     links:
       - front
       - api
