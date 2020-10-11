@@ -3,19 +3,19 @@ services:
   https-portal:
     image: steveltn/https-portal:1
     ports:
+      - 80:80
       - 443:443
     links:
       - nginx
     restart: always
     environment:
-      DOMAINS: "ver3.sssignal.com -> http://ver3.sssignal.com, api.sssignal.com -> http://api.sssignal.com"
+      DOMAINS: "ver3.sssignal.com -> http://front:3000, api.sssignal.com -> http://api:1323"
 
   nginx:
     build:
       context: ./app/nginx/
     container_name: nginx
     ports:
-      - 80:80
     links:
       - front
       - api
