@@ -6,18 +6,11 @@ services:
       - 80:80
       - 443:443
     links:
-      - nginx
+      - front
+      - api
     restart: always
     environment:
       DOMAINS: "ver3.sssignal.com -> http://front:3000, api.sssignal.com -> http://api:1323"
-
-  nginx:
-    build:
-      context: ./app/nginx/
-    container_name: nginx
-    links:
-      - front
-      - api
 
   front:
     build: ./app/front/
