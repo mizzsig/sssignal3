@@ -1,14 +1,20 @@
 version: "3.7"
 services:
-  nginx:
-    build:
-      context: ./app/nginx/
-      args:
-        email: ${EMAIL}
-    container_name: nginx
+  https-portal:
+    image: steveltn/https-portal:1
     ports:
       - 80:80
       - 443:443
+    links:
+      - nginx
+    restart: always
+    environment:
+      DOMAINS: "ver3.sssignal.com -> http://ver3.sssignal.com, api.sssignal.com -> http://api.sssignal.com"
+
+  nginx:
+    build:
+      context: ./app/nginx/
+    container_name: nginx
     links:
       - front
       - api

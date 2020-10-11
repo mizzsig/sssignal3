@@ -14,6 +14,6 @@ RUN apk del tzdata
 RUN rm -rf /var/cache/apk/*
 
 # set let's encrypt
-ARG email
-RUN apk add certbot
-RUN certbot certonly --standalone -d ver3.sssignal.com -d api.sssignal.com -n --agree-tos -m $email
+# ARG email
+# RUN apk add certbot
+# RUN certbot certonly --standalone -d ver3.sssignal.com -d api.sssignal.com -n --agree-tos -m $email
