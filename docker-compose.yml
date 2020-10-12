@@ -11,6 +11,9 @@ services:
     restart: always
     environment:
       DOMAINS: "ver3.sssignal.com -> http://front:3000, api.sssignal.com -> http://api:1323"
+      ERROR_LOG: stdout
+      ACCESS_LOG: stderr
+      STAGE: "production"
 
   front:
     build: ./app/front/
