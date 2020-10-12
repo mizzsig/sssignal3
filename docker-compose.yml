@@ -19,8 +19,8 @@ services:
     build: ./app/front/
     container_name: front
     working_dir: /home/node/front
-    environment:
-      HOST: 0.0.0.0
+    # environment:
+    #   HOST: 0.0.0.0
     ports:
       - 3000:3000
     volumes:
@@ -32,8 +32,8 @@ services:
     build: ./app/api/
     container_name: api
     working_dir: /go/cmd/sssignal3/app/api
-    environment:
-      HOST: 0.0.0.0
+    # environment:
+    #   HOST: 0.0.0.0
     ports:
       - 1323:1323
     links:
@@ -45,6 +45,8 @@ services:
   mongodb:
     image: mongo:4.2.2
     container_name: mongodb
+    environment:
+      HOST: 0.0.0.0
     ports:
       - 27017:27017
     volumes:
