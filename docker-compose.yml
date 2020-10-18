@@ -45,13 +45,12 @@ services:
   mongodb:
     image: mongo:4.2.2
     container_name: mongodb
-    environment:
-      HOST: 0.0.0.0
     ports:
       - 27017:27017
     volumes:
       - mongodb-data:/data/db
     environment:
+      - HOST=0.0.0.0
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
 
