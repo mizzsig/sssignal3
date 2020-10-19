@@ -21,8 +21,6 @@ services:
     build: ./app/front/
     container_name: front
     working_dir: /home/node/front
-    environment:
-      HOST: 0.0.0.0
     ports:
       - 3000:3000
     volumes:
@@ -34,8 +32,6 @@ services:
     build: ./app/api/
     container_name: api
     working_dir: /go/cmd/sssignal3/app/api
-    environment:
-      HOST: 0.0.0.0
     ports:
       - 1323:1323
     links:
@@ -52,7 +48,6 @@ services:
     volumes:
       - mongodb-data:/data/db
     environment:
-      - HOST=0.0.0.0
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
 
