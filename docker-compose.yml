@@ -5,6 +5,8 @@ services:
     ports:
       - 80:80
       - 443:443
+    environment:
+      HOST: 0.0.0.0
     links:
       - front
       - api
@@ -50,6 +52,7 @@ services:
     volumes:
       - mongodb-data:/data/db
     environment:
+      - HOST=0.0.0.0
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
 
