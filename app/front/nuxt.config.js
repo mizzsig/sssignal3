@@ -52,6 +52,6 @@ module.exports = {
   },
 
   env: {
-    SSSIGNAL_API_DOMAIN: "http://api.sssignal.com"
+    SSSIGNAL_API_DOMAIN: "https://api.sssignal.com"
   }
 };
