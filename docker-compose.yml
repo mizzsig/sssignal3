@@ -28,7 +28,7 @@ services:
     volumes:
       - ./app/front:/home/node/front
       - /home/node/front/node_modules
-    command: yarn run start
+    command: ash -c "yarn run build && yarn run start"
 
   api:
     build: ./app/api/
