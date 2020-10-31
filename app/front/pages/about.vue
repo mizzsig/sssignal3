@@ -1833,11 +1833,27 @@
       </style>
     </svg>
     <div class="section-container">
-      <div class="section-title">規約！！！！</div>
-      <p>
-        このサイトはどのページもリンクフリーです。
-        <br />画像の無断転載はご遠慮ください。
-      </p>
+      <div class="section-title">プライバシーポリシー・規約</div>
+      <div>
+        <h2>Google Analyticsについて</h2>
+        <p>
+          このサイトでは、アクセス解析のためGoogle
+          Analyticsを利用しています。<br />
+          Google
+          AnalyticsではCookieを利用していますが、個人を特定する情報は取得していません。<br />
+          詳細な仕組みについては<a
+            href="https://policies.google.com/technologies/partner-sites"
+            >https://policies.google.com/technologies/partner-sites</a
+          >をご参照ください。
+        </p>
+      </div>
+      <div>
+        <h2>規約!!!</h2>
+        <p>
+          このサイトはどのページもリンクフリーです。
+          <br />画像の無断転載はご遠慮ください。
+        </p>
+      </div>
     </div>
   </div>
 </template>
