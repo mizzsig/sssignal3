@@ -10,42 +10,22 @@ export default {
     return {
       title: `${this.column.Title} - Starch Syrup Signal3`,
       meta: [
-        {
-          hid: "description",
-          name: "description",
-          content: this.column.CharacterComment
-        },
-        {
-          hid: "og:description",
-          name: "og:description",
-          content: this.column.CharacterComment
-        },
-        {
-          hid: "twitter:site",
-          name: "twitter:site",
-          content: "@mizzsig"
-        },
-        {
-          hid: "og:title",
-          name: "og:title",
-          content: `${this.column.Title} - Starch Syrup Signal3`
-        },
-        {
-          hid: "twitter:card",
-          name: "twitter:card",
-          content: "summary_large_image"
-        },
-        {
-          hid: "og:image",
-          name: "og:image",
-          content: this.column.ImageUrl
-        }
+        { hid: "description", name: "description", content: this.column.CharacterComment },
+        { hid: "og:description", name: "og:description", content: this.column.CharacterComment },
+        { hid: "twitter:site", name: "twitter:site", content: "@mizzsig" },
+        { hid: "og:title", name: "og:title", content: `${this.column.Title} - Starch Syrup Signal3` },
+        { hid: "twitter:card", name: "twitter:card", content: "summary_large_image" },
+        { hid: "og:image", name: "og:image", content: this.column.ImageUrl }
       ]
     };
   },
   data() {
     return {
-      column: {}
+      column: {
+          Title: "",
+          CharacterComment: "",
+          ImageUrl: ""
+      }
     };
   },
   mounted() {
