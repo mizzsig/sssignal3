@@ -6,6 +6,30 @@
 
 <script>
 export default {
+  async asyncData({ params }) {
+    return fetch(
+      process.env.SSSIGNAL_API_DOMAIN + "/column/" + params.url,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then(response => response.json())
+      .then(resultJson => {
+        const column = resultJson;
+
+        // 記事の内容なかった時用の
+        if (column.Url === "") {
+          column.Body = "記事ないよー(泣)";
+        }
+
+        column.slicedDate = column.Date.slice(0, 10);
+        return { column: column };
+      });
+  },
   head() {
     return {
       title: `${this.column.Title} - Starch Syrup Signal3`,
@@ -21,44 +45,19 @@ export default {
   },
   data() {
     return {
-      column: {
-          Title: "",
-          CharacterComment: "",
-          ImageUrl: ""
-      }
     };
   },
   mounted() {
-    fetch(
-      process.env.SSSIGNAL_API_DOMAIN + "/column/" + this.$route.params.url,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
-      }
-    )
-      .then(response => response.json())
-      .then(resultJson => {
-        this.column = resultJson;
-
-        // 記事の内容なかった時用の
-        if (this.column.Url === "") {
-          this.column.Body = "記事ないよー(泣)";
-        }
-
-        if (!this.column.ShowCharacter) {
-          this.$store.commit("character/setShow", false);
-        } else {
-          this.$store.commit("character/setShow", true);
-          this.$store.commit(
+    console.log(this.column);
+    if (!this.column.ShowCharacter) {
+        this.$store.commit("character/setShow", false);
+    } else {
+        this.$store.commit("character/setShow", true);
+        this.$store.commit(
             "character/setComment",
             this.column.CharacterComment
-          );
-        }
-        this.column.slicedDate = this.column.Date.slice(0, 10);
-      });
+        );
+    }
   },
   methods: {}
 };
