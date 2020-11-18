@@ -38,7 +38,6 @@
     />
     <character
       v-show="isShow"
-      class="character"
       v-bind:class="{
         'character-show': isCharacter,
         'character-fade': !isCharacter

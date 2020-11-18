@@ -106,33 +106,19 @@ $height: 50px;
   width: 100%;
   height: calc(100% - 50px);
 }
-.character {
-  position: fixed;
-  right: 0px;
-  transition: all 0.3s;
-  width: 300px;
-}
-.character-show {
-  bottom: -40px;
-}
-.character-fade {
-  bottom: -330px;
-}
 @media screen and (max-width: 899px) {
   .nuxt-show-character {
     width: 100%;
-  }
-  .character,
-  .character-fade {
-    display: none;
   }
 }
 @media screen and (max-height: 499px) {
   .nuxt-show-character {
     width: 100%;
   }
-  .character,
-  .character-fade {
-    display: none;
-  }
+}
+.character-show {
+  bottom: -40px;
+}
+.character-fade {
+  bottom: -330px;
 }

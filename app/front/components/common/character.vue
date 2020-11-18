@@ -143,6 +143,20 @@ export default {
 .container {
   display: flex;
   flex-direction: column;
+  position: fixed;
+  right: 0px;
+  transition: all 0.3s;
+  width: 300px;
+}
+@media screen and (max-width: 899px) {
+  .container {
+    display: none;
+  }
+}
+@media screen and (max-height: 499px) {
+  .container {
+    display: none;
+  }
 }
 
 .pointer {
