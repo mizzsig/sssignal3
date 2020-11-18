@@ -1,5 +1,15 @@
 const pkg = require("./package");
 
+const environment = process.env.NODE_ENV || 'development';
+const envSet = {
+    production: {
+        SSSIGNAL_API_DOMAIN: "https://api.sssignal.com"
+    },
+    development: {
+        SSSIGNAL_API_DOMAIN: "http://localhost:1323"
+    }
+}
+
 module.exports = {
   ssr: true,
 
@@ -51,7 +61,5 @@ module.exports = {
     extend(config, ctx) {}
   },
 
-  env: {
-    SSSIGNAL_API_DOMAIN: "https://api.sssignal.com"
-  }
+  env: envSet[environment]
 };

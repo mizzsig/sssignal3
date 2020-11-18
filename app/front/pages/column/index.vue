@@ -2,11 +2,10 @@
   <div>
     こらむ！
     <br />記事とか載せたりするページです
-    <br />工事中
     <div>
       <div class="column" v-for="column in columns" v-bind:key="column.Date">
         <nuxt-link
-          :to="'/column/' + column.Url"
+          :to="'/column/' + column.Url + '/'"
           @mouseenter.native="
             $store.commit('character/setComment', column.CharacterComment)
           "

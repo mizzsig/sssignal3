@@ -48,7 +48,6 @@ export default {
     };
   },
   mounted() {
-    console.log(this.column);
     if (!this.column.ShowCharacter) {
         this.$store.commit("character/setShow", false);
     } else {

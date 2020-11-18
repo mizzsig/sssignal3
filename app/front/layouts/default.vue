@@ -87,10 +87,6 @@ export default {
     }
   },
   mounted() {
-    // トップページはキャラ出さない
-    if (this.$route.path !== "/") {
-      this.$store.commit("character/setShow", true);
-    }
     window.addEventListener("click", this.toggleMenu);
   },
   beforeDestroy() {
