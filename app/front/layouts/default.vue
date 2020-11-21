@@ -47,7 +47,6 @@
         <input type="text" id="nuxt-link-url">
         <button id="nuxt-link-button" @click="locationHref"></button>
     </div>
-    <nuxt-link to="/column/aaa">aaa</nuxt-link>
   </div>
 </template>
 
@@ -108,8 +107,7 @@ export default {
 
 <style lang="scss">
 html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Avenir','Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック',YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
   font-size: 16px;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
