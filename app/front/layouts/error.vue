@@ -1,13 +1,15 @@
 <template>
  <div class="container">
-    <h1 v-if="error.statusCode === 404">ページが見つかりません</h1>
+    <div v-if="error.statusCode === 404">
+        <h1>ページが見つかりません🙇</h1>
+    </div>
     <h1 v-else>エラーが発生しました</h1>
-    <nuxt-link to="/">ホーム</nuxt-link>
+    <div>status code : {{ error.statusCode }}</div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['error'],
+  props: ['error']
 }
 </script>
