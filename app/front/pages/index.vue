@@ -12,7 +12,12 @@ export default {
     return {
       title: "Starch Syrup Signal3",
       meta: [
-        { hid: "description", name: "description", content: "ウェブサイトです" }
+        { hid: "description", name: "description", content: "水飴信号３" },
+        { hid: "twitter:site", name: "twitter:site", content: "@mizzsig" },
+        { hid: "twitter:card", name: "twitter:card", content: "summary_large_image" },
+        { hid: "og:description", property: "og:description", content: "水飴信号３" },
+        { hid: "og:title", property: "og:title", content: "Starch Syrup Signal3" },
+        { hid: "og:image", property: "og:image", content: "https://ver3.sssignal.com/temporary_twitter_card.png" }
       ]
     };
   },

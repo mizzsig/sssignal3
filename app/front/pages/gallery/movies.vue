@@ -46,7 +46,14 @@ export default {
   head() {
     return {
       title: "Movies - Starch Syrup Signal3",
-      meta: [{ hid: "description", name: "description", content: "動画一覧" }]
+      meta: [
+        { hid: "description", name: "description", content: "動画一覧" },
+        { hid: "twitter:site", name: "twitter:site", content: "@mizzsig" },
+        { hid: "twitter:card", name: "twitter:card", content: "summary_large_image" },
+        { hid: "og:description", property: "og:description", content: "動画一覧" },
+        { hid: "og:title", property: "og:title", content: "Movies - Starch Syrup Signal3" },
+        { hid: "og:image", property: "og:image", content: "https://ver3.sssignal.com/temporary_twitter_card.png" }
+      ]
     };
   },
   data() {

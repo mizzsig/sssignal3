@@ -35,11 +35,11 @@ export default {
       title: `${this.column.Title} - Starch Syrup Signal3`,
       meta: [
         { hid: "description", name: "description", content: this.column.CharacterComment },
-        { hid: "og:description", name: "og:description", content: this.column.CharacterComment },
         { hid: "twitter:site", name: "twitter:site", content: "@mizzsig" },
-        { hid: "og:title", name: "og:title", content: `${this.column.Title} - Starch Syrup Signal3` },
         { hid: "twitter:card", name: "twitter:card", content: "summary_large_image" },
-        { hid: "og:image", name: "og:image", content: this.column.ImageUrl }
+        { hid: "og:description", property: "og:description", content: this.column.CharacterComment },
+        { hid: "og:title", property: "og:title", content: `${this.column.Title} - Starch Syrup Signal3` },
+        { hid: "og:image", property: "og:image", content: `https://ver3.sssignal.com${this.column.ImageUrl}` }
       ]
     };
   },

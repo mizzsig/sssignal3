@@ -1864,7 +1864,15 @@ import { mapMutations } from "vuex";
 export default {
   head() {
     return {
-      title: "About - Starch Syrup Signal3"
+      title: "About - Starch Syrup Signal3",
+      meta: [
+        { hid: "description", name: "description", content: "水飴信号３について" },
+        { hid: "twitter:site", name: "twitter:site", content: "@mizzsig" },
+        { hid: "twitter:card", name: "twitter:card", content: "summary_large_image" },
+        { hid: "og:description", property: "og:description", content: "水飴信号３について" },
+        { hid: "og:title", property: "og:title", content: "About - Starch Syrup Signal3" },
+        { hid: "og:image", property: "og:image", content: "https://ver3.sssignal.com/about/twitter_card.png" }
+      ]
     };
   },
   data() {
