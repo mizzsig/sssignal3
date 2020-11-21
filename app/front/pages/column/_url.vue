@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  async asyncData({ params, error }) {
+  async asyncData({ params, error, redirect }) {
     return fetch(
       process.env.SSSIGNAL_API_DOMAIN + "/column/" + params.url,
       {
@@ -21,11 +21,9 @@ export default {
       .then(resultJson => {
         const column = resultJson;
 
-        // 記事の内容なかった時用の
+        // 記事の内容なかった時はver2にリダイレクト(リンクとかから来た人用に)
         if (column.Url === "") {
-            return error({
-                statusCode: 404
-            });
+            redirect(302, "https://ver2.sssignal.com/column/" + params.url);
         }
 
         column.slicedDate = column.Date.slice(0, 10);
