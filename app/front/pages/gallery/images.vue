@@ -72,7 +72,7 @@ export default {
   },
   methods: {
     commentInit() {
-      this.$store.commit("character/setComment", "画像で振り返る水飴信号！");
+      this.$store.commit("character/setComment", "");
     }
   }
 };

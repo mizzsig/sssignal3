@@ -74,7 +74,7 @@ export default {
   },
   methods: {
     commentInit() {
-      this.$store.commit("character/setComment", "動画で振り返る水飴信号！");
+      this.$store.commit("character/setComment", "");
     },
     isActive(path) {
       return path === this.$route.path;
