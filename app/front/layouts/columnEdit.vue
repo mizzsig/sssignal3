@@ -64,8 +64,12 @@
           <span v-bind:class="{ active: isActive('/column') }">column</span>
         </nuxt-link>
       </div>
+      <div style="height: 50px;"></div>
     </header>
-    <div style="height: 50px;"></div>
+    <div style="display:none; width: 0px; height: 0px;">
+        <input type="text" id="nuxt-link-url">
+        <button id="nuxt-link-button" @click="locationHref"></button>
+    </div>
     <nuxt />
   </div>
 </template>
