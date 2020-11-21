@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  async asyncData({ params }) {
+  async asyncData({ params, error }) {
     return fetch(
       process.env.SSSIGNAL_API_DOMAIN + "/column/" + params.url,
       {
@@ -23,7 +23,9 @@ export default {
 
         // 記事の内容なかった時用の
         if (column.Url === "") {
-          column.Body = "記事ないよー(泣)";
+            return error({
+                statusCode: 404
+            });
         }
 
         column.slicedDate = column.Date.slice(0, 10);
