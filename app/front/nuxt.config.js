@@ -6,7 +6,7 @@ const envSet = {
         SSSIGNAL_API_DOMAIN: "https://api.sssignal.com"
     },
     development: {
-        SSSIGNAL_API_DOMAIN: "http://localhost:1323"
+        SSSIGNAL_API_DOMAIN: "http://host.docker.internal:1323"
     }
 }
 
