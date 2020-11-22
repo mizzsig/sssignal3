@@ -43,10 +43,6 @@ export default {
       ]
     };
   },
-  data() {
-    return {
-    };
-  },
   mounted() {
     if (!this.column.ShowCharacter) {
         this.$store.commit("character/setShow", false);

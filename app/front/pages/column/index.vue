@@ -41,16 +41,9 @@ export default {
       ]
     };
   },
-  data() {
-    return {
-      columns: []
-    };
-  },
-  mounted() {
-    this.commentInit();
-
+  asyncData() {
     // APIから記事一覧読み込み
-    fetch(process.env.SSSIGNAL_API_DOMAIN + "/column/list", {
+    return fetch(process.env.SSSIGNAL_API_DOMAIN + "/column/list", {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -59,8 +52,12 @@ export default {
     })
       .then(response => response.json())
       .then(columnsJson => {
-        this.columns = columnsJson;
+        const columns = columnsJson;
+        return { columns: columns };
       });
+  },
+  mounted() {
+    this.commentInit();
   },
   methods: {
     commentInit() {
