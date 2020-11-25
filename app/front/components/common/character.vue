@@ -42,7 +42,7 @@
           <div class="tweet-header">
             <img
               class="tweet-icon"
-              src="https://pbs.twimg.com/profile_images/950738808911233024/H357rT4H_400x400.jpg"
+              src="https://pbs.twimg.com/profile_images/1331444884612423681/jHpNa0XI_400x400.jpg"
             />
             <div class="tweet-name">とえら＠mizzsig</div>
           </div>
