@@ -13,6 +13,7 @@
       <br />
       <button @click="setDate">↑now!</button>
       <div>column.CharacterComment</div>
+      <input v-model="column.ShowCharacter" type="checkbox" />
       <input v-model="column.CharacterComment" style="width: 40%; background: #E0E0E0;" />
       <div>column.ImageUrl</div>
       <input v-model="column.ImageUrl" style="width: 40%; background: #E0E0E0;" />
@@ -121,6 +122,7 @@ export default {
             Body: this.column.Body,
             Date: this.column.Date,
             CharacterComment: this.column.CharacterComment,
+            ShowCharacter: this.column.ShowCharacter,
             ImageUrl: this.column.ImageUrl
           })
         }
