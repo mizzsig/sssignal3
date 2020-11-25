@@ -23,7 +23,7 @@ export default {
 
         // 記事の内容なかった時はver2にリダイレクト(リンクとかから来た人用に)
         if (column.Url === "") {
-            redirect(302, "https://ver2.sssignal.com/column/" + params.url);
+            redirect(301, "https://ver2.sssignal.com/column/" + params.url);
         }
 
         column.slicedDate = column.Date.slice(0, 10);
