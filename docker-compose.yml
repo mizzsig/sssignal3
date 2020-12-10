@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   https-portal:
-    image: steveltn/https-portal:1
+    image: steveltn/https-portal:1.14.0
     container_name: https-portal
     environment:
       HOST: 0.0.0.0
