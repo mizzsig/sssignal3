@@ -37,7 +37,7 @@
         <div class="right-menu">
             <div v-show="isListSelect === 0" style="width: 100%;">
                 <div class="right-header" style="padding: 4px 10px;">クリックでチャンネルページに飛びます</div>
-                <div style="display: flex; flex-wrap: wrap; margin-top: 32px;">
+                <div class="right-content" style="display: flex; flex-wrap: wrap;">
                     <div v-for="channel in subscribe_channel" :key="channel.id" class="listed-channel">
                         <a target="_blank" :href="'https://www.youtube.com/channel/' + channel.snippet.resourceId.channelId" style="text-decoration: none;">
                             <img :src="channel.snippet.thumbnails.default.url">
@@ -52,7 +52,7 @@
                     <div style="padding: 5px 10px" v-on:click="setDetailAction('edit_detail')" v-bind:class="{'action-select': listDetailAction === 'edit_detail'}">edit_detail</div>
                     <div style="padding: 5px 10px" v-on:click="setDetailAction('show_list')" v-bind:class="{'action-select': listDetailAction === 'show_list'}">show_list</div>
                 </div>
-                <div v-show="listDetailAction === 'edit_list'" style="display: flex; flex-wrap: wrap; margin-top: 32px;">
+                <div v-show="listDetailAction === 'edit_list'" class="right-content" style="display: flex; flex-wrap: wrap;">
                     <div v-for="channel in subscribe_channel" :key="channel.id" class="listed-channel" v-bind:class="{'registed-channel': list[isListSelect - 1] === undefined ? false : list[isListSelect - 1].channelIds.includes(channel.snippet.resourceId.channelId)}">
                         <div style="cursor: pointer;" v-on:click="toggleListChannel(channel.snippet.resourceId.channelId)">
                             <img :src="channel.snippet.thumbnails.default.url">
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-                <div v-show="listDetailAction === 'edit_detail'" style="display: flex; flex-wrap: wrap; margin-top: 32px;">
+                <div v-show="listDetailAction === 'edit_detail'" class="right-content" style="display: flex; flex-wrap: wrap;">
                     <div v-for="channel in subscribe_channel" :key="channel.id">
                         <div v-show="list[isListSelect - 1] === undefined ? false : list[isListSelect - 1].channelIds.includes(channel.snippet.resourceId.channelId)" class="listed-channel">
                             <img :src="channel.snippet.thumbnails.default.url">
@@ -68,7 +68,7 @@
                         </div>
                     </div>
                 </div>
-                <div v-show="listDetailAction === 'show_list'" style="margin-top: 32px;">
+                <div v-show="listDetailAction === 'show_list'" class="right-content">
                     <div v-for="video in subscribe_videoList" :key="video.etag">
                         <a v-show="list[isListSelect - 1] === undefined ? false : list[isListSelect - 1].channelIds.includes(video.snippet.channelId)" target="_blank" :href="'https://www.youtube.com/watch?v=' + video.contentDetails.videoId" style="display: flex; margin: 2px; padding: 3px; text-decoration: none; font-size: 14px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                             <img :src="video.snippet.thumbnails.default.url">
@@ -374,6 +374,10 @@ export default {
     background: rgba(64, 64, 64, 0.9);
 }
 
+.right-content {
+    margin-top: 32px;
+}
+
 @media screen and (max-width: 500px) {
   .left-menu {
     width: 100%;
@@ -390,6 +394,10 @@ export default {
   .right-header {
       width: 100%;
       margin-top: 100px;
+  }
+
+  .right-content {
+      margin-top: 132px;
   }
 }
 
