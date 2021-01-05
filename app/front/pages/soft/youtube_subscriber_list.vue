@@ -246,7 +246,7 @@ export default {
                     return data;
                 }
 
-                return data.items[0].id;
+                return data.items !== undefined ? data.items[0].id : 'channnel_not_have';
             });
         },
         setSubscribeChannel(nextPageToken) {
@@ -367,7 +367,7 @@ export default {
                 this.isListEdit = -1;
                 this.editCategory = '';
             }
-            setMyListCookie();
+            this.setMyListCookie();
         },
         setDetailAction(action) {
             this.listDetailAction = action;
@@ -378,7 +378,7 @@ export default {
             } else {
                 this.list[this.isListSelect - 1].channelIds.push(channelId);
             }
-            setMyListCookie();
+            this.setMyListCookie();
         },
         setMyListCookie() {
             document.cookie = `list_${this.my_channelId}=${JSON.stringify(this.list)}; max-age=${60*60*24*365}`;
