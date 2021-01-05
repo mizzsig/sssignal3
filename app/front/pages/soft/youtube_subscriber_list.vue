@@ -8,7 +8,7 @@
             まずはYoutubeにログインしてください！
         </p>
         <h1>
-            <a href="https://accounts.google.com/o/oauth2/auth?client_id=143628981154-u0ppptc4gif0t98htc3gf9o315lsv5qp.apps.googleusercontent.com&redirect_uri=https://ver3.sssignal.com/soft/youtube_subscriber_list&scope=https://www.googleapis.com/auth/youtube.readonly&response_type=token">
+            <a :href="'https://accounts.google.com/o/oauth2/auth?client_id=260053394039-9pgbce0boctusgg974ai62bsqls5ituq.apps.googleusercontent.com&redirect_uri=' + location_protocol + '//' + location_host + '/soft/youtube_subscriber_list&scope=https://www.googleapis.com/auth/youtube.readonly&response_type=token'">
                 Youtubeログイン
             </a>
         </h1>
@@ -76,6 +76,7 @@
                                 <div class="show-text" style="font-size: 16px;">{{ video.snippet.title }}</div>
                                 <div class="show-text" style="font-size: 12px;">{{ video.snippet.channelTitle }}</div>
                                 <div class="show-text" style="font-size: 12px;">{{ new Date(video.contentDetails.videoPublishedAt).toLocaleString() }}</div>
+                                <div class="show-text" style="font-size: 12px;">{{ video.videoDetail !== undefined ? video.videoDetail.contentDetails.duration : '' }}</div>
                             </div>
                         </a>
                     </div>
@@ -105,7 +106,9 @@ export default {
             isListEdit: -1,
             listDetailAction: 'edit_list',
             // 編集中のリスト名
-            editCategory: ''
+            editCategory: '',
+            location_protocol: '',
+            location_host: ''
         });
     },
     async mounted() {
@@ -113,6 +116,8 @@ export default {
         window.addEventListener('beforeunload', this.setMyListCookie);
 
         this.$store.commit("character/setShow", false);
+        this.location_protocol = location.protocol;
+        this.location_host = location.host;
 
         // URL末尾のハッシュを分解
         const urlHash = this.$route.hash.substr(1);
@@ -191,6 +196,24 @@ export default {
             setVideolistFunctions.push(this.setVideoList(playlistId));
         });
         await Promise.all(setVideolistFunctions);
+        
+        // 動画の詳細情報を取得
+        const setVideoDetailFunctions = [];
+        let videoIdsString = '';
+        this.subscribe_videoList.forEach((video, index) => {
+            if (index % 50 === 0) {
+                if (videoIdsString !== '') {
+                    setVideoDetailFunctions.push(this.setVideoDetail(videoIdsString));
+                }
+                videoIdsString = video.snippet.resourceId.videoId;
+            } else {
+                videoIdsString += `,${video.snippet.resourceId.videoId}`;
+            }
+        });
+        if (videoIdsString !== '') {
+            setVideoDetailFunctions.push(this.setVideoDetail(videoIdsString));
+        }
+        await Promise.all(setVideoDetailFunctions);
 
         // 動画を公開日時順に並び替え
         this.subscribe_videoList = this.subscribe_videoList.sort((prev, next) => {
@@ -223,7 +246,7 @@ export default {
                     return data;
                 }
 
-                return data.items[0].id;
+                return data.items !== undefined ? data.items[0].id : 'channnel_not_have';
             });
         },
         setSubscribeChannel(nextPageToken) {
@@ -242,8 +265,8 @@ export default {
                 }
                 
                 // チャンネル一覧に追加
-                Object.keys(data.items).forEach(index => {
-                    this.subscribe_channel.push(data.items[index]);
+                data.items.forEach(item => {
+                    this.subscribe_channel.push(item);
                 });
 
                 return data;
@@ -288,6 +311,32 @@ export default {
                 });
             })
         },
+        setVideoDetail(videoIdsString) {
+            return fetch(`https://www.googleapis.com/youtube/v3/videos?part=id,contentDetails&id=${videoIdsString}&maxResults=50`, {
+                'method': 'GET',
+                'headers': {
+                    'Authorization': `${this.token_type} ${this.access_token}`
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error !== undefined) {
+                    // セッション有効期限切れなどのエラー
+                    // this.access_token = 'none';
+                    return;
+                }
+
+                data.items.forEach(video => {
+                    this.subscribe_videoList.forEach((value, index) => {
+                        if (value.snippet.resourceId.videoId === video.id) {
+                            this.subscribe_videoList[index]['videoDetail'] = video;
+                        }
+                    });
+                });
+
+                return data;
+            });
+        },
         setNewListEdit() {
             if (this.isListEdit < 0) {
                 this.list.push({ name: '', channelIds: [] });
@@ -318,13 +367,10 @@ export default {
                 this.isListEdit = -1;
                 this.editCategory = '';
             }
+            this.setMyListCookie();
         },
         setDetailAction(action) {
             this.listDetailAction = action;
-
-            // if (action === 'show_list') {
-            //     this.setVideoList();
-            // }
         },
         toggleListChannel(channelId) {
             if (this.list[this.isListSelect - 1].channelIds.includes(channelId)) {
@@ -332,6 +378,7 @@ export default {
             } else {
                 this.list[this.isListSelect - 1].channelIds.push(channelId);
             }
+            this.setMyListCookie();
         },
         setMyListCookie() {
             document.cookie = `list_${this.my_channelId}=${JSON.stringify(this.list)}; max-age=${60*60*24*365}`;
