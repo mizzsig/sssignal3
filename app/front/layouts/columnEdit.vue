@@ -106,6 +106,9 @@ export default {
       } else {
         this.toggleShow = false;
       }
+    },
+    locationHref() {
+        this.$router.push(document.getElementById('nuxt-link-url').value);
     }
   },
   mounted() {
