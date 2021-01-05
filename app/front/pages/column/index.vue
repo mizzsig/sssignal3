@@ -162,17 +162,16 @@ export default {
 
 .title {
   text-align: left;
+  font-size: 20px;
 }
 @media screen and (max-width: 300px) {
   .title {
-    font-size: 20px;
     padding-left: 15px;
   }
 }
 @media screen and (min-width: 301px) {
   .title {
-    font-size: 24px;
-    padding-left: 50px;
+    padding-left: 30px;
   }
 }
 </style>
