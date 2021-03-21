@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
         <video autoplay class="video-bg" :srcObject.prop="video.srcObject"></video>
-        <video autoplay :style="{ position: 'absolute', borderRadius: `${video.width / 2}px` }" :srcObject.prop="video.srcObject" :width="video.width" :height="video.height"></video>
+        <video autoplay class="video-circle" :style="{ borderRadius: `${video.width / 2}px` }" :srcObject.prop="video.srcObject" :width="video.width" :height="video.height"></video>
     </div>
 </template>
 
@@ -57,5 +57,12 @@ export default {
     transform: translate(-50%, -50%);
     filter: blur(7px) grayscale(80%);
     opacity: 0.4;
+}
+
+.video-circle {
+    position: absolute;
+    transform: translate(-50%, 0%);
+    margin-top: 10%;
+    margin-left: -20%;
 }
 </style>
