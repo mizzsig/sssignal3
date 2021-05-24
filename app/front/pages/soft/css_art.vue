@@ -95,7 +95,7 @@ export default {
                 left: "0px",
                 width: "50px",
                 height: "50px",
-                background: "#FFFFFF",
+                background: "rgb(255, 255, 255)",
             };
             this.contents.push({
                 ...template,
@@ -232,7 +232,7 @@ export default {
       }
 
       input {
-        width: 80px;
+        width: 120px;
       }
     }
   }
