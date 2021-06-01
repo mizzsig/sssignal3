@@ -7,6 +7,7 @@
                     <div v-for="(content, index) in contents" v-bind:key="`view-${content.key}`" :style="content" @mousedown="mouseDown(index, $event)"></div>
                 </div>
                 <textarea class="content" style="margin-bottom: 10px;" v-model="resultHtml" readonly></textarea>
+                <textarea class="content" style="margin-bottom: 10px;" v-model="contentsJson"></textarea>
             </div>
             <div class="sub-right" style="max-height: 100%;">
                 <div class="content" style="padding: 10px; margin-bottom: 10px; display: flex; justify-content: space-between;">
@@ -60,6 +61,7 @@ export default {
     data() {
         return ({
             contents: [],
+            contentsJson: "",
             resultHtml: "",
             isDrug: false,
             addCssIndex: "",
@@ -79,12 +81,29 @@ export default {
         this.reloadTimer = setInterval(() => {
             const element = document.getElementsByClassName('sub-content-main')[0];
             this.resultHtml = '<div style="position: relative;">' + element.innerHTML + '</div>';
+            this.contentsJson = JSON.stringify(this.contents);
         }, 20);
     },
     beforeDestroy() {
         window.removeEventListener("mousemove", this.mouseMove);
         window.removeEventListener("mouseup", this.mouseUp);
         clearInterval(this.reloadTimer);
+    },
+    watch: {
+        contentsJson(value) {
+            try {
+                this.contents = JSON.parse(value);
+                const maxVal = this.contents.reduce((acc, val) => {
+                    if (parseInt(acc.key.replace('content-', '')) > parseInt(val.key.replace('content-', ''))) {
+                        return acc;
+                    } else {
+                        return val;
+                    }
+                });
+                this.divIndex = Math.max(parseInt(maxVal.key.replace('content-', '')) + 1, this.divIndex);
+            } catch (error) {
+            }
+        }
     },
     methods: {
         addDiv() {
