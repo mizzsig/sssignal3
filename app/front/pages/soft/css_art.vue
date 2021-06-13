@@ -137,7 +137,7 @@ export default {
         },
         addCssToDiv(event) {
             this.addCssIndex = this.addCssIndex.trim();
-            this.addCssValue = this.addCssValue.trim();
+            this.addCssValue = this.addCssValue.trimStart();
             if (event.key !== "Enter" || this.drugIndex === -1 || this.addCssIndex === "" || this.addCssValue === "") {
                 return;
             }
