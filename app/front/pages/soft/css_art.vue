@@ -17,7 +17,12 @@
                     <div class="icon" @mousedown="copyDiv()">copy</div>
                     <div class="icon" @mousedown="deleteDiv()">delete</div>
                 </div>
-                <div class="content" style="padding: 5px; margin-bottom: 10px;">
+                <div class="content" style="max-height: 200px; overflow: scroll; margin-bottom: 10px;">
+                    <div class="content" v-for="(content, index) in contents" v-bind:key="content.key" @mousedown="changeIndex(index)">
+                        <div :style="(content === contents[drugIndex]) ? {background: '#6f6faf'} : {}">{{ content.key }}</div>
+                    </div>
+                </div>
+                <div class="content" style="padding: 5px;">
                     <div>[Parameter{{ drugIndex !== -1 ? ` : ${contents[drugIndex]["key"]}` : "" }}]</div>
                     <div v-if="drugIndex !== -1" style="max-height: 300px; overflow: scroll;">
                         <div v-for="(css, index) in contents[drugIndex]" v-bind:key="`content-css-${index}`">
@@ -30,11 +35,6 @@
                             <input type="text" v-model="addCssIndex" @keydown="addCssToDiv">
                             <input type="text" v-model="addCssValue" @keydown="addCssToDiv">
                         </div>
-                    </div>
-                </div>
-                <div class="content" style="max-height: 200px; overflow: scroll;">
-                    <div class="content" v-for="(content, index) in contents" v-bind:key="content.key" @mousedown="changeIndex(index)">
-                        <div :style="(content === contents[drugIndex]) ? {background: '#4F4F8F'} : {}">{{ content.key }}</div>
                     </div>
                 </div>
             </div>
@@ -239,6 +239,7 @@ export default {
   .sub-right {
     @extend .sub;
     width: 30%;
+    user-select: none;
 
     .content {
       box-sizing: border-box;
@@ -248,6 +249,13 @@ export default {
 
       .icon {
         cursor: pointer;
+        flex-grow: 1;
+        border-radius: 4px;
+        transition: all 0.4s;
+
+        &:hover {
+          background: #6f6faf;
+        }
       }
 
       input {
