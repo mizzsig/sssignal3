@@ -27,6 +27,7 @@
                     <div v-if="drugIndex !== -1" style="max-height: 300px; overflow: scroll;">
                         <div v-for="(css, index) in contents[drugIndex]" v-bind:key="`content-css-${index}`">
                             <div v-if="!['position', 'key'].includes(index)" style="display: flex; overflow: hidden;">
+                                <div class="delete" @mousedown="deleteCssAttribute(index)">×</div>
                                 <div style="margin-right: 5px;">{{ index }}</div>
                                 <input type="text" v-model="contents[drugIndex][index]">
                             </div>
@@ -167,6 +168,9 @@ export default {
             });
             this.drugIndex = -1;
         },
+        deleteCssAttribute(index) {
+            delete this.contents[this.drugIndex][index];
+        },
         mouseDown(index, event) {
             if (!this.isDrug) {
                 this.isDrug = true;
@@ -260,6 +264,16 @@ export default {
 
       input {
         width: 120px;
+      }
+
+      .delete {
+        cursor: pointer;
+        padding: 0px 5px;
+        transition: all 0.4s;
+
+        &:hover {
+          background: #6f6faf;
+        }
       }
     }
   }
