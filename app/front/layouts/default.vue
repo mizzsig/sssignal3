@@ -9,6 +9,7 @@
       <div class="toggle-menu" :class="{ 'toggle-show': toggleShow }">
         <nuxt-link class="menu" to="/">Top</nuxt-link>
         <nuxt-link class="menu" to="/about">about</nuxt-link>
+        <nuxt-link class="menu" to="/soft">soft</nuxt-link>
         <nuxt-link class="menu" to="/gallery/images">gallery</nuxt-link>
         <nuxt-link class="menu" to="/column">column</nuxt-link>
       </div>
@@ -20,6 +21,9 @@
         </nuxt-link>
         <nuxt-link class="menu" to="/about">
           <span v-bind:class="{ active: isActive('/about') }">about</span>
+        </nuxt-link>
+        <nuxt-link class="menu" to="/soft">
+          <span v-bind:class="{ active: isActive('/soft') }">soft</span>
         </nuxt-link>
         <nuxt-link class="menu" to="/gallery/images">
           <span v-bind:class="{ active: isActive('/gallery') }">gallery</span>
@@ -82,7 +86,7 @@ export default {
     },
     toggleMenu(event) {
       // メニューが出ていない & 画面幅が小さい & メニューを押下したときにトグルメニューを出す
-      if (!this.toggleShow && window.innerWidth <= 500 && event.clientY <= 50) {
+      if (!this.toggleShow && window.innerWidth <= 550 && event.clientY <= 50) {
         this.toggleShow = true;
       } else {
         this.toggleShow = false;
