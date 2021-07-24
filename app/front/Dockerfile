@@ -1,4 +1,4 @@
-FROM node:14.17.0-alpine
+FROM node:14.17.3-alpine
 
 WORKDIR /home/node
 RUN mkdir front
