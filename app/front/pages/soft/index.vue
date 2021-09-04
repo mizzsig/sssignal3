@@ -1,14 +1,14 @@
 <template>
   <section class="container">
-      <nuxt-link to="/soft/css_art">
+      <nuxt-link class="link" to="/soft/css_art">
           <h2>css art</h2>
           <div style="margin-bottom: 50px;">htmlとcssを組み合わせてアートを作ろう！</div>
       </nuxt-link>
-      <nuxt-link to="/soft/midi_keyboard_realtime_score">
+      <nuxt-link class="link" to="/soft/midi_keyboard_realtime_score">
           <h2>midi keyboard realtime score</h2>
           <div style="margin-bottom: 50px;">MIDIキーボードで弾いた楽譜が出ます！カメラも使います！</div>
       </nuxt-link>
-      <nuxt-link to="/soft/youtube_subscriber_list">
+      <nuxt-link class="link" to="/soft/youtube_subscriber_list">
           <h2>Youtube subscriber list</h2>
           <div>Youtubeの登録チャンネルを整理するページ、管理人以外は使えません！</div>
       </nuxt-link>
@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
+.link {
   text-decoration: none;
 }
 </style>
