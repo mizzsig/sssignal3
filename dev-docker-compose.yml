@@ -43,6 +43,16 @@ services:
       - ./:/go/cmd/sssignal3
     command: realize start --run --no-config
 
+  cron:
+    build: ./app/cron
+    container_name: cron
+    # コンテナを起動しっぱなしにする
+    tty: true
+    links:
+      - mongodb
+    volumes:
+      - ./:/home/
+
   mongodb:
     image: mongo:4.2.2
     container_name: mongodb
