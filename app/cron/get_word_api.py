@@ -23,7 +23,7 @@ response = requests.request("GET", url, headers=headers, params=querystring)
 responseWord = response.json()['word']
 
 ### APIから取得したものをDBに保存(スタイル崩れの原因になる文字は抜く)
-if ' ' not in responseWord && '-' not in responseWord:
+if ' ' not in responseWord and '-' not in responseWord:
     data = mongoDB['sssignal3']['endless_typing_words'].find_one({'word': responseWord})
     if data is None:
         mongoDB['sssignal3']['endless_typing_words'].insert_one({'word': responseWord})
