@@ -61,6 +61,20 @@ type Column struct {
 	ImageUrl string `bson:"imageUrl"`
 }
 
+// /soft/endless_typing の単語
+type EndlessTypingWord struct {
+	Word string `bson:"word"`
+}
+
+// /soft/endless_typing のランキング
+type EndlessTypingRanking struct {
+	Time string `bson:"time"`
+	Success string `bson:"success"`
+	Failure string `bson:"failure"`
+	SuccessRate string `bson:"successRate"`
+	TypeRate string `bson:"typeRate"`
+}
+
 func main() {
 	e := echo.New()
 
@@ -317,6 +331,24 @@ func main() {
 
 		session.Close()
 		return c.JSON(http.StatusOK, "r")
+	})
+	// /soft/endless_typing 用の単語を取得
+	e.GET("/soft/endless_typing/all_words", func(c echo.Context) error {
+		credential := &mgo.Credential{Username: mongoUsername, Password: mongoPassword}
+		session, _ := mgo.Dial("mongodb")
+		session.Login(credential)
+		words := session.DB("sssignal3").C("endless_typing_words")
+
+		var wordList []EndlessTypingWord
+		words.Find(bson.M{}).All(&wordList)
+
+		result := []string{}
+		for _, value := range wordList {
+			result = append(result, value.Word)
+		}
+
+		session.Close()
+		return c.JSON(http.StatusOK, result)
 	})
 	e.Logger.Fatal(e.Start(":1323"))
 }
