@@ -14,7 +14,7 @@
             </div>
             <div style="position: relative; height: 70px;">
                 <div class="scroll">
-                    <div ref="scroll_left" :style="{maxWidth: '100%',  position: 'absolute', transform: 'translateX(-50%)', left: typingData.leftPosition, display: 'flex', gap: '0px 10px'}">
+                    <div ref="scroll_left" class="both-content" :style="{left: typingData.leftPosition}">
                         <div style="position: relative;" v-bind:class="{'typing-border': typingData.type.split(' ').length === 1}">
                             {{ showWords[0] }}
                             <div class="typing">
@@ -34,7 +34,7 @@
                             {{ typingData.type.split(' ')[2] }}
                         </div>
                     </div> 
-                    <div ref="scroll_right" :style="{maxWidth: '100%', position: 'absolute', transform: 'translateX(-50%)', left: typingData.rightPosition, display: 'flex', gap: '0px 10px'}">
+                    <div ref="scroll_right" class="both-content" :style="{left: typingData.rightPosition}">
                         <div style="position: relative;">
                             {{ showWords[3] }}
                         </div>
@@ -55,6 +55,25 @@
                 type rate: {{ typeRate }} / sec
             </div>
             <div>press space to title</div>
+        </div>
+        <div v-show="['title', 'clear'].includes(stage)" style="margin-top: 30px;">
+            <div style="font-size: 20px; margin-bottom: 10px;">Ranking</div>
+            <div style="display: flex; flex-flow: column;">
+                <div style="display: flex; justify-content: center;">
+                    <div @click="setRankingSort('time')" class="ranking-caption">Time {{ this.rankingSort === 'time' ? '▼' : '' }}</div>
+                    <div @click="setRankingSort('success')" class="ranking-caption">Success {{ this.rankingSort === 'success' ? '▼' : '' }}</div>
+                    <div @click="setRankingSort('failure')" class="ranking-caption">Failure {{ this.rankingSort === 'failure' ? '▼' : '' }}</div>
+                    <div @click="setRankingSort('successRate')" class="ranking-caption">SuccessRate {{ this.rankingSort === 'successRate' ? '▼' : '' }}</div>
+                    <div @click="setRankingSort('typeRate')" class="ranking-caption">TypeRate {{ this.rankingSort === 'typeRate' ? '▼' : '' }}</div>
+                </div>
+                <div style="display: flex; justify-content: center;" v-for="(value, index) in rankingData[rankingSort]" v-bind:key="index">
+                    <div v-bind:class="{ 'color-red': isMyRankingScore(value) }" class="ranking-score">{{ value.Time.toFixed(1) }}</div>
+                    <div v-bind:class="{ 'color-red': isMyRankingScore(value) }" class="ranking-score">{{ value.Success }}</div>
+                    <div v-bind:class="{ 'color-red': isMyRankingScore(value) }" class="ranking-score">{{ value.Failure }}</div>
+                    <div v-bind:class="{ 'color-red': isMyRankingScore(value) }" class="ranking-score">{{ value.SuccessRate.toFixed(2) }}</div>
+                    <div v-bind:class="{ 'color-red': isMyRankingScore(value) }" class="ranking-score">{{ value.TypeRate.toFixed(2) }}</div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -101,7 +120,11 @@ export default {
                 // 入力文字の左・右の文字位置
                 leftPosition: 'calc(50%)',
                 rightPosition: 'calc(50%)',
-            }
+            },
+            // ランキングデータ
+            rankingData: {},
+            // ランキングでソート中の項目
+            rankingSort: "success"
         });
     },
     computed: {
@@ -109,15 +132,15 @@ export default {
             return (this.typingData.time / 10).toFixed(1);
         },
         successRate() {
-            if (this.typingData.success === 0) {
-                return 0;
+            if ((this.typingData.success === 0) || (this.typingData.success < this.typingData.failure)) {
+                return (0).toFixed(2);
             } else {
                 return ((this.typingData.success - this.typingData.failure) / this.typingData.success * 100).toFixed(2);
             }
         },
         typeRate() {
             if (this.typingData.time === 0) {
-                return 0;
+                return (0).toFixed(2);
             } else {
                 return (this.typingData.success / (this.typingData.time / 10)).toFixed(2);
             }
@@ -139,6 +162,8 @@ export default {
         .then(resultJson => {
             this.words = resultJson;
         })
+
+        this.getRanking();
     },
     beforeDestroy() {
         window.removeEventListener('keydown', this.keydown);
@@ -174,7 +199,55 @@ export default {
             this.typingData.leftPosition = `calc(50% - ${(this.$refs.scroll_left.offsetWidth / 2) + (this.$refs.scroll_center.offsetWidth / 2) + 10}px)`;
             this.typingData.rightPosition = `calc(50% + ${(this.$refs.scroll_right.offsetWidth / 2) + (this.$refs.scroll_center.offsetWidth / 2) + 10}px)`;
         },
-        keydown(event) {
+        // 今回の自分のデータがランキング内にあるかを判定
+        isMyRankingScore(rankingScore) {
+            let isMine = true;
+            if (rankingScore.Time != this.typingTime) {
+                isMine = false;
+            } else if (rankingScore.Success != this.typingData.success) {
+                isMine = false;
+            } else if (rankingScore.Failure != this.typingData.failure) {
+                isMine = false;
+            } else if (rankingScore.SuccessRate != this.successRate) {
+                isMine = false;
+            } else if (rankingScore.TypeRate != this.typeRate) {
+                isMine = false;
+            }
+            return isMine;
+        },
+        setRankingSort(value) {
+            this.rankingSort = value;
+        },
+        getRanking() {
+            fetch(`${process.env.SSSIGNAL_API_DOMAIN}/soft/endless_typing/ranking`, {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(response => response.json())
+            .then(resultJson => {
+                this.rankingData = resultJson;
+            })
+        },
+        putRanking() {
+            return fetch(`${process.env.SSSIGNAL_API_DOMAIN}/soft/endless_typing/ranking`, {
+                method: "PUT",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    Time: Number(this.typingTime),
+                    Success: Number(this.typingData.success),
+                    Failure: Number(this.typingData.failure),
+                    SuccessRate: Number(this.successRate),
+                    TypeRate: Number(this.typeRate)
+                })
+            })
+        },
+        async keydown(event) {
             if (this.stage === 'title') {
                 if (event.key === ' ' && this.words.length > 0) {
                     this.stage = 'play';
@@ -185,6 +258,9 @@ export default {
                 if (key === 'Enter'){
                     clearInterval(this.typingData.timer);
                     this.stage = 'clear';
+                    // ランキングデータを登録
+                    await this.putRanking();
+                    this.getRanking();
                     return;
                 } else if (key === '/' || key.length > 1) {
                     return;
@@ -200,7 +276,6 @@ export default {
                     this.typingData.success += 1;
                     this.typingData.failureFlag = false;
                 } else if (key === ' ' && this.indexInWord === checkWord.length) {
-                    console.log('space');
                     // 単語と単語の間ではスペースを打つ
                     if (this.indexWords < 2) {
                         this.indexWords += 1;
@@ -228,7 +303,6 @@ export default {
                         this.typingData.failureFlag = true;
                     }
                 }
-                console.log(this.indexInWord, checkWord.length);
             } else if (this.stage === 'clear') {
                 if (event.key === ' ') {
                     this.stage = 'title';
@@ -244,6 +318,19 @@ export default {
 .wrapper {
   overflow: hidden;
   margin-top: 30px;
+
+  .ranking-caption {
+    flex-basis: 120px;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  .ranking-score {
+    flex-basis: 120px;
+    text-align: right;
+    padding-right: 30px;
+    box-sizing: border-box;
+  }
 }
 
 .scroll {
@@ -252,6 +339,14 @@ export default {
   position: absolute;
   user-select: none;
   width: 100%;
+
+  .both-content {
+    max-width: 100%;
+    position: absolute;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0px 10px;
+  }
 
   .center {
     position: absolute;
@@ -270,5 +365,9 @@ export default {
     padding-bottom: 3px;
     border-bottom: 1px solid red;
   }
+}
+
+.color-red {
+  color: red;
 }
 </style>
