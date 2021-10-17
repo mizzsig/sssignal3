@@ -14,6 +14,7 @@ import (
 	"math/rand"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
+	"./soft"
 )
 
 // 問い合わせフォームから送られるリクエスト
@@ -66,25 +67,22 @@ type EndlessTypingWord struct {
 	Word string `bson:"word"`
 }
 
-// /soft/endless_typing のランキング
-type EndlessTypingRanking struct {
-	Time string `bson:"time"`
-	Success string `bson:"success"`
-	Failure string `bson:"failure"`
-	SuccessRate string `bson:"successRate"`
-	TypeRate string `bson:"typeRate"`
-}
-
 func main() {
 	e := echo.New()
-
-	// CORS用の設定
-	e.Use(middleware.CORS())
 
 	// .envファイル読み込み
 	err := godotenv.Load("../../.env")
 	if err != nil {
 		fmt.Println(".env loading error!")
+	}
+
+	// CORSの設定, 本番は正しいドメインからしかAPIにアクセスできないようにする
+	if os.Getenv("ENVIRONMENT") == "production" {
+		e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+			AllowOrigins: []string{"https://sssignal.com", "https://ver3.sssignal.com"},
+		}))
+	} else {
+		e.Use(middleware.CORS())
 	}
 
 	slackWebhook := os.Getenv("SLACK_WEBHOOK")
@@ -350,5 +348,9 @@ func main() {
 		session.Close()
 		return c.JSON(http.StatusOK, result)
 	})
+	// /soft/endless_typing 用のランキングを取得
+	e.GET("/soft/endless_typing/ranking", endlessTyping.GetRanking)
+	// /soft/endless_typing 用のランキングを更新
+	e.PUT("/soft/endless_typing/ranking", endlessTyping.PutRanking)
 	e.Logger.Fatal(e.Start(":1323"))
 }
