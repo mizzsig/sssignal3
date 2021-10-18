@@ -1,5 +1,9 @@
 <template>
   <section class="container">
+      <nuxt-link class="link" to="/soft/endless_typing">
+          <h2>endless typing</h2>
+          <div style="margin-bottom: 50px;">終わらないタイピングが始まる……！</div>
+      </nuxt-link>
       <nuxt-link class="link" to="/soft/css_art">
           <h2>css art</h2>
           <div style="margin-bottom: 50px;">htmlとcssを組み合わせてアートを作ろう！</div>
@@ -33,6 +37,9 @@ export default {
   data() {
     return {
     };
+  },
+  mounted() {
+    this.$store.commit('character/setShow', true);
   }
 };
 </script>

@@ -30,13 +30,14 @@ jobs:
           REPOSITORY_PATH: ${{ secrets.REPOSITORY_PATH }}
           SERVER_IP: ${{ secrets.SERVER_IP }}
           USER_NAME: ${{ secrets.USER_NAME }}
+          ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
           API_PASSWORD: ${{ secrets.API_PASSWORD }}
           RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
           MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
           MONGO_USERNAME: ${{ secrets.MONGO_USERNAME }}
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           EMAIL: ${{ secrets.EMAIL }}
-        run: ssh -o StrictHostKeyChecking=no ${USER_NAME}@${SERVER_IP} -i ssh_private_key "cd $REPOSITORY_PATH && echo API_PASSWORD=$API_PASSWORD > .env && echo RAPIDAPI_KEY=$RAPIDAPI_KEY > .env && echo MONGO_PASSWORD=$MONGO_PASSWORD >> .env && echo MONGO_USERNAME=$MONGO_USERNAME >> .env && echo EMAIL=$EMAIL >> .env && echo SLACK_WEBHOOK=$SLACK_WEBHOOK >> .env"
+        run: ssh -o StrictHostKeyChecking=no ${USER_NAME}@${SERVER_IP} -i ssh_private_key "cd $REPOSITORY_PATH && echo ENVIRONMENT=$ENVIRONMENT > .env && echo API_PASSWORD=$API_PASSWORD >> .env && echo RAPIDAPI_KEY=$RAPIDAPI_KEY >> .env && echo MONGO_PASSWORD=$MONGO_PASSWORD >> .env && echo MONGO_USERNAME=$MONGO_USERNAME >> .env && echo EMAIL=$EMAIL >> .env && echo SLACK_WEBHOOK=$SLACK_WEBHOOK >> .env"
 
       - name: ssh & restart sssignal3
         env:
