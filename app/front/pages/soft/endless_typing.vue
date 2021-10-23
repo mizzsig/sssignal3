@@ -44,7 +44,8 @@
                     </div>
                 </div>
             </div>
-            <div>press space key between word and word</div>
+            <div>Space : press between word and word</div>
+            <div>Enter : press to end typing</div>
         </div>
         <div v-show="stage === 'clear'">
             <div style="font-size: 20px;">Result</div>
