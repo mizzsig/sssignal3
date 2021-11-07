@@ -163,15 +163,9 @@ export default {
 .title {
   text-align: left;
   font-size: 20px;
-}
-@media screen and (max-width: 300px) {
-  .title {
-    padding-left: 15px;
-  }
-}
-@media screen and (min-width: 301px) {
-  .title {
-    padding-left: 30px;
-  }
+  padding-left: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>
