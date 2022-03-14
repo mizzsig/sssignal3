@@ -77,7 +77,7 @@ export default {
                     12: [0, 1, 1, 2, 2, 3, 3, 4, 5, 5, 6, 6],
                     13: [0, 1, 1, 2, 2, 3, 3, 4, 5, 5, 6, 6],
                     14: [0, 1, 1, 2, 2, 3, 3, 4, 5, 5, 6, 6],
-                    // 15: [0, 1, 1, 2, 2, 3, 3, 4, 5, 5, 6, 6]
+                    15: [0, 1, 1, 2, 2, 3, 4, 4, 5, 5, 6, 6]
                 },
                 // pitchMapに置いた音符にシャープ・フラットをつけるかを設定している
                 // １:♯ , 0:none , -1:♭
@@ -92,7 +92,7 @@ export default {
                     12: [0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1],
                     13: [0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1],
                     14: [0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1],
-                    // 15: [0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1]
+                    15: [0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1]
                 },
                 above: {
                     clef: 'treble_clef',
@@ -259,32 +259,32 @@ export default {
 
 <style lang="scss" scoped>
 .staff {
-    position: absolute;
-    width: 100%;
-    padding-top: 7px;
+  position: absolute;
+  width: 100%;
+  padding-top: 7px;
 
-    img {
-        position: absolute;
-        left: 0px;
-    }
+  img {
+    position: absolute;
+    left: 0px;
+  }
 }
 
 .note {
-    position: absolute;
-    right: 120%;
-    animation: note-animation 8s linear;
+  position: absolute;
+  right: 120%;
+  animation: note-animation 8s linear;
 }
 @keyframes note-animation {
-    0% {
-        right: -5%;
-    }
+  0% {
+    right: -5%;
+  }
 
-    100% {
-        right: 120%;
-    }
+  100% {
+    right: 120%;
+  }
 }
 
 .note-under {
-    transform: translateY(calc(-100% + 34px));
+  transform: translateY(calc(-100% + 34px));
 }
 </style>
