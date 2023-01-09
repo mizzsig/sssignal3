@@ -1,5 +1,9 @@
 <template>
   <section class="container">
+      <a class="link" href="/soft/wanwan_world2">
+          <h2>わんわんわーるど２</h2>
+          <div style="margin-bottom: 50px;">ノンフィールドRPG</div>
+      </a>
       <nuxt-link class="link" to="/soft/endless_typing">
           <h2>endless typing</h2>
           <div style="margin-bottom: 50px;">終わらないタイピングが始まる……！</div>
